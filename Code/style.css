@@ -1,0 +1,77 @@
+/* Crazy neon cyberpunk style */
+body {
+    background: radial-gradient(circle, #000428, #004e92);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container {
+    margin-top: 50px;
+    animation: glitch 1.5s infinite;
+}
+
+h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff0000;
+    animation: flicker 1.5s infinite alternate;
+}
+
+canvas {
+    border: 5px solid #fff;
+    box-shadow: 0 0 15px #00ffcc, 0 0 25px #ff00ff;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+button {
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+}
+
+button:hover {
+    transform: scale(1.2) rotate(3deg);
+    box-shadow: 0 0 20px #00ffcc, 0 0 30px #ff0000;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+@keyframes glitch {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+    100% { transform: translateX(0); }
+}
+
+/* Add some crazy animated background effects */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(45deg, rgba(255,0,150,0.1), rgba(0,255,255,0.1) 10px);
+    animation: backgroundMove 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
