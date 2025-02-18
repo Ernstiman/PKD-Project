@@ -15,7 +15,8 @@ function draw() {
         // Draw a circle
         ctx.beginPath();  // Start a new path
         ctx.arc(250, 250, 100, 0, 2 * Math.PI);  // x, y, radius, start angle, end angle
-        ctx.stroke();  // Render the circle
+        //ctx.stroke();  // Render the circle
+
 
     }
   }
