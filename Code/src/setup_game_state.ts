@@ -6,7 +6,7 @@ import { trap_draw_function } from './draw_functions.js';
 import { generate_x_y } from './generate_x_y.js';
 
 
-
+const i_node_array: Array<iNode>=[];
 export function get_base_game_state() : GameState{
     const basic_graph: ListGraph = {
 
@@ -21,7 +21,9 @@ export function get_base_game_state() : GameState{
         size: 5
     };
 
-    const i_node_array: Array<iNode>=[];
+    
+
+
 
     construct_inode(0,[construct_node_object(0, trap_draw_function)],100,500, i_node_array)
     construct_inode(1,[],300,500, i_node_array)
@@ -33,3 +35,5 @@ export function get_base_game_state() : GameState{
 
     return {i_node_array: i_node_array, map_graph: basic_graph}
 }
+
+// module.exports = {i_node_array}
