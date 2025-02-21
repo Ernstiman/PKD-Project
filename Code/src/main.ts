@@ -1,34 +1,6 @@
-import {for_each, list, List} from './lib/list.js'; 
-import { ListGraph } from './lib/graphs.js';
-import { GameState, iNode,  NodeObject} from './types.js';
 import { draw } from './draw.js';
-import { construct_inode, construct_node_object } from './contructors.js';
-import { trap_draw_function } from './draw_functions.js';
-import { generate_x_y } from './generate_x_y.js';
+import { get_base_game_state } from './setup_game_state.js';
 
-const basic_graph: ListGraph = {
-
-    adj: [
-        list(1),
-        list(2),
-        list(3),
-        list(4),
-        list(0),
-
-    ],
-    size: 5
-};
-
-const i_node_array: Array<iNode>=[];
-
-construct_inode(0,[construct_node_object(0, trap_draw_function)],100,500, i_node_array)
-construct_inode(1,[],300,500, i_node_array)
-construct_inode(2,[],500,500, i_node_array)
-construct_inode(3,[],700,500, i_node_array)
-construct_inode(4,[],900,600, i_node_array)
-
-generate_x_y(i_node_array);
-
-const game_state: GameState={i_node_array: i_node_array, map_graph: basic_graph}
+let game_state=get_base_game_state()
 
 draw(game_state)
