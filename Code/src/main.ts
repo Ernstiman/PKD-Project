@@ -1,66 +1,34 @@
-import {list, List} from './lib/list'; 
-//import {ListGraph, } from '../lib/graphs';
-
-type iNode = {
-    index: number,
-    nodeObjects: List<NodeObject>
-    x: number,
-    y: number,
-};
-
-function construct_inode(index: number, node_objects: List<NodeObject>, x: number, y: number) : iNode{
-    return {index: index, nodeObjects: node_objects, x : x, y : y}
-}
-
-type NodeObject = {
-    type: number
-    id: number
-    player_step_on_function: Function
-    round_end_function: Function
-    collectables: List<number>
-}
-
-type ListGraph = {
-    adj: Array<List<iNode>>, // Lists may not be sorted
-    size: number
-};
+import {for_each, list, List} from './lib/list.js'; 
+import { ListGraph } from './lib/graphs.js';
+import { GameState, iNode,  NodeObject} from './types.js';
+import { draw } from './draw.js';
+import { construct_inode, construct_node_object } from './contructors.js';
+import { trap_draw_function } from './draw_functions.js';
+import { generate_x_y } from './generate_x_y.js';
 
 const basic_graph: ListGraph = {
+
     adj: [
-        list(construct_inode(1, list(), 100, 500)),
-        list(construct_inode(2, list(), 200, 500)),
-        list(construct_inode(3, list(), 300, 500)),
-        list(construct_inode(4, list(), 400, 500)),
-        list(construct_inode(0, list(), 500, 500)),
+        list(1),
+        list(2),
+        list(3),
+        list(4),
+        list(0),
 
     ],
     size: 5
 };
 
-function list_graph_draw(ctx: CanvasRenderingContext2D, list_graph: ListGraph){
-    ctx.beginPath(); // Start a new path
-    ctx.moveTo(50, 50); // Start point (x, y)
-    ctx.lineTo(250, 450); // End point (x, y)
-    ctx.stroke(); // Render the line
-}
+const i_node_array: Array<iNode>=[];
 
-function draw(): void {
-    const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
-    if (canvas && canvas.getContext) {
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+construct_inode(0,[construct_node_object(0, trap_draw_function)],100,500, i_node_array)
+construct_inode(1,[],300,500, i_node_array)
+construct_inode(2,[],500,500, i_node_array)
+construct_inode(3,[],700,500, i_node_array)
+construct_inode(4,[],900,600, i_node_array)
 
-        ctx.fillStyle = "rgb(200, 0, 0)";
-        ctx.fillRect(10, 10, 500, 50);
+generate_x_y(i_node_array);
 
-        ctx.beginPath();
-        ctx.moveTo(50, 50);
-        ctx.lineTo(450, 450);
-        ctx.stroke();
+const game_state: GameState={i_node_array: i_node_array, map_graph: basic_graph}
 
-        ctx.beginPath();
-        ctx.arc(250, 250, 100, 0, 2 * Math.PI);
-    }
-}
-
-draw()
+draw(game_state)
