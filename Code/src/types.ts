@@ -23,3 +23,12 @@ export type GameState = {
     current_node: number | undefined
 
 }
+
+export type Button = {
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    text: string
+    func: Function | undefined
+}

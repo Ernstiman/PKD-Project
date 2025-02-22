@@ -1,5 +1,5 @@
 
-import { iNode } from './types.js';
+import { iNode, Button } from './types.js';
 
 export function get_clicked_node_index(nodes: Array<iNode>, x: number, y: number): number | undefined{
     for (let node of nodes){

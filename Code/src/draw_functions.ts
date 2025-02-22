@@ -9,8 +9,14 @@ export function trap_draw_function(ctx: CanvasRenderingContext2D, x: number, y: 
 
 export function player_draw_function(ctx: CanvasRenderingContext2D, x: number, y: number) : void{
     ctx.beginPath()
-    ctx.fillStyle = "rgba(200, 0, 0, 0.2)";
+    ctx.fillStyle = "rgba(20, 216, 2, 0.73)";
     ctx.arc(x, y, 20, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
+
+    ctx.fillStyle = "black";      // Set text color
+    ctx.font = "16px Arial";      // Set font size and type
+    ctx.textAlign = "center";     // Center the text horizontally
+    ctx.textBaseline = "middle";  // Center the text vertically
+    ctx.fillText("YOU", x, y);
 }
