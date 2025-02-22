@@ -12,8 +12,8 @@ export function get_base_game_state() : GameState{
 
         adj: [
             list(1),
-            list(2),
-            list(3),
+            list(2, 4),
+            list(3, 1),
             list(4),
             list(0),
 
@@ -33,7 +33,7 @@ export function get_base_game_state() : GameState{
 
     generate_x_y(i_node_array);
 
-    return {i_node_array: i_node_array, map_graph: basic_graph}
+    return {i_node_array: i_node_array, map_graph: basic_graph, current_node: undefined}
 }
 
 // module.exports = {i_node_array}

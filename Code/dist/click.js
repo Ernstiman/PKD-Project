@@ -1,12 +1,10 @@
 export function get_clicked_node_index(nodes, x, y) {
-    let i = 0;
     for (let node of nodes) {
         let dx = Math.pow((x - node.x), 2);
         let dy = Math.pow((y - node.y), 2);
         if (dx + dy <= Math.pow(20, 2)) {
-            return i;
+            return node.index;
         }
-        i++;
     }
     return undefined;
 }
