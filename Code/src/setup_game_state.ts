@@ -12,8 +12,8 @@ export function get_base_game_state() : GameState{
 
         adj: [
             list(1),
-            list(2, 4),
-            list(3, 1),
+            list(2,4),
+            list(3),
             list(4),
             list(0),
 
