@@ -17,7 +17,12 @@ export function draw(game_state: GameState): void {
 export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
 
     //Draw lines
-    
+    ctx.fillStyle = "black";      // Set text color
+    ctx.font = "16px Arial";      // Set font size and type
+    ctx.textAlign = "center";     // Center the text horizontally
+    ctx.textBaseline = "middle";  // Center the text vertically
+    ctx.fillText(game_state.round.toString(), 100, 100);
+
     for(let i=0; i<game_state.map_graph.size; i++){
 
        let inode: iNode= game_state.i_node_array[i];
@@ -104,7 +109,8 @@ export function draw_buttons(ctx: CanvasRenderingContext2D, game_state: GameStat
         y: start_y,
         width: 150,
         height: 80,
-        text: "PLACE TRAP"
+        text: "PLACE TRAP",
+        func: ()=>{}
     }
     ctx.fillStyle = "black"
     ctx.fillRect(trap_button.x, trap_button.y, trap_button.width, trap_button.height);

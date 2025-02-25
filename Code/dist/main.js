@@ -3,7 +3,7 @@ import { get_clicked_node_index } from './click.js';
 import { construct_node_object } from './contructors.js';
 import { draw } from './draw.js';
 import { player_draw_function } from './draw_functions.js';
-import { remove_node_object } from './node_objects.js';
+import { remove_node_object, step_on_node } from './node_objects.js';
 import { get_base_game_state, } from './setup_game_state.js';
 let game_state = get_base_game_state();
 draw(game_state);
@@ -17,7 +17,8 @@ addEventListener('click', function (e) {
             my_node.nodeObjects = remove_node_object(my_node.nodeObjects, 1);
             if (i === node_index) {
                 game_state.current_node = node_index;
-                my_node.nodeObjects.push(construct_node_object(1, player_draw_function));
+                my_node.nodeObjects.push(construct_node_object(1, player_draw_function, () => { }, () => { }));
+                step_on_node(game_state, my_node);
             }
         }
         draw(game_state);
