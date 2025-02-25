@@ -13,12 +13,12 @@ export function construct_inode(index: number, node_objects: Array<NodeObject>, 
     i_node_array.push({index: index, nodeObjects: node_objects, x : x, y : y})
 }
 
-export function construct_node_object(type: number, draw_function: Function) : NodeObject{
+export function construct_node_object(type: number, draw_function: Function, player_step_on_function: Function, round_end_function: Function) : NodeObject{
     return {
         type: type,
         id: get_node_object_id(),
-        player_step_on_function: ()=>{},
-        round_end_function: ()=>{},
+        player_step_on_function: player_step_on_function,
+        round_end_function: round_end_function,
         collectables: [],
         draw_function: draw_function,
         

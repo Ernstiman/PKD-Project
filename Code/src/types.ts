@@ -20,6 +20,15 @@ export type NodeObject = {
 export type GameState = {
     i_node_array: Array<iNode>, 
     map_graph: ListGraph,
-    current_node: number | undefined
+    current_node: number | undefined,
+    round: number
+}
 
+export type Button = {
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    text: string
+    func: Function | undefined
 }
