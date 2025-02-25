@@ -1,30 +1,50 @@
 import { is_adj_node } from './adj_nodes.js';
+import { find_id_arrray } from './click.js';
 import {for_each} from './lib/list.js'; 
-import { GameState, iNode,  NodeObject, Button} from './types.js';
+import { GameState, iNode,  NodeObject, GuiRectangle} from './types.js';
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
 const ctx = canvas!.getContext("2d");
 
 export function draw(game_state: GameState): void {
-    
         if (!ctx) return;
         ctx.clearRect(0, 0, canvas!.width, canvas!.height);
-
-        list_graph_draw(ctx, game_state);
-        draw_buttons(ctx, game_state);
+        for (let screen_id of game_state.active_screens){
+            let screen = find_id_arrray(screen_id, game_state.screens);
+            if(screen !== undefined){
+                screen.draw_function(ctx, game_state)
+            }
+            
+        }
     }
+
+export function game_draw(ctx: CanvasRenderingContext2D,game_state: GameState){
+    list_graph_draw(ctx, game_state);
+    draw_gui_rectangles(ctx, game_state)
+}
+
 
 export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
 
     //Draw lines
     ctx.fillStyle = "black";      // Set text color
-    ctx.font = "16px Arial";      // Set font size and type
+    ctx.font ="45px 'Comic Sans MS'";      // Set font size and type
     ctx.textAlign = "center";     // Center the text horizontally
     ctx.textBaseline = "middle";  // Center the text vertically
-    ctx.fillText(game_state.round.toString(), 100, 100);
+    ctx.fillText("Round: "+game_state.round.toString(), 100, 100);
+
+
+
+    //Draw collectables
+    for(let i=0;i<game_state.player_collectables.length;i++){
+        ctx.font = "45px 'Comic Sans MS'";
+        ctx.fillText(game_state.player_collectables[i].name.toString() + " : " + 
+        game_state.player_collectables[i].count.toString() , 100, 200+i*40);
+    }
+
 
     for(let i=0; i<game_state.map_graph.size; i++){
-
+       ctx.font = "45px Arial";
        let inode: iNode= game_state.i_node_array[i];
        let adj_nodes = game_state.map_graph.adj[i];
 
@@ -46,7 +66,10 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
             ctx.strokeStyle = "black";
             if (inode.index === game_state.current_node) {
                 let is_walkable = is_adj_node(game_state, adj_index);
-                ctx.strokeStyle = is_walkable ? "green" : "red";
+                if (is_walkable) {
+                    ctx.strokeStyle =  "green";
+                }
+            
                 
                 ctx.beginPath();
                 
@@ -93,32 +116,38 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
         let inode: iNode= game_state.i_node_array[i]
         for(let i_node_object=0; i_node_object<inode.nodeObjects.length; i_node_object++){
             let node_object=inode.nodeObjects[i_node_object]
-            node_object.draw_function(ctx, inode.x, inode.y)
+            node_object.draw_function(ctx, inode.x, inode.y, inode.nodeObjects[i_node_object])
         }
     }
 
 }
 
-export function draw_buttons(ctx: CanvasRenderingContext2D, game_state: GameState) {
+export function draw_gui_rectangles(ctx: CanvasRenderingContext2D, game_state: GameState) {
 
     const start_x = 1675;
     const start_y = 200;
 
-    const trap_button: Button = {
-        x: start_x,
-        y: start_y,
-        width: 150,
-        height: 80,
-        text: "PLACE TRAP",
-        func: ()=>{}
-    }
-    ctx.fillStyle = "black"
-    ctx.fillRect(trap_button.x, trap_button.y, trap_button.width, trap_button.height);
+    
+    for (let rect of game_state.gui_rectangles){
+        ctx.fillStyle = "black"
+    ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
 
     ctx.fillStyle = "white"; // Text color
     ctx.font = "20px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(trap_button.text, trap_button.x + trap_button.width / 2, trap_button.y + trap_button.height / 2);
+    ctx.fillText(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2);
+
+
+    }
+    
+
+}
+
+export function draw_shop_gui(ctx: CanvasRenderingContext2D, game_state: GameState){
+    ctx.fillStyle = "rgba(200, 0, 0, 0.37)";
+    ctx.fillRect(0, 0, canvas!.width, canvas!.height)
+    
+
 
 }

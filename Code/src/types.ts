@@ -1,6 +1,9 @@
 import { ListGraph } from './lib/graphs.js';
 import { List } from './lib/list';
 
+
+
+
 export type iNode = {
     index: number,
     nodeObjects: Array<NodeObject>
@@ -13,22 +16,37 @@ export type NodeObject = {
     id: number
     player_step_on_function: Function
     round_end_function: Function
-    collectables: Array<number>
+    collectables: Array<Collectable>
     draw_function: Function
-
 }
+
 export type GameState = {
     i_node_array: Array<iNode>, 
     map_graph: ListGraph,
     current_node: number | undefined,
-    round: number
+    round: number,
+    player_collectables: Array<Collectable>,
+    gui_rectangles: Array<GuiRectangle>
+    screens: Array<Screen>,
+    active_screens: Array<string>
 }
 
-export type Button = {
+export type GuiRectangle = {
+    id: string,
     x: number,
     y: number,
     width: number,
     height: number,
     text: string
-    func: Function | undefined
+    click_on_function: Function
+}
+
+export type Screen = {
+    id: string,
+    draw_function: Function
+}
+
+export type Collectable = {
+    name: string,
+    count: number,
 }
