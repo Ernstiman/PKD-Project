@@ -1,4 +1,4 @@
-import { NodeObject } from "./types";
+import { NodeObject } from "./types.js";
 
 export function trap_draw_function(ctx: CanvasRenderingContext2D, x: number, y: number, self: NodeObject) : void{
     

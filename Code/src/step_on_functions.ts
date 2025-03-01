@@ -1,10 +1,10 @@
-import { GameState, iNode } from "./types";
-import { remove_id_arrray } from "./id_array";
-import { node_activate_round_end } from "./node_objects";
-import { construct_rectangle } from "./contructors";
-import { shop_screen } from "./screens";
-import { i_node_array } from "./setup_game_state";
-import { NodeObject } from "./types";
+import { GameState, iNode } from "./types.js";
+import { remove_id_arrray } from "./id_array.js";
+import { node_activate_round_end } from "./node_objects.js";
+import { construct_rectangle } from "./contructors.js";
+import { shop_screen } from "./screens.js";
+import { i_node_array } from "./setup_game_state.js";
+import { NodeObject } from "./types.js";
 
 
 
