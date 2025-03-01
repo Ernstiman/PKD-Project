@@ -2,6 +2,8 @@ import {for_each, list, List} from './lib/list.js';
 import { ListGraph } from './lib/graphs.js';
 import { Collectable, GameState, GuiRectangle, iNode,  NodeObject} from './types.js';
 import { trap_draw_function } from './draw_functions.js';
+import { trap_step_on } from './step_on_functions.js';
+import { trap_round_end } from './round_end_functions.js';
 
 
 let global_node_object_id=0
@@ -34,15 +36,5 @@ export function construct_rectangle(id: string, x: number, y: number, width: num
 }
 
 export function test_trap_constructor(){
-    return  construct_node_object(0, trap_draw_function, (game_state: GameState,node: iNode, node_objects: NodeObject)=>{
-        game_state.gui_rectangles.push(construct_rectangle("collect", node.x + 50, node.y + 50, 50, 50, "collect beavers",(game_state: GameState) => {
-            game_state.player_collectables[0].count += node_objects.collectables[0].count;
-            node_objects.collectables[0].count = 0;
-            } ))
-
-}, (game_state: GameState, node_object: NodeObject)=>{
-    node_object.collectables[0].count+=1;
-    
-
-
-})}
+    return  construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end)
+}

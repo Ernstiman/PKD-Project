@@ -26,6 +26,7 @@ export type GameState = {
     current_node: number | undefined,
     round: number,
     player_collectables: Array<Collectable>,
+    shop_collectables: Array<Collectable>,
     gui_rectangles: Array<GuiRectangle>
     screens: Array<Screen>,
     active_screens: Array<string>
