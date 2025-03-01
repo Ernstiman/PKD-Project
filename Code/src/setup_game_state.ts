@@ -103,8 +103,7 @@ export function get_base_game_state() : GameState{
     let shop_start_collectables=[construct_collectable("beaver",350)]
     
 
-    return {i_node_array: i_node_array, map_graph: basic_graph, 
-        current_node: undefined, round: 0, player_collectables: start_collectables, shop_collectables: shop_start_collectables, gui_rectangles: [], screens: [game_screen, shop_screen], active_screens: [game_screen.id]}
+    return {i_node_array: i_node_array, map_graph: basic_graph, current_node: undefined, round: 0, player_collectables: start_collectables, shop_collectables: shop_start_collectables, gui_rectangles: [], screens: [game_screen, shop_screen], active_screens: [game_screen.id]}
 }
 
 // module.exports = {i_node_array}
