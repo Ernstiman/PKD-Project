@@ -41,12 +41,16 @@ export function get_base_game_state() : GameState{
     })
     
     let shop = construct_node_object(0, shop_draw_function,  (game_state: GameState, node: iNode)=>{ 
-        game_state.round=game_state.round+1
+        game_state.round=game_state.round + 1
         game_state.active_screens.push(shop_screen.id);
         game_state.gui_rectangles.push(construct_rectangle("return_to_game", 500, 500, 200, 200, "heh", () => {
+            game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
+            game_state.player_collectables[0].count = 0;
+
             for(let i = 0; i < game_state.active_screens.length; i ++){
                 if(game_state.active_screens[i] === "shop_screen"){
                     game_state.active_screens.splice(i, 1);
+
                 }
                 remove_id_arrray("return_to_game", game_state.gui_rectangles);
             }
@@ -96,10 +100,11 @@ export function get_base_game_state() : GameState{
 
     generate_x_y(i_node_array);
     let start_collectables=[construct_collectable("beaver",0), construct_collectable("rabbit",0)]
+    let shop_start_collectables=[construct_collectable("beaver",350)]
     
 
     return {i_node_array: i_node_array, map_graph: basic_graph, 
-        current_node: undefined, round: 0, player_collectables: start_collectables, gui_rectangles: [], screens: [game_screen, shop_screen], active_screens: [game_screen.id]}
+        current_node: undefined, round: 0, player_collectables: start_collectables, shop_collectables: shop_start_collectables, gui_rectangles: [], screens: [game_screen, shop_screen], active_screens: [game_screen.id]}
 }
 
 // module.exports = {i_node_array}

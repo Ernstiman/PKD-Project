@@ -1,5 +1,5 @@
 export function generate_x_y(i_node_array) {
-    const center_x = 1280 / 2 - 200;
+    const center_x = 1280 / 2 + 200;
     const center_y = 720 / 2;
     const radius = 280;
     for (let i = 0; i < i_node_array.length; i++) {

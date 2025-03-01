@@ -36,12 +36,22 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
 
 
     //Draw collectables
+
+
     for(let i=0;i<game_state.player_collectables.length;i++){
         ctx.font = "45px 'Comic Sans MS'";
         ctx.fillText(game_state.player_collectables[i].name.toString() + " : " + 
         game_state.player_collectables[i].count.toString() , 100, 200+i*40);
     }
 
+    for(let i=0;i<game_state.shop_collectables.length;i++){
+        ctx.font = "45px 'Comic Sans MS'";
+        ctx.fillText(game_state.shop_collectables[i].name.toString() + " Quota : " + 
+        game_state.shop_collectables[i].count.toString() , 200, 600+i*40);
+    }
+
+
+    
 
     for(let i=0; i<game_state.map_graph.size; i++){
        ctx.font = "45px Arial";
@@ -62,31 +72,34 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
             const arrowX2 = draw_x - headlen * Math.cos(angle + Math.PI / 6);
             const arrowY2 = draw_y - headlen * Math.sin(angle + Math.PI / 6);
 
+            ctx.beginPath(); 
+            ctx.moveTo(inode.x, inode.y); // Start on node
+            ctx.lineTo(out_node.x, out_node.y); // End on adj
+            ctx.stroke(); // Render the line
            
             ctx.strokeStyle = "black";
             if (inode.index === game_state.current_node) {
                 let is_walkable = is_adj_node(game_state, adj_index);
                 if (is_walkable) {
                     ctx.strokeStyle =  "green";
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX1, arrowY1);
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX2, arrowY2);
+                     ctx.stroke();
+                    
                 }
             
                 
-                ctx.beginPath();
+              
                 
-                ctx.moveTo(draw_x, draw_y);
-                ctx.lineTo(arrowX1, arrowY1);
-                ctx.moveTo(draw_x, draw_y);
-                ctx.lineTo(arrowX2, arrowY2);
-                ctx.stroke();
+
             }
+            
 
 
 
-            ctx.beginPath(); 
-            ctx.moveTo(inode.x, inode.y); // Start on node
-            ctx.lineTo(out_node.x, out_node.y); // End on adj
-            ctx.stroke(); // Render the line
-           
+        
 
         }, adj_nodes)
 
