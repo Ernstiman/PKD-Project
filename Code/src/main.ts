@@ -1,5 +1,5 @@
 import { is_adj_node } from './adj_nodes.js';
-import { clicked_on_node, get_clicked_node_index, position_in_rectangle } from './click.js';
+import { clicked_on_node, get_clicked_node_index, mouse_in_rectangle} from './click.js';
 import { construct_node_object } from './contructors.js';
 import { draw, list_graph_draw } from './draw.js';
 import { player_draw_function} from './draw_functions.js';
@@ -23,7 +23,7 @@ addEventListener('click', function(e){
         clicked_on_node(game_state, node_index);
     }
     for(let button of game_state.gui_rectangles){
-        if(position_in_rectangle(x, y, button.x, button.y, button.width + button.x, button.height + button.y)){
+        if(mouse_in_rectangle(x, y, button.x, button.y, button.width + button.x, button.height + button.y)){
             button.click_on_function(game_state);
         }
     }

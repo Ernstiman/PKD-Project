@@ -1,5 +1,5 @@
 import { GameState, iNode } from "./types";
-import { remove_id_arrray } from "./click";
+import { remove_id_arrray } from "./id_array";
 import { node_activate_round_end } from "./node_objects";
 import { construct_rectangle } from "./contructors";
 import { shop_screen } from "./screens";

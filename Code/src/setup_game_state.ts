@@ -7,7 +7,7 @@ import { generate_x_y } from './generate_x_y.js';
 import { node_activate_round_end } from './node_objects.js';
 import { construct_collectable } from './contructors.js';
 import { draw, draw_shop_gui, game_draw } from './draw.js';
-import { remove_id_arrray } from './click.js';
+import { remove_id_arrray } from './id_array.js';
 import { shop_screen } from './screens.js';
 import { game_screen } from './screens.js';
 import { shop_step_on, trap_step_on } from './step_on_functions.js';

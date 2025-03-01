@@ -5,7 +5,7 @@ import { generate_x_y } from './generate_x_y.js';
 import { node_activate_round_end } from './node_objects.js';
 import { construct_collectable } from './contructors.js';
 import { draw_shop_gui, game_draw } from './draw.js';
-import { remove_id_arrray } from './click.js';
+import { remove_id_arrray } from './id_array.js';
 const i_node_array = [];
 export function get_base_game_state() {
     const basic_graph = {
@@ -77,7 +77,6 @@ export function get_base_game_state() {
     generate_x_y(i_node_array);
     let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)];
     let shop_start_collectables = [construct_collectable("beaver", 350)];
-    return { i_node_array: i_node_array, map_graph: basic_graph,
-        current_node: undefined, round: 0, player_collectables: start_collectables, shop_collectables: shop_start_collectables, gui_rectangles: [], screens: [game_screen, shop_screen], active_screens: [game_screen.id] };
+    return { i_node_array: i_node_array, map_graph: basic_graph, current_node: undefined, round: 0, player_collectables: start_collectables, shop_collectables: shop_start_collectables, gui_rectangles: [], screens: [game_screen, shop_screen], active_screens: [game_screen.id] };
 }
 // module.exports = {i_node_array}
