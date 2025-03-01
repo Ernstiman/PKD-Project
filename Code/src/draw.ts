@@ -1,4 +1,5 @@
 import { is_adj_node } from './adj_nodes.js';
+import { shop_item_block_click_on } from './click.js';
 import { find_id_arrray } from './id_array.js';
 import {for_each} from './lib/list.js'; 
 import { GameState, iNode,  NodeObject, GuiRectangle} from './types.js';
@@ -157,12 +158,14 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
 
 export function draw_gui_rectangles(ctx: CanvasRenderingContext2D, game_state: GameState) {
 
-    const start_x = 1675;
-    const start_y = 200;
-
-    
     for (let rect of game_state.gui_rectangles){
-        ctx.fillStyle = "black"
+        draw_gui_rectangle(ctx, rect);
+    }
+}
+
+export function draw_gui_rectangle(ctx: CanvasRenderingContext2D, rect: GuiRectangle){
+
+    ctx.fillStyle = "black"
     ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
 
     ctx.fillStyle = "white"; // Text color
@@ -170,11 +173,22 @@ export function draw_gui_rectangles(ctx: CanvasRenderingContext2D, game_state: G
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2);
-    }
+
 }
 
 export function draw_shop_gui(ctx: CanvasRenderingContext2D, game_state: GameState){
     ctx.fillStyle = "rgba(200, 0, 0, 0.37)";
     ctx.fillRect(0, 0, canvas!.width, canvas!.height)
+    draw_shop_block_item_blocks(ctx, game_state);
     
+}
+
+export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_state: GameState){
+    let x = 700;
+    let y = 700;
+    for(let shop_block_item_block of game_state.shop_item_blocks){
+        ctx.fillStyle = "grey";
+        shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x ,shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
+        draw_gui_rectangle(ctx, shop_block_item_block.block);
+    }
 }

@@ -1,5 +1,5 @@
 
-import { GameState, iNode } from './types.js';
+import { GameState, iNode, ShopItemBlock } from './types.js';
 import { remove_node_object } from './node_objects.js';
 import { construct_node_object } from './contructors.js';
 import { player_draw_function } from './draw_functions.js';
@@ -53,6 +53,7 @@ export function place_object_click_on(game_state: GameState){
         }
     }
 }
-export function shop_item_block_click_on(game_state: GameState){
-    
+export function shop_item_block_click_on(game_state: GameState, self: ShopItemBlock,i: number){
+    game_state.player_inventory.push(self.node_object);
+    game_state.shop_item_blocks.splice(i, 1);
 }

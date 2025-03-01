@@ -47,7 +47,7 @@ export type GuiRectangle = {
 export type ShopItemBlock = {
     cost: number,
     node_object: NodeObject,
-    button: GuiRectangle
+    block: GuiRectangle
 }
 
 export type Screen = {
