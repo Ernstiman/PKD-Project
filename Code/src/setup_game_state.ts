@@ -65,13 +65,10 @@ export function get_base_game_state() : GameState{
     //Create place object button
     let place_object_button=construct_rectangle("place_object", 1400, 100, 100, 100, "Place Object", place_object_click_on)
 
-    let shop_item_button = construct_rectangle("shop_item_block", 500, 500, 100, 100, "Buy item", shop_item_block_click_on)
-
-    let test_shop_item_block=construct_shop_item_block(5, test_trap_constructor(), 
-    shop_item_button)
+    
 
     //Skapa shop item blocks
-    let start_shop_item_blocks: Array<ShopItemBlock> = [test_shop_item_block]
+    let start_shop_item_blocks: Array<ShopItemBlock> = []
 
     //Skapa gamestate
     return {i_node_array: i_node_array, 
@@ -80,7 +77,7 @@ export function get_base_game_state() : GameState{
             round: 0, 
             player_collectables: start_collectables, 
             shop_collectables: shop_start_collectables, 
-            gui_rectangles: [place_object_button, shop_item_button], 
+            gui_rectangles: [place_object_button], 
             screens: [game_screen, shop_screen], 
             active_screens: 
             [game_screen.id],

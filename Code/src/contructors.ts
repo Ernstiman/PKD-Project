@@ -39,6 +39,6 @@ export function test_trap_constructor(){
     return  construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end)
 }
 
-export function construct_shop_item_block(cost: number, node_object: NodeObject, button: GuiRectangle): ShopItemBlock{
-    return {cost: cost, node_object: node_object, button: button}
+export function construct_shop_item_block(cost: number, node_object: NodeObject, block: GuiRectangle): ShopItemBlock{
+    return {cost: cost, node_object: node_object, block: block}
 }
