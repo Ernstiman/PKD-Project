@@ -22,6 +22,17 @@ export function game_draw(ctx: CanvasRenderingContext2D,game_state: GameState){
     list_graph_draw(ctx, game_state);
     draw_gui_rectangles(ctx, game_state);
     draw_ui_elements(ctx, game_state);
+    draw_inventory(ctx, game_state);
+}
+
+
+function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
+    let x=1600
+    let y=150
+    for(let i=0;i<game_state.player_inventory.length;i++){
+        game_state.player_inventory[i].draw_function(ctx, x, y, game_state.player_inventory[i])
+        y+=50
+    }
 }
 
 export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: GameState) {

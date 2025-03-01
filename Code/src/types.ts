@@ -29,7 +29,9 @@ export type GameState = {
     shop_collectables: Array<Collectable>,
     gui_rectangles: Array<GuiRectangle>
     screens: Array<Screen>,
-    active_screens: Array<string>
+    active_screens: Array<string>,
+    player_inventory: Array<NodeObject>,
+    shop_item_blocks: Array<ShopItemBlock>
 }
 
 export type GuiRectangle = {
@@ -40,6 +42,12 @@ export type GuiRectangle = {
     height: number,
     text: string
     click_on_function: Function
+}
+
+export type ShopItemBlock = {
+    cost: number,
+    node_object: NodeObject,
+    button: GuiRectangle
 }
 
 export type Screen = {

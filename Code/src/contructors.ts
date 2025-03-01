@@ -1,6 +1,6 @@
 import {for_each, list, List} from './lib/list.js'; 
 import { ListGraph } from './lib/graphs.js';
-import { Collectable, GameState, GuiRectangle, iNode,  NodeObject} from './types.js';
+import { Collectable, GameState, GuiRectangle, iNode,  NodeObject, ShopItemBlock} from './types.js';
 import { trap_draw_function } from './draw_functions.js';
 import { trap_step_on } from './step_on_functions.js';
 import { trap_round_end } from './round_end_functions.js';
@@ -37,4 +37,8 @@ export function construct_rectangle(id: string, x: number, y: number, width: num
 
 export function test_trap_constructor(){
     return  construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end)
+}
+
+export function construct_shop_item_block(cost: number, node_object: NodeObject, button: GuiRectangle): ShopItemBlock{
+    return {cost: cost, node_object: node_object, button: button}
 }
