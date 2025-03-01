@@ -1,5 +1,5 @@
 import { for_each } from "./lib/list.js";
-import { GameState, iNode } from "./types";
+import { GameState, iNode } from "./types.js";
 
 export function is_adj_node(game_state: GameState, new_node_index: number): boolean{
     let return_boolean = false;

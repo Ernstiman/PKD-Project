@@ -1,4 +1,4 @@
-import { GameState, iNode, NodeObject } from "./types";
+import { GameState, iNode, NodeObject } from "./types.js";
 
 export function remove_node_object(node_objects: Array<NodeObject>, type: number): Array<NodeObject>{
     const return_array: Array<NodeObject> = []
