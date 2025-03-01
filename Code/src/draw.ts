@@ -1,5 +1,5 @@
 import { is_adj_node } from './adj_nodes.js';
-import { find_id_arrray } from './click.js';
+import { find_id_arrray } from './id_array.js';
 import {for_each} from './lib/list.js'; 
 import { GameState, iNode,  NodeObject, GuiRectangle} from './types.js';
 
