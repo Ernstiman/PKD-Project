@@ -7,7 +7,7 @@ import { generate_x_y } from './generate_x_y.js';
 import { node_activate_round_end } from './node_objects.js';
 import { construct_collectable } from './contructors.js';
 import { draw, draw_shop_gui, game_draw } from './draw.js';
-import { remove_id_arrray } from './click.js';
+import { remove_id_arrray } from './id_array.js';
 
 const i_node_array: Array<iNode>=[];
 export function get_base_game_state() : GameState{
@@ -44,8 +44,8 @@ export function get_base_game_state() : GameState{
         game_state.round=game_state.round + 1
         game_state.active_screens.push(shop_screen.id);
         game_state.gui_rectangles.push(construct_rectangle("return_to_game", 500, 500, 200, 200, "heh", () => {
-            game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
-            game_state.player_collectables[0].count = 0;
+        game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
+        game_state.player_collectables[0].count = 0;
 
             for(let i = 0; i < game_state.active_screens.length; i ++){
                 if(game_state.active_screens[i] === "shop_screen"){

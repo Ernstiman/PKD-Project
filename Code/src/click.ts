@@ -4,6 +4,7 @@ import { remove_node_object } from './node_objects.js';
 import { construct_node_object } from './contructors.js';
 import { player_draw_function } from './draw_functions.js';
 import { step_on_node } from './node_objects.js';
+import { find_id_arrray, remove_id_arrray } from './id_array.js';
 
 
 export function get_clicked_node_index(nodes: Array<iNode>, x: number, y: number): number | undefined{
@@ -17,41 +18,23 @@ export function get_clicked_node_index(nodes: Array<iNode>, x: number, y: number
     return undefined;
 }
 
-export function position_in_rectangle(x: number, y: number, x1: number, y1: number, x2: number, y2: number): boolean{
+export function mouse_in_rectangle(x: number, y: number, x1: number, y1: number, x2: number, y2: number): boolean{
 
     if (x>x1 && x<x2 && y>y1 &&y<y2){
         return true
     }
-
     return false
 }
 
-export function remove_id_arrray<T extends {id: string}>(id: string, arr: Array<T>):void{
-    for (let i = 0; i < arr.length; i ++){
-        let elem = arr[i];
-        if(elem.id === id){
-            arr.splice(i, 1)
-        }
-    }
-}
-
-export function find_id_arrray<T extends {id:string}>(id: string, arr: Array<T>): T | undefined{
-    for (let i = 0; i < arr.length; i ++){
-        let elem = arr[i]
-        if(elem.id === id){
-            return elem
-        }
-    }
-}
 export function clicked_on_node(game_state: GameState,node_index: number ){
     for(let i = 0; i < game_state.i_node_array.length; i ++){
-                let my_node: iNode = game_state.i_node_array[i];
-                my_node.nodeObjects = remove_node_object(my_node.nodeObjects, 1);
-                if(i === node_index){
-                    game_state.current_node = node_index;
-                    my_node.nodeObjects.push(construct_node_object(1, player_draw_function, ()=>{},  ()=>{}))
-                    remove_id_arrray("collect", game_state.gui_rectangles);
-                    step_on_node(game_state, my_node)
-                }
-            }
+        let my_node: iNode = game_state.i_node_array[i];
+        my_node.nodeObjects = remove_node_object(my_node.nodeObjects, 1);
+        if(i === node_index){
+            game_state.current_node = node_index;
+            my_node.nodeObjects.push(construct_node_object(1, player_draw_function, ()=>{},  ()=>{}))
+            remove_id_arrray("collect", game_state.gui_rectangles);
+            step_on_node(game_state, my_node)
+        }
+    }
 }
