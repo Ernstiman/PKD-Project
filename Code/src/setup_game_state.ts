@@ -1,7 +1,7 @@
 import {for_each, list, List} from './lib/list.js'; 
 import { ListGraph } from './lib/graphs.js';
 import { GameState, iNode,  NodeObject, Screen, ShopItemBlock} from './types.js';
-import { construct_inode, construct_node_object, construct_rectangle, construct_shop_item_block, test_trap_constructor } from './contructors.js';
+import { construct_inode, construct_level_1_trap, construct_node_object, construct_rectangle, construct_shop_item_block, test_trap_constructor } from './contructors.js';
 import { shop_draw_function, trap_draw_function } from './draw_functions.js';
 import { generate_x_y } from './generate_x_y.js';
 import { node_activate_round_end } from './node_objects.js';
