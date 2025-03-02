@@ -1,11 +1,8 @@
-import { list } from './lib/list.js';
-import { construct_inode, construct_node_object, construct_rectangle } from './contructors.js';
-import { shop_draw_function } from './draw_functions.js';
+import { construct_rectangle } from './contructors.js';
 import { generate_x_y } from './generate_x_y.js';
 import { construct_collectable } from './contructors.js';
 import { shop_screen } from './screens.js';
 import { game_screen } from './screens.js';
-import { shop_step_on } from './step_on_functions.js';
 import { place_object_click_on } from './click.js';
 export const i_node_array = [];
 export let quota_amount = 3;
@@ -17,36 +14,11 @@ export function get_base_game_state() {
         // from: https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
     }
     const basic_graph = {
-        adj: [
-            //island 1
-            list(1), //0
-            list(2), //0
-            list(3, 9), //0
-            list(4), //0
-            list(5), //0
-            list(6), //0
-            list(7, 1), //0
-            list(8), //0
-            list(9), //0
-            list(10), //0
-            list(0), //0
-        ],
-        size: 11
+        adj: [],
+        size: 0
     };
-    //skapa shop
-    let shop = construct_node_object(0, shop_draw_function, shop_step_on, () => { });
-    // let shop_index = random_shop_index(0, basic_graph.size);
     let shop_index = Math.floor(Math.random() * basic_graph.size);
-    //Skapa spelplan
-    for (let i = 0; i < basic_graph.size; i++) {
-        if (i === shop_index) {
-            construct_inode(i, [shop], 0, 0, i_node_array);
-        }
-        else {
-            construct_inode(i, [], 0, 0, i_node_array);
-        }
-    }
-    generate_x_y(i_node_array);
+    generate_x_y(basic_graph, i_node_array, shop_index);
     //Setup collectables for player
     let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)];
     //Setup collectables quota
