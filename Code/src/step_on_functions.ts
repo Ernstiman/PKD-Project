@@ -7,7 +7,7 @@ import { i_node_array } from "./setup_game_state.js";
 import { NodeObject } from "./types.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
 import { shop_item_block_click_on } from "./click.js";
-
+import { play_music, stop_music } from "./music.js";
 
 
 
@@ -16,7 +16,8 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
         () => {
         game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
         game_state.player_collectables[0].count = 0;
-
+        stop_music(game_state.songs[0])
+        play_music(game_state.songs[1])
         for(let i = 0; i < game_state.active_screens.length; i ++){
             if(game_state.active_screens[i] === "shop_screen"){
                 game_state.active_screens.splice(i, 1);
@@ -35,6 +36,11 @@ export function shop_step_on(game_state: GameState, node: iNode){
         //Increase round
         game_state.round=game_state.round + 1
         //Add active screen
+        
+        //Play music
+        stop_music(game_state.songs[1])
+        play_music(game_state.songs[0])
+
         for(let i = 0; i < 3; i ++){
           let shop_item_button = construct_rectangle("shop_item_block", 200 * i + 200, 500, 100, 100, "Buy item", shop_item_block_click_on)
 

@@ -13,6 +13,7 @@ import { game_screen } from './screens.js';
 import { shop_step_on, trap_step_on } from './step_on_functions.js';
 import { trap_round_end } from './round_end_functions.js';
 import { place_object_click_on, shop_item_block_click_on } from './click.js';
+import { play_music } from './music.js';
 
 export const i_node_array: Array<iNode>=[];
 
@@ -77,6 +78,9 @@ export function get_base_game_state() : GameState{
     //Skapa shop item blocks
     let start_shop_item_blocks: Array<ShopItemBlock> = []
 
+    //Create array of songs
+    let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3")]
+
     //Skapa gamestate
     return {i_node_array: i_node_array, 
             map_graph: basic_graph, 
@@ -89,6 +93,7 @@ export function get_base_game_state() : GameState{
             active_screens: 
             [game_screen.id],
             player_inventory: [],
-            shop_item_blocks: start_shop_item_blocks
+            shop_item_blocks: start_shop_item_blocks,
+            songs: songs
     }
 }

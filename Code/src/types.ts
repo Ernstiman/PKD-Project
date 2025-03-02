@@ -32,7 +32,8 @@ export type GameState = {
     screens: Array<Screen>,
     active_screens: Array<string>,
     player_inventory: Array<NodeObject>,
-    shop_item_blocks: Array<ShopItemBlock>
+    shop_item_blocks: Array<ShopItemBlock>,
+    songs: Array<HTMLAudioElement>
 }
 
 export type GuiRectangle = {
