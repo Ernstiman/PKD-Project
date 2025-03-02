@@ -50,7 +50,6 @@ export function get_base_game_state() : GameState{
     let shop = construct_node_object(0, shop_draw_function,  shop_step_on, ()=>{})
     // let shop_index = random_shop_index(0, basic_graph.size);
     let shop_index = Math.floor(Math.random() * basic_graph.size)
-    console.log(shop_index);
     //Skapa spelplan
     for (let i = 0; i < basic_graph.size; i++) {
         if (i === shop_index) {
@@ -81,7 +80,7 @@ export function get_base_game_state() : GameState{
     //Skapa gamestate
     return {i_node_array: i_node_array, 
             map_graph: basic_graph, 
-            current_node: undefined, 
+            current_node: shop_index, 
             round: 0, 
             player_collectables: start_collectables, 
             shop_collectables: shop_start_collectables, 

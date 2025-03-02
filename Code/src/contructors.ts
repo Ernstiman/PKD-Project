@@ -17,7 +17,7 @@ export function construct_inode(index: number, node_objects: Array<NodeObject>, 
     i_node_array.push({index: index, nodeObjects: node_objects, x : x, y : y})
 }
 
-export function construct_node_object(type: number, draw_function: Function, player_step_on_function: Function, round_end_function: Function) : NodeObject{
+export function construct_node_object(type: number, draw_function: Function, player_step_on_function: Function, round_end_function: Function, collection_rate: number = 1) : NodeObject{
     return {
         type: type,
         id: get_node_object_id(),
@@ -25,6 +25,7 @@ export function construct_node_object(type: number, draw_function: Function, pla
         round_end_function: round_end_function,
         collectables: [{name: "beaver", count: 0}],
         draw_function: draw_function,
+        collection_rate: collection_rate
     }
 }
 export function construct_collectable(name: string, count: number): Collectable{
@@ -36,7 +37,7 @@ export function construct_rectangle(id: string, x: number, y: number, width: num
 }
 
 export function test_trap_constructor(){
-    return  construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end)
+    return  construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.5)
 }
 
 export function construct_shop_item_block(cost: number, node_object: NodeObject, block: GuiRectangle): ShopItemBlock{

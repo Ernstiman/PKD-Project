@@ -9,6 +9,8 @@ import { Collectable, GameState, GuiRectangle, iNode } from './types.js';
 
 
 let game_state=get_base_game_state()
+
+clicked_on_node(game_state, game_state.current_node);
 draw(game_state);
 
 
@@ -28,12 +30,11 @@ addEventListener('click', function(e){
             button.click_on_function(game_state);
         }
     }
-    for(let block of game_state.shop_item_blocks){
-        if(mouse_in_rectangle(x, y, block.block.x, block.block.y, block.block.width + block.block.x, block.block.height + block.block.y)){
-            block.block.click_on_function(game_state, block, i);
-        }}
-
-    
+    for(let shop_item_block of game_state.shop_item_blocks){
+        if(mouse_in_rectangle(x, y, shop_item_block.block.x, shop_item_block.block.y, shop_item_block.block.width + shop_item_block.block.x, shop_item_block.block.height + shop_item_block.block.y)){
+            shop_item_block.block.click_on_function(game_state, shop_item_block, i);  
+        }
+        i ++}
     draw(game_state);      
 }
 )

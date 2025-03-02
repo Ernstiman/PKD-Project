@@ -43,8 +43,6 @@ export function clicked_on_node(game_state: GameState, node_index: number ){
 export function place_object_click_on(game_state: GameState){
     if (game_state.current_node!==undefined){
         if (game_state.player_inventory[0]!==undefined){
-            console.log(i_node_array[game_state.current_node].nodeObjects)  
-            console.log(i_node_array[game_state.current_node].nodeObjects.length)
             //Om det inte finns något node object där man vill placera.
             if (i_node_array[game_state.current_node].nodeObjects.length<2){ 
                 i_node_array[game_state.current_node].nodeObjects.push(game_state.player_inventory[0])
@@ -55,5 +53,5 @@ export function place_object_click_on(game_state: GameState){
 }
 export function shop_item_block_click_on(game_state: GameState, self: ShopItemBlock,i: number){
     game_state.player_inventory.push(self.node_object);
-    game_state.shop_item_blocks.splice(i, 1);
+    game_state.shop_item_blocks.splice(i,1)
 }

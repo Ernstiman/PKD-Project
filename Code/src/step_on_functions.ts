@@ -30,6 +30,8 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
 }
 
 export function shop_step_on(game_state: GameState, node: iNode){
+        // Empty the shop
+        game_state.shop_item_blocks = [];
         //Increase round
         game_state.round=game_state.round + 1
         //Add active screen

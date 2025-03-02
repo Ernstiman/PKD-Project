@@ -17,13 +17,14 @@ export type NodeObject = {
     player_step_on_function: Function
     round_end_function: Function
     collectables: Array<Collectable>
-    draw_function: Function
+    draw_function: Function,
+    collection_rate: number
 }
 
 export type GameState = {
     i_node_array: Array<iNode>, 
     map_graph: ListGraph,
-    current_node: number | undefined,
+    current_node: number,
     round: number,
     player_collectables: Array<Collectable>,
     shop_collectables: Array<Collectable>,

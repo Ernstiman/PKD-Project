@@ -42,7 +42,7 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
         ctx.font ="45px Georgia";      // Set font size and type
         ctx.textAlign = "center";     // Center the text horizontally
         ctx.textBaseline = "middle";  // Center the text vertically
-        ctx.fillText("Round: "+game_state.round.toString(), 100, 100);
+        ctx.fillText("Day: "+game_state.round.toString(), 100, 100);
     }
 
     function draw_player_collectables() {
@@ -200,5 +200,4 @@ export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_
         ctx.fillStyle = "rgba(0, 240, 20, 0.86)";
         shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x ,shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
-    }
-}
+    }}
