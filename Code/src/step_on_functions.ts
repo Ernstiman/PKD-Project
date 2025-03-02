@@ -1,13 +1,8 @@
 import { GameState, iNode } from "./types.js";
 import { remove_id_arrray } from "./id_array.js";
 import { node_activate_round_end } from "./node_objects.js";
-<<<<<<< HEAD
-import { construct_rectangle } from "./contructors.js";
 import { game_over_screen, shop_screen } from "./screens.js";
-=======
 import { construct_level_1_trap, construct_rectangle } from "./contructors.js";
-import { shop_screen } from "./screens.js";
->>>>>>> philip
 import { i_node_array } from "./setup_game_state.js";
 import { NodeObject } from "./types.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
@@ -24,29 +19,26 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
         
         game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
         game_state.player_collectables[0].count = 0;
-<<<<<<< HEAD
         if(!check_quota(game_state)){
         stop_music(game_state.songs[0])
         play_music(game_state.songs[1])
         for(let i = 0; i < game_state.active_screens.length; i ++)
             if(game_state.active_screens[i] === "shop_screen"){{
-=======
         // stop_music(game_state.songs[0])
         // play_music(game_state.songs[1])
         for(let i = 0; i < game_state.active_screens.length; i ++){
             if(game_state.active_screens[i] === "shop_screen"){
->>>>>>> philip
                 game_state.active_screens.splice(i, 1);
 
             }
             remove_id_arrray("return_to_game", game_state.gui_rectangles);
             game_state.shop_item_blocks = [];
-                }        }
+                }        }}}
         else{
             game_over_screen.draw_function(ctx, game_state)
         }
-        }
-    )
+        
+})
 }
 
 export function shop_step_on(game_state: GameState, node: iNode){
