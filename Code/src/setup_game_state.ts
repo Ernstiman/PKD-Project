@@ -48,7 +48,8 @@ export function get_base_game_state() : GameState{
 
     //skapa shop
     let shop = construct_node_object(0, shop_draw_function,  shop_step_on, ()=>{})
-    let shop_index = random_shop_index(0, basic_graph.size);
+    // let shop_index = random_shop_index(0, basic_graph.size);
+    let shop_index = Math.floor(Math.random() * basic_graph.size)
     console.log(shop_index);
     //Skapa spelplan
     for (let i = 0; i < basic_graph.size; i++) {
