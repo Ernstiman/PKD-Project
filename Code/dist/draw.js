@@ -152,8 +152,7 @@ export function draw_shop_block_item_blocks(ctx, game_state) {
     let x = 700;
     let y = 700;
     for (let shop_block_item_block of game_state.shop_item_blocks) {
-        ctx.fillStyle = "rgba(0, 240, 20, 0.86)";
-        shop_block_item_block.node_object.draw_function(ctx, shop_block_item_block.block.x, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
+        shop_block_item_block.node_object.draw_function(ctx, shop_block_item_block.block.x + 50, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
     }
 }

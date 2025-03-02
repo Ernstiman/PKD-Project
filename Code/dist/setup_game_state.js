@@ -56,8 +56,12 @@ export function get_base_game_state() {
     //Skapa shop item blocks
     let start_shop_item_blocks = [];
     //Create array of songs
+<<<<<<< HEAD
     let songs = [new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3")];
     let start_days_to_quota = 6;
+=======
+    let songs = [new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3")];
+>>>>>>> philip
     //Skapa gamestate
     return { i_node_array: i_node_array,
         map_graph: basic_graph,
@@ -70,8 +74,12 @@ export function get_base_game_state() {
         active_screens: [game_screen.id],
         player_inventory: [],
         shop_item_blocks: start_shop_item_blocks,
+<<<<<<< HEAD
         songs: songs,
         days_to_quota: start_days_to_quota,
         quota_amount: quota_amount
+=======
+        songs: songs
+>>>>>>> philip
     };
 }

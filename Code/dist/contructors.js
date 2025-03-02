@@ -1,6 +1,6 @@
-import { trap_draw_function } from './draw_functions.js';
+import { lvl_1_trap_draw_function, trap_draw_function } from './draw_functions.js';
 import { trap_step_on } from './step_on_functions.js';
-import { trap_round_end } from './round_end_functions.js';
+import { lvl_1_trap_end, trap_round_end } from './round_end_functions.js';
 let global_node_object_id = 0;
 export function get_node_object_id() {
     global_node_object_id = global_node_object_id + 1;
@@ -28,6 +28,9 @@ export function construct_rectangle(id, x, y, width, height, text, click_on_func
 }
 export function test_trap_constructor() {
     return construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.5);
+}
+export function construct_level_1_trap() {
+    return construct_node_object(0, lvl_1_trap_draw_function, trap_step_on, lvl_1_trap_end, 1);
 }
 export function construct_shop_item_block(cost, node_object, block) {
     return { cost: cost, node_object: node_object, block: block };

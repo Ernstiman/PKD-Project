@@ -44,6 +44,9 @@ export function place_object_click_on(game_state) {
     }
 }
 export function shop_item_block_click_on(game_state, self, i) {
-    game_state.player_inventory.push(self.node_object);
-    game_state.shop_item_blocks.splice(i, 1);
+    if (game_state.player_collectables[0].count >= self.cost) {
+        game_state.player_inventory.push(self.node_object);
+        game_state.player_collectables[0].count -= self.cost;
+        game_state.shop_item_blocks.splice(i, 1);
+    }
 }
