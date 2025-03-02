@@ -1,4 +1,6 @@
-import { NodeObject } from "./types.js";
+import { canvas } from "./draw.js";
+import { GameState, NodeObject } from "./types.js";
+
 
 export function trap_draw_function(ctx: CanvasRenderingContext2D, x: number, y: number, self: NodeObject) : void{
     
@@ -35,7 +37,7 @@ export function shop_draw_function(ctx: CanvasRenderingContext2D, x: number, y: 
 
 export function player_draw_function(ctx: CanvasRenderingContext2D, x: number, y: number, self: NodeObject) : void{
     ctx.beginPath()
-    ctx.fillStyle = "rgba(20, 216, 2, 0.73)";
+    ctx.fillStyle = "rgba(35, 154, 43, 0.73)";
     ctx.arc(x, y, 20, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
@@ -46,3 +48,4 @@ export function player_draw_function(ctx: CanvasRenderingContext2D, x: number, y
     ctx.textBaseline = "middle";  // Center the text vertically
     ctx.fillText("You", x, y);
 }
+

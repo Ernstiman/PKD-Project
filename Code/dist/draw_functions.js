@@ -28,7 +28,7 @@ export function shop_draw_function(ctx, x, y, self) {
 }
 export function player_draw_function(ctx, x, y, self) {
     ctx.beginPath();
-    ctx.fillStyle = "rgba(20, 216, 2, 0.73)";
+    ctx.fillStyle = "rgba(35, 154, 43, 0.73)";
     ctx.arc(x, y, 20, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
