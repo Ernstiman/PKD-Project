@@ -10,9 +10,9 @@ body {
 }
 
 canvas {
-    padding: 10px;
-    color: #000000;
-    background-color: #84c0ca; 
+    padding: 0px;
+    color: #5e2e2e;
+    background: radial-gradient(circle, #dbdce9c5 0%, #394b7eee 100%);
     border: 4px solid #000000;
 }
 
@@ -23,7 +23,7 @@ canvas {
     width: 300px;      /* Adjust the width as needed */
     height: 100vh;     /* Full height of the screen */
     background: #000000;
-    background: linear-gradient(to right, #00000060 0%, #ffffff00 100%);
+    
     color: white;      /* Text color */
     padding: 20px;     /* Add some space inside */
     box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3); /* Adds shadow for depth */

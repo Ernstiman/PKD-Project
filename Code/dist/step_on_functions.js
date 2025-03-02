@@ -6,7 +6,11 @@ import { i_node_array } from "./setup_game_state.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
 import { shop_item_block_click_on } from "./click.js";
 function construct_shop_return_to_game_button(game_state, node) {
+<<<<<<< HEAD
     return construct_rectangle("return_to_game", 800, 800, 100, 100, "heh", () => {
+=======
+    return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", () => {
+>>>>>>> philip
         game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
         game_state.player_collectables[0].count = 0;
         for (let i = 0; i < game_state.active_screens.length; i++) {
@@ -37,7 +41,11 @@ export function shop_step_on(game_state, node) {
     }
 }
 export function trap_step_on(game_state, node, node_objects) {
+<<<<<<< HEAD
     game_state.gui_rectangles.push(construct_rectangle("collect", node.x + 50, node.y + 50, 50, 50, "collect beavers", (game_state) => {
+=======
+    game_state.gui_rectangles.push(construct_rectangle("collect", node.x + 50, node.y + 50, 130, 50, "collect beavers", (game_state) => {
+>>>>>>> philip
         game_state.player_collectables[0].count += node_objects.collectables[0].count;
         node_objects.collectables[0].count = 0;
     }));

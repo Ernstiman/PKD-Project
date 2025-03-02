@@ -31,24 +31,22 @@ function draw_inventory(ctx, game_state) {
 export function draw_ui_elements(ctx, game_state) {
     function current_round_text() {
         ctx.fillStyle = "black"; // Set text color
-        ctx.font = "45px 'Comic Sans MS'"; // Set font size and type
+        ctx.font = "45px Georgia"; // Set font size and type
         ctx.textAlign = "center"; // Center the text horizontally
         ctx.textBaseline = "middle"; // Center the text vertically
         ctx.fillText("Round: " + game_state.round.toString(), 100, 100);
     }
     function draw_player_collectables() {
-        for (let i = 0; i < game_state.player_collectables.length; i++) {
-            ctx.font = "45px 'Comic Sans MS'";
-            ctx.fillText(game_state.player_collectables[i].name.toString() + " : " +
-                game_state.player_collectables[i].count.toString(), 100, 200 + i * 40);
-        }
+        ctx.font = "45px Georgia";
+        ctx.fillText("Beavers: " +
+            game_state.player_collectables[0].count.toString(), 400, 100);
+        ctx.fillText("Rabbits: " +
+            game_state.player_collectables[1].count.toString(), 700, 100);
     }
     function draw_beaver_quota() {
-        for (let i = 0; i < game_state.shop_collectables.length; i++) {
-            ctx.font = "45px 'Comic Sans MS'";
-            ctx.fillText(game_state.shop_collectables[i].name.toString() + " Quota : " +
-                game_state.shop_collectables[i].count.toString(), 200, 600 + i * 40);
-        }
+        ctx.font = "45px Georgia";
+        ctx.fillText("Quota: " +
+            game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100);
     }
     current_round_text();
     draw_player_collectables();
@@ -81,7 +79,7 @@ export function list_graph_draw(ctx, game_state) {
                 if (inode.index === game_state.current_node) {
                     let is_walkable = is_adj_node(game_state, adj_index);
                     if (is_walkable) {
-                        ctx.strokeStyle = "green";
+                        ctx.strokeStyle = "rgb(46, 148, 63)";
                         ctx.moveTo(draw_x, draw_y);
                         ctx.lineTo(arrowX1, arrowY1);
                         ctx.moveTo(draw_x, draw_y);
@@ -132,16 +130,19 @@ export function draw_gui_rectangles(ctx, game_state) {
     }
 }
 export function draw_gui_rectangle(ctx, rect) {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.34)";
     ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-    ctx.fillStyle = "white"; // Text color
-    ctx.font = "20px Arial";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+    ctx.fillStyle = "black"; // Text color
+    ctx.font = "20px Georgia";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2);
 }
 export function draw_shop_gui(ctx, game_state) {
-    ctx.fillStyle = "rgba(200, 0, 0, 0.37)";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.37)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     draw_shop_block_item_blocks(ctx, game_state);
 }
@@ -149,7 +150,7 @@ export function draw_shop_block_item_blocks(ctx, game_state) {
     let x = 700;
     let y = 700;
     for (let shop_block_item_block of game_state.shop_item_blocks) {
-        ctx.fillStyle = "grey";
+        ctx.fillStyle = "rgba(0, 240, 20, 0.86)";
         shop_block_item_block.node_object.draw_function(ctx, shop_block_item_block.block.x, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
     }
