@@ -1,9 +1,5 @@
 import { list } from './lib/list.js';
-<<<<<<< HEAD
-import { construct_inode, construct_node_object, construct_rectangle, test_trap_constructor } from './contructors.js';
-=======
 import { construct_inode, construct_node_object, construct_rectangle } from './contructors.js';
->>>>>>> philip
 import { shop_draw_function } from './draw_functions.js';
 import { generate_x_y } from './generate_x_y.js';
 import { construct_collectable } from './contructors.js';
@@ -38,19 +34,12 @@ export function get_base_game_state() {
     };
     //skapa shop
     let shop = construct_node_object(0, shop_draw_function, shop_step_on, () => { });
-<<<<<<< HEAD
-    //Skapa spelplan
-    for (let i = 0; i < basic_graph.size; i++) {
-        if (i > 1) {
-            construct_inode(i, [], 0, 0, i_node_array);
-=======
-    let shop_index = random_shop_index(0, basic_graph.size);
-    console.log(shop_index);
+    // let shop_index = random_shop_index(0, basic_graph.size);
+    let shop_index = Math.floor(Math.random() * basic_graph.size);
     //Skapa spelplan
     for (let i = 0; i < basic_graph.size; i++) {
         if (i === shop_index) {
             construct_inode(i, [shop], 0, 0, i_node_array);
->>>>>>> philip
         }
         else {
             construct_inode(i, [], 0, 0, i_node_array);
@@ -62,28 +51,23 @@ export function get_base_game_state() {
     //Setup collectables quota
     let shop_start_collectables = [construct_collectable("beaver", 350)];
     //Create place object button
-<<<<<<< HEAD
-    let place_object_button = construct_rectangle("place_object", 1400, 100, 100, 100, "Place Object", place_object_click_on);
-=======
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on);
->>>>>>> philip
     //Skapa shop item blocks
     let start_shop_item_blocks = [];
+    //Create array of songs
+    let songs = [new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3")];
     //Skapa gamestate
     return { i_node_array: i_node_array,
         map_graph: basic_graph,
-        current_node: undefined,
+        current_node: shop_index,
         round: 0,
         player_collectables: start_collectables,
         shop_collectables: shop_start_collectables,
         gui_rectangles: [place_object_button],
         screens: [game_screen, shop_screen],
         active_screens: [game_screen.id],
-<<<<<<< HEAD
-        player_inventory: [test_trap_constructor(), test_trap_constructor(), test_trap_constructor()],
-=======
         player_inventory: [],
->>>>>>> philip
-        shop_item_blocks: start_shop_item_blocks
+        shop_item_blocks: start_shop_item_blocks,
+        songs: songs
     };
 }

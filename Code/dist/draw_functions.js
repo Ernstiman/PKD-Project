@@ -4,7 +4,9 @@ export function trap_draw_function(ctx, x, y, self) {
     ctx.font = "16px Arial"; // Set font size and type
     ctx.textAlign = "center"; // Center the text horizontally
     ctx.textBaseline = "middle"; // Center the text vertically
-    ctx.fillText(self.collectables[0].count.toString(), x + 40, y);
+    if (self.collectables[0].count > 0) {
+        ctx.fillText(self.collectables[0].count.toString(), x + 40, y);
+    }
     ctx.beginPath();
     ctx.fillStyle = "rgb(200, 0, 0)";
     ctx.arc(x, y, 10, 0, 2 * Math.PI);

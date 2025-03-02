@@ -34,7 +34,7 @@ export function draw_ui_elements(ctx, game_state) {
         ctx.font = "45px Georgia"; // Set font size and type
         ctx.textAlign = "center"; // Center the text horizontally
         ctx.textBaseline = "middle"; // Center the text vertically
-        ctx.fillText("Round: " + game_state.round.toString(), 100, 100);
+        ctx.fillText("Day: " + game_state.round.toString(), 100, 100);
     }
     function draw_player_collectables() {
         ctx.font = "45px Georgia";
