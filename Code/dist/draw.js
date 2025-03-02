@@ -18,6 +18,15 @@ export function game_draw(ctx, game_state) {
     list_graph_draw(ctx, game_state);
     draw_gui_rectangles(ctx, game_state);
     draw_ui_elements(ctx, game_state);
+    draw_inventory(ctx, game_state);
+}
+function draw_inventory(ctx, game_state) {
+    let x = 1600;
+    let y = 150;
+    for (let i = 0; i < game_state.player_inventory.length; i++) {
+        game_state.player_inventory[i].draw_function(ctx, x, y, game_state.player_inventory[i]);
+        y += 50;
+    }
 }
 export function draw_ui_elements(ctx, game_state) {
     function current_round_text() {
@@ -118,19 +127,30 @@ export function list_graph_draw(ctx, game_state) {
     draw_node_objects();
 }
 export function draw_gui_rectangles(ctx, game_state) {
-    const start_x = 1675;
-    const start_y = 200;
     for (let rect of game_state.gui_rectangles) {
-        ctx.fillStyle = "black";
-        ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-        ctx.fillStyle = "white"; // Text color
-        ctx.font = "20px Arial";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2);
+        draw_gui_rectangle(ctx, rect);
     }
+}
+export function draw_gui_rectangle(ctx, rect) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+    ctx.fillStyle = "white"; // Text color
+    ctx.font = "20px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2);
 }
 export function draw_shop_gui(ctx, game_state) {
     ctx.fillStyle = "rgba(200, 0, 0, 0.37)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    draw_shop_block_item_blocks(ctx, game_state);
+}
+export function draw_shop_block_item_blocks(ctx, game_state) {
+    let x = 700;
+    let y = 700;
+    for (let shop_block_item_block of game_state.shop_item_blocks) {
+        ctx.fillStyle = "grey";
+        shop_block_item_block.node_object.draw_function(ctx, shop_block_item_block.block.x, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
+        draw_gui_rectangle(ctx, shop_block_item_block.block);
+    }
 }

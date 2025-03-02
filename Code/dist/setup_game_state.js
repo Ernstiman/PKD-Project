@@ -1,12 +1,13 @@
 import { list } from './lib/list.js';
 import { construct_inode, construct_node_object, construct_rectangle, test_trap_constructor } from './contructors.js';
-import { shop_draw_function, trap_draw_function } from './draw_functions.js';
+import { shop_draw_function } from './draw_functions.js';
 import { generate_x_y } from './generate_x_y.js';
-import { node_activate_round_end } from './node_objects.js';
 import { construct_collectable } from './contructors.js';
-import { draw_shop_gui, game_draw } from './draw.js';
-import { remove_id_arrray } from './id_array.js';
-const i_node_array = [];
+import { shop_screen } from './screens.js';
+import { game_screen } from './screens.js';
+import { shop_step_on } from './step_on_functions.js';
+import { place_object_click_on } from './click.js';
+export const i_node_array = [];
 export function get_base_game_state() {
     const basic_graph = {
         adj: [
@@ -21,36 +22,12 @@ export function get_base_game_state() {
         ],
         size: 8
     };
-    let test_trap = construct_node_object(0, trap_draw_function, (game_state, node, node_objects) => {
-        game_state.gui_rectangles.push(construct_rectangle("collect", node.x + 50, node.y + 50, 50, 50, "collect beavers", (game_state) => {
-            game_state.player_collectables[0].count += node_objects.collectables[0].count;
-            node_objects.collectables[0].count = 0;
-        }));
-    }, (game_state, node_object) => {
-        node_object.collectables[0].count += 1;
-    });
-    let shop = construct_node_object(0, shop_draw_function, (game_state, node) => {
-        game_state.round = game_state.round + 1;
-        game_state.active_screens.push(shop_screen.id);
-        game_state.gui_rectangles.push(construct_rectangle("return_to_game", 500, 500, 200, 200, "heh", () => {
-            game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
-            game_state.player_collectables[0].count = 0;
-            for (let i = 0; i < game_state.active_screens.length; i++) {
-                if (game_state.active_screens[i] === "shop_screen") {
-                    game_state.active_screens.splice(i, 1);
-                }
-                remove_id_arrray("return_to_game", game_state.gui_rectangles);
-            }
-        }));
-        //alla noder istället
-        //Loopa igenom alla
-        for (let i = 0; i < game_state.i_node_array.length; i++) {
-            node_activate_round_end(game_state, i_node_array[i]);
-        }
-    }, () => { });
+    //skapa shop
+    let shop = construct_node_object(0, shop_draw_function, shop_step_on, () => { });
+    //Skapa spelplan
     for (let i = 0; i < basic_graph.size; i++) {
         if (i > 1) {
-            construct_inode(i, [test_trap_constructor()], 0, 0, i_node_array);
+            construct_inode(i, [], 0, 0, i_node_array);
         }
         else {
             if (i === 0) {
@@ -61,22 +38,26 @@ export function get_base_game_state() {
             }
         }
     }
-    let game_screen = {
-        id: "game_screen",
-        draw_function: game_draw
-    };
-    let shop_screen = {
-        id: "shop_screen",
-        draw_function: draw_shop_gui
-    };
-    // construct_inode(0,[construct_node_object(0, trap_draw_function)],100,500, i_node_array)
-    // construct_inode(1,[],300,500, i_node_array)
-    // construct_inode(2,[],500,500, i_node_array)
-    // construct_inode(3,[],700,500, i_node_array)
-    // construct_inode(4,[],900,600, i_node_array)
     generate_x_y(i_node_array);
+    //Setup collectables for player
     let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)];
+    //Setup collectables quota
     let shop_start_collectables = [construct_collectable("beaver", 350)];
-    return { i_node_array: i_node_array, map_graph: basic_graph, current_node: undefined, round: 0, player_collectables: start_collectables, shop_collectables: shop_start_collectables, gui_rectangles: [], screens: [game_screen, shop_screen], active_screens: [game_screen.id] };
+    //Create place object button
+    let place_object_button = construct_rectangle("place_object", 1400, 100, 100, 100, "Place Object", place_object_click_on);
+    //Skapa shop item blocks
+    let start_shop_item_blocks = [];
+    //Skapa gamestate
+    return { i_node_array: i_node_array,
+        map_graph: basic_graph,
+        current_node: undefined,
+        round: 0,
+        player_collectables: start_collectables,
+        shop_collectables: shop_start_collectables,
+        gui_rectangles: [place_object_button],
+        screens: [game_screen, shop_screen],
+        active_screens: [game_screen.id],
+        player_inventory: [test_trap_constructor(), test_trap_constructor(), test_trap_constructor()],
+        shop_item_blocks: start_shop_item_blocks
+    };
 }
-// module.exports = {i_node_array}
