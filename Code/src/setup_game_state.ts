@@ -16,7 +16,7 @@ import { place_object_click_on, shop_item_block_click_on } from './click.js';
 import { play_music } from './music.js';
 
 export const i_node_array: Array<iNode>=[];
-
+export let quota_amount: number = 3;
 export function get_base_game_state() : GameState{
 
     function random_shop_index(min: number, max: number): number {
@@ -68,7 +68,8 @@ export function get_base_game_state() : GameState{
     //Setup collectables for player
     let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)]
     //Setup collectables quota
-    let shop_start_collectables = [construct_collectable("beaver",350)]
+    
+    let shop_start_collectables = [construct_collectable("beaver",quota_amount)]
     
     //Create place object button
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on)
@@ -79,7 +80,9 @@ export function get_base_game_state() : GameState{
     let start_shop_item_blocks: Array<ShopItemBlock> = []
 
     //Create array of songs
-    let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3")]
+    let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3")]
+
+    let start_days_to_quota = 6;
 
     //Skapa gamestate
     return {i_node_array: i_node_array, 
@@ -94,6 +97,8 @@ export function get_base_game_state() : GameState{
             [game_screen.id],
             player_inventory: [],
             shop_item_blocks: start_shop_item_blocks,
-            songs: songs
+            songs: songs,
+            days_to_quota: start_days_to_quota,
+            quota_amount: quota_amount
     }
 }

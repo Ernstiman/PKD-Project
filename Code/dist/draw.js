@@ -1,8 +1,9 @@
 import { is_adj_node } from './adj_nodes.js';
 import { find_id_arrray } from './id_array.js';
 import { for_each } from './lib/list.js';
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+import { play_music } from "./music.js";
+export const canvas = document.getElementById("canvas");
+export const ctx = canvas.getContext("2d");
 export function draw(game_state) {
     if (!ctx)
         return;
@@ -34,7 +35,7 @@ export function draw_ui_elements(ctx, game_state) {
         ctx.font = "45px Georgia"; // Set font size and type
         ctx.textAlign = "center"; // Center the text horizontally
         ctx.textBaseline = "middle"; // Center the text vertically
-        ctx.fillText("Round: " + game_state.round.toString(), 100, 100);
+        ctx.fillText("Day: " + game_state.round.toString(), 100, 100);
     }
     function draw_player_collectables() {
         ctx.font = "45px Georgia";
@@ -47,6 +48,7 @@ export function draw_ui_elements(ctx, game_state) {
         ctx.font = "45px Georgia";
         ctx.fillText("Quota: " +
             game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100);
+        ctx.fillText("Days Left: " + game_state.days_to_quota.toString(), 1085, 160);
     }
     current_round_text();
     draw_player_collectables();
@@ -154,4 +156,17 @@ export function draw_shop_block_item_blocks(ctx, game_state) {
         shop_block_item_block.node_object.draw_function(ctx, shop_block_item_block.block.x, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
     }
+}
+export function draw_game_over_screen(ctx, game_state) {
+    const img = new Image();
+    img.src = '../img/HOB-0.jpg';
+    img.onload = () => {
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Draw the GIF
+            requestAnimationFrame(draw); // Continue to draw the image in sync with the animation
+        }
+        draw();
+    };
+    play_music(game_state.songs[2]);
 }

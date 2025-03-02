@@ -35,8 +35,6 @@ export function clicked_on_node(game_state, node_index) {
 export function place_object_click_on(game_state) {
     if (game_state.current_node !== undefined) {
         if (game_state.player_inventory[0] !== undefined) {
-            console.log(i_node_array[game_state.current_node].nodeObjects);
-            console.log(i_node_array[game_state.current_node].nodeObjects.length);
             //Om det inte finns något node object där man vill placera.
             if (i_node_array[game_state.current_node].nodeObjects.length < 2) {
                 i_node_array[game_state.current_node].nodeObjects.push(game_state.player_inventory[0]);

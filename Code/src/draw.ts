@@ -3,9 +3,10 @@ import { shop_item_block_click_on } from './click.js';
 import { find_id_arrray } from './id_array.js';
 import {for_each} from './lib/list.js'; 
 import { GameState, iNode,  NodeObject, GuiRectangle} from './types.js';
+import { play_music, stop_music } from "./music.js";
 
-const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
-const ctx = canvas!.getContext("2d");
+export const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
+export const ctx = canvas!.getContext("2d");
 
 export function draw(game_state: GameState): void {
         if (!ctx) return;
@@ -60,6 +61,7 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
         ctx.font = "45px Georgia";
         ctx.fillText("Quota: " + 
         game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100);
+        ctx.fillText("Days Left: " + game_state.days_to_quota.toString(), 1085, 160)
         
     }
 
@@ -201,3 +203,19 @@ export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_
         shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x ,shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
     }}
+
+    export function draw_game_over_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
+    
+        const img = new Image();
+        img.src = '../img/HOB-0.jpg'
+        img.onload = () => {
+            function draw() {
+                ctx.clearRect(0, 0, canvas!.width, canvas!.height);  // Clear the canvas
+                ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF
+                requestAnimationFrame(draw);  // Continue to draw the image in sync with the animation
+              }
+              
+              draw();
+        }
+        play_music(game_state.songs[2]);
+    }
