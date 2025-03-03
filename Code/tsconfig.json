@@ -1,19 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "ESNext",
+    "target": "ES6", // Target modern JavaScript (adjust according to your needs)
+    "module": "ESNext", // Use ES module syntax (adjust according to your needs)
     "moduleResolution": "node",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "./dist", // All compiled JS files go here
+    "rootDir": "./src", // Root directory for TypeScript files
     "esModuleInterop": true,
     "strict": true,
-    "skipLibCheck": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts" // Include all TypeScript files in src/
   ],
   "exclude": [
     "node_modules"
   ]
-  
 }
