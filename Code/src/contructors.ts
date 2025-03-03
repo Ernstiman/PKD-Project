@@ -47,3 +47,7 @@ export function construct_level_1_trap(): NodeObject {
 export function construct_shop_item_block(cost: number, node_object: NodeObject, block: GuiRectangle): ShopItemBlock{
     return {cost: cost, node_object: node_object, block: block}
 }
+
+export function construct_inventory_items(node_object: NodeObject, box: GuiRectangle, index: number){
+    return {node_object: node_object, box: box, index: index};
+}

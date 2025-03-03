@@ -1,6 +1,6 @@
 import {for_each, list, List} from './lib/list.js'; 
 import { ListGraph } from './lib/graphs.js';
-import { GameState, iNode,  NodeObject, Screen, ShopItemBlock} from './types.js';
+import { GameState, iNode,  InventoryNodeObject,  NodeObject, Screen, ShopItemBlock} from './types.js';
 import { construct_inode, construct_level_1_trap, construct_node_object, construct_rectangle, construct_shop_item_block, test_trap_constructor } from './contructors.js';
 import { shop_draw_function, trap_draw_function } from './draw_functions.js';
 import { generate_x_y } from './generate_x_y.js';
@@ -12,7 +12,7 @@ import { shop_screen } from './screens.js';
 import { game_screen } from './screens.js';
 import { shop_step_on, trap_step_on } from './step_on_functions.js';
 import { trap_round_end } from './round_end_functions.js';
-import { place_object_click_on, shop_item_block_click_on } from './click.js';
+import { place_object_click_on, shop_item_block_click_on, submit_beavers_click_on } from './click.js';
 import { play_music } from './music.js';
 
 export const i_node_array: Array<iNode>=[];
@@ -49,8 +49,6 @@ export function get_base_game_state() : GameState{
     //Create place object button
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on)
 
-    
-
     //Skapa shop item blocks
     let start_shop_item_blocks: Array<ShopItemBlock> = []
 
@@ -58,6 +56,8 @@ export function get_base_game_state() : GameState{
     let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3")]
 
     let start_days_to_quota = 6;
+
+    let player_inventory: Array<InventoryNodeObject> = []
 
     //Skapa gamestate
     return {i_node_array: i_node_array, 
@@ -70,10 +70,12 @@ export function get_base_game_state() : GameState{
             screens: [game_screen, shop_screen], 
             active_screens: 
             [game_screen.id],
-            player_inventory: [],
+            player_inventory: player_inventory,
             shop_item_blocks: start_shop_item_blocks,
             songs: songs,
             days_to_quota: start_days_to_quota,
-            quota_amount: quota_amount
+            quota_amount: quota_amount,
+            selected_object: undefined
+            
     }
 }

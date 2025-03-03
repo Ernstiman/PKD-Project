@@ -6,7 +6,7 @@ import { construct_level_1_trap, construct_rectangle } from "./contructors.js";
 import { i_node_array } from "./setup_game_state.js";
 import { NodeObject } from "./types.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
-import { shop_item_block_click_on } from "./click.js";
+import { shop_item_block_click_on, submit_beavers_click_on } from "./click.js";
 import { play_music, stop_music } from "./music.js";
 import { check_quota } from "./round_end_functions.js";
 import { ctx } from "./draw.js";
@@ -16,9 +16,6 @@ import { ctx } from "./draw.js";
 function construct_shop_return_to_game_button(game_state: GameState, node: iNode){
     return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", 
         () => {
-        
-        game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
-        game_state.player_collectables[0].count = 0;
         if(!check_quota(game_state)){
         stop_music(game_state.songs[0])
         play_music(game_state.songs[1])
@@ -32,6 +29,7 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
 
             }
             remove_id_arrray("return_to_game", game_state.gui_rectangles);
+            remove_id_arrray("submit_beavers", game_state.gui_rectangles)
             game_state.shop_item_blocks = [];
                 }        }}}
         else{
@@ -41,11 +39,15 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
 })
 }
 
+
+
 export function shop_step_on(game_state: GameState, node: iNode){
         // Empty the shop
         game_state.shop_item_blocks = [];
         //Increase round
         game_state.round=game_state.round + 1
+        let submit_beavers_button = construct_rectangle("submit_beavers",200, 700, 200, 100, "submit beavers",submit_beavers_click_on);
+        game_state.gui_rectangles.push(submit_beavers_button);
         //Add active screen
         
         //Play music

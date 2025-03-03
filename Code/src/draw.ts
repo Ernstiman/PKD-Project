@@ -32,7 +32,9 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
     let x=1600
     let y=150
     for(let i=0;i<game_state.player_inventory.length;i++){
-        game_state.player_inventory[i].draw_function(ctx, x, y, game_state.player_inventory[i])
+        let inventory_object = game_state.player_inventory[i];
+        inventory_object.node_object.draw_function(ctx, inventory_object.box.x, inventory_object.box.y, inventory_object.node_object)
+        draw_gui_rectangle(ctx, inventory_object.box);
         y+=50
     }
 }
@@ -57,7 +59,7 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
     }
 
     function draw_beaver_quota() {
-
+        console.log(game_state.shop_collectables[0].count)
         ctx.font = "45px Georgia";
         ctx.fillText("Quota: " + 
         game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100);
