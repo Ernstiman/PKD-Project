@@ -1,6 +1,6 @@
 import { construct_inode, construct_node_object } from './contructors.js';
 import { shop_draw_function } from './draw_functions.js';
-import { build_list, list, map, length as list_length } from './lib/list.js';
+import { build_list, list, map, length as list_length, pair } from './lib/list.js';
 import { shop_step_on } from './step_on_functions.js';
 export function generate_x_y(graph, i_node_array, shop_index) {
     const center_x = 1280 / 2 + 200;
@@ -13,11 +13,33 @@ export function generate_x_y(graph, i_node_array, shop_index) {
     let nodes = 0;
     function build_connections(nodes, connect_layers, random_factor, layer, i, amount_array) {
         let list_1 = list();
-        if (amount_array[i] === amount_array[(i + 1) % circle_size]) {
-            list_1 = list(nodes + amount_array[i], nodes + 1);
+        if (layer === 0) {
+            if (Math.random() < 0.5) {
+                list_1 = list(nodes + amount_array[i], nodes + 1);
+            }
+            else {
+                list_1 = list(nodes + 1);
+            }
+            if (Math.random() < 0.4) {
+                list_1 = pair(nodes + amount_array[i] - layer + Math.floor(Math.random() * amount_array[(i + 1) % circle_size]), list_1);
+            }
+        }
+        else if (amount_array[i] - 1 === layer) {
+            if (Math.random() < 0.5) {
+                list_1 = list(nodes + amount_array[i] - layer + Math.floor(amount_array[(i + 1) % circle_size] - 1), nodes + 1);
+            }
+            else {
+                list_1 = list(nodes + 1);
+            }
         }
         else {
             list_1 = list(nodes + 1);
+            if (Math.random() < 0.1) {
+                list_1 = pair(nodes + amount_array[i] - layer + Math.min(Math.floor(amount_array[(i + 1) % circle_size] - 1), layer), list_1);
+            }
+            if (Math.random() < 0.1) {
+                list_1 = pair(nodes + amount_array[i] - layer + Math.min(Math.floor(amount_array[(i + 1) % circle_size] - 1), layer), list_1);
+            }
         }
         if (list_length(list_1) < 1) {
             return list(nodes + Math.floor(1 + Math.random() * (layers)));
