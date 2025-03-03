@@ -51,8 +51,8 @@ export function shop_step_on(game_state: GameState, node: iNode){
         //Add active screen
         
         //Play music
-        // stop_music(game_state.songs[1])
-        // play_music(game_state.songs[0])
+        stop_music(game_state.songs[1])
+        play_music(game_state.songs[0])
 
         function generate_shop_items() {
             const number_of_traps = 2;

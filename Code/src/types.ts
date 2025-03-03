@@ -37,7 +37,7 @@ export type GameState = {
     gui_rectangles: Array<GuiRectangle>
     screens: Array<Screen>,
     active_screens: Array<string>,
-    player_inventory: Array<InventoryNodeObject>,
+    player_inventory: Array<InventoryNodeObject | undefined>,
     shop_item_blocks: Array<ShopItemBlock>,
     songs: Array<HTMLAudioElement>,
     days_to_quota: number,

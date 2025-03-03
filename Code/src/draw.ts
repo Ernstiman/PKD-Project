@@ -33,9 +33,22 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
     let y=150
     for(let i=0;i<game_state.player_inventory.length;i++){
         let inventory_object = game_state.player_inventory[i];
-        inventory_object.node_object.draw_function(ctx, inventory_object.box.x, inventory_object.box.y, inventory_object.node_object)
-        draw_gui_rectangle(ctx, inventory_object.box);
-        y+=50
+        if (inventory_object !== undefined) {
+        
+            inventory_object.node_object.draw_function(ctx, inventory_object.box.x + 25, inventory_object.box.y + 25, inventory_object.node_object)
+            if(i === game_state.selected_object?.index){
+
+                ctx.fillStyle = "rgba(255, 255, 255, 0.34)";
+
+                ctx.fillRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
+                ctx.strokeStyle = "green";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
+
+            }
+            draw_gui_rectangle(ctx, inventory_object.box);
+            y+=50
+        }
     }
 }
 

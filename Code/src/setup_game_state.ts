@@ -47,7 +47,7 @@ export function get_base_game_state() : GameState{
     let shop_start_collectables = [construct_collectable("beaver",quota_amount)]
     
     //Create place object button
-    let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on)
+    
 
     //Skapa shop item blocks
     let start_shop_item_blocks: Array<ShopItemBlock> = []
@@ -66,7 +66,7 @@ export function get_base_game_state() : GameState{
             round: 0, 
             player_collectables: start_collectables, 
             shop_collectables: shop_start_collectables, 
-            gui_rectangles: [place_object_button], 
+            gui_rectangles: [], 
             screens: [game_screen, shop_screen], 
             active_screens: 
             [game_screen.id],

@@ -37,12 +37,14 @@ addEventListener('click', function(e){
         }
         i ++}
     for (let game_object of game_state.player_inventory){
+        if(game_object !== undefined){
         let x_1 = game_object.box.x;
         let y_1 = game_object.box.y;
         let x_2 = game_object.box.width;
         let y_2 = game_object.box.height
         if(mouse_in_rectangle(x, y, x_1, y_1, x_2 + x_1, y_2 + y_1)){
             game_object.box.click_on_function(game_state, i);
+        }
         }
         i ++
     }
