@@ -1,6 +1,8 @@
-export function trap_round_end(game_state, node_object) {
+import { construct_beaver_icon_animations } from "./contructors.js";
+export function trap_round_end(game_state, node_object, node) {
     if (Math.random() <= node_object.collection_rate) {
-        node_object.collectables[0].count += 1;
+        console.log("BEAEAVER");
+        construct_beaver_icon_animations(game_state, Math.random() * 500, 1000 + Math.random() * 200, node.x - 30, node.y - 30, node_object);
     }
 }
 export function check_quota(game_state) {
@@ -16,17 +18,13 @@ export function check_quota(game_state) {
     }
     return false;
 }
-export function check_win(game_state) {
-    if (game_state.game_rounds === 0) {
-        return true;
-    }
-    return false;
-}
-export function lvl_1_trap_end(game_state, node_object) {
-    let x = node_object.collection_rate;
+export function lvl_1_trap_end(game_state, node_object, node) {
     let day = game_state.round;
-    let y = 0;
-    node_object.collectables[0].count += day;
+    //node_object.collectables[0].count += day;
+    console.log("BEAEAVER");
+    for (let i = 0; i < day; i++) {
+        construct_beaver_icon_animations(game_state, Math.random() * 500, 1000 + Math.random() * 200, node.x - 30, node.y - 30, node_object);
+    }
 }
 export function detective_end(game_state, node_object) {
 }

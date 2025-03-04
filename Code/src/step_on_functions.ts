@@ -28,11 +28,7 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
             }
         }
         
-        game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
-        game_state.player_collectables[0].count = 0;
         
-      
-
         //Chance to add wolf on each empty node
         for(let i=0;i<game_state.i_node_array.length;i++){
             if (game_state.i_node_array[i].nodeObjects.length<1){
@@ -59,7 +55,9 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
             game_state.shop_item_blocks = [];
                 }        }}}
         else{
-            game_over_screen.draw_function(ctx, game_state)
+            game_state.not_win = true;
+            play_music(game_state.songs[2]);
+            
         }
         
 })

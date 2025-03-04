@@ -62,7 +62,7 @@ export function get_base_game_state() : GameState{
     //Create array of songs
     let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3"), new Audio("../soundtrack/love.mp3")]
 
-    let start_days_to_quota = 6;
+    let start_days_to_quota = 2;
 
     let player_inventory: Array<InventoryNodeObject> = []
 
@@ -89,6 +89,7 @@ export function get_base_game_state() : GameState{
             game_over: false,
             icon_animations: [],
             ticks: 0,
+            not_win: false
             
     }
 }

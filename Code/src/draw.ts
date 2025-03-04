@@ -8,24 +8,33 @@ import { get_detective_nodes_indexes } from './detective.js';
 import { List, list } from './lib/list.js';
 import { construct_inode } from './contructors.js';
 import { i_node_array, shop_index } from './setup_game_state.js';
+import { game_over_screen } from './screens.js';
 
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
 export const ctx = canvas!.getContext("2d");
 
 export function draw(game_state: GameState): void {
         if (!ctx) return;
+
         ctx.clearRect(0, 0, canvas!.width, canvas!.height);
-        for (let screen_id of game_state.active_screens){
+        if(game_state.game_over){
+            draw_win_screen(ctx, game_state)
+        }
+        else if(game_state.not_win){
+        draw_game_over_screen(ctx, game_state)
+        }
+        else{for (let screen_id of game_state.active_screens){
             let screen = find_id_arrray(screen_id, game_state.screens);
             if(screen !== undefined){
                 screen.draw_function(ctx, game_state)
             }
             
-        }
+        }}
+        
     }
 
-    function applyOldMovieFilter() {
-        if (!ctx || !canvas) return;
+    function applyOldMovieFilter(ctx: CanvasRenderingContext2D, game_state: GameState) {
+        if (!ctx || !canvas || game_state.game_over) return;
     
         // Get the image data from canvas
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -85,7 +94,7 @@ export function game_draw(ctx: CanvasRenderingContext2D,game_state: GameState){
     draw_gui_rectangles(ctx, game_state);
     draw_ui_elements(ctx, game_state);
     draw_inventory(ctx, game_state);
-    applyOldMovieFilter();
+    applyOldMovieFilter(ctx, game_state);
 }
 
 
@@ -311,23 +320,15 @@ export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_
     
         const img = new Image();
         img.src = '../img/HOB-0.jpg'
-        img.onload = () => {
-                ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF;  // Continue to draw the image in sync with the animation
-            
-        }
-        play_music(game_state.songs[2]);
+        ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF;  // Continue to draw the image in sync with the animation
+        
     }
 
     export function draw_win_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
         const img = new Image();
         img.src = '../img/win_screen.jpg'
-                img.onload = () => {
-                        ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF   
+        ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF   
                       
-                }
-        for (let music of game_state.songs){
-            stop_music(music)
-        }
-        play_music(game_state.songs[3]);
+        
         
     }

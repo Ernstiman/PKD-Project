@@ -5,7 +5,7 @@ import { step_on_node } from './node_objects.js';
 import { remove_id_arrray } from './id_array.js';
 import { i_node_array } from './setup_game_state.js';
 import { detective_walk } from './detective.js';
-import { draw_win_screen, ctx } from './draw.js';
+import { stop_music, play_music } from './music.js';
 export function get_clicked_node_index(nodes, x, y) {
     for (let node of nodes) {
         console.log(nodes);
@@ -41,7 +41,10 @@ export function place_object_click_on(game_state) {
     //Om det inte finns något node object där man vill placera.
     if (((_a = game_state.selected_object) === null || _a === void 0 ? void 0 : _a.node_object.type) === 2 && game_state.i_node_array[game_state.current_node].nodeObjects[0].type === 3) {
         game_state.game_over = true;
-        draw_win_screen(ctx, game_state);
+        for (let music of game_state.songs) {
+            stop_music(music);
+        }
+        play_music(game_state.songs[3]);
     }
     if (i_node_array[game_state.current_node].nodeObjects.length < 2) {
         if (game_state.selected_object !== undefined && game_state.selected_object.node_object.type !== 2) {

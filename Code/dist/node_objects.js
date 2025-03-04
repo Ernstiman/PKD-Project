@@ -14,6 +14,6 @@ export function step_on_node(game_state, node) {
 }
 export function node_activate_round_end(game_state, node) {
     for (let i = 0; i < node.nodeObjects.length; i++) {
-        node.nodeObjects[i].round_end_function(game_state, node.nodeObjects[i]);
+        node.nodeObjects[i].round_end_function(game_state, node.nodeObjects[i], node);
     }
 }
