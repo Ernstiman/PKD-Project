@@ -111,3 +111,20 @@ export function player_draw_function(ctx: CanvasRenderingContext2D, x: number, y
     ctx.fillText("You", x, y);
 }
 
+export function ring_draw_function(ctx: CanvasRenderingContext2D, x: number, y: number){
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(181, 200, 11, 0.73)";
+    ctx.arc(x, y, 20, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+}
+
+export function draw_daughter(ctx: CanvasRenderingContext2D, x: number, y: number){
+
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(59, 220, 9, 0.73)";
+    ctx.arc(x, y, 20, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+}
+

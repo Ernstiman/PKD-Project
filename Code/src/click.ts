@@ -8,10 +8,12 @@ import { find_id_arrray, remove_id_arrray } from './id_array.js';
 import { i_node_array } from './setup_game_state.js';
 import { list_ref, length as list_length} from './lib/list.js';
 import { detective_walk } from './detective.js';
+import { draw_win_screen, ctx } from './draw.js';
 
 
 export function get_clicked_node_index(nodes: Array<iNode>, x: number, y: number): number | undefined{
     for (let node of nodes){
+        console.log(nodes)
         let dx = (x - node.x) ** 2;
         let dy = (y - node.y) ** 2;
         if(dx + dy <= 40**2){
@@ -48,11 +50,13 @@ export function clicked_on_node(game_state: GameState, node_index: number ){
 }
 
 export function place_object_click_on(game_state: GameState){
-    if (game_state.current_node!==undefined){
-        if (game_state.player_inventory[0]!==undefined){
             //Om det inte finns något node object där man vill placera.
+            if(game_state.selected_object?.node_object.type === 2 && game_state.i_node_array[game_state.current_node].nodeObjects[0].type === 3){
+                game_state.game_over = true;
+                draw_win_screen(ctx!, game_state)
+            }
             if (i_node_array[game_state.current_node].nodeObjects.length<2){ 
-                if(game_state.selected_object !== undefined){
+                if(game_state.selected_object !== undefined && game_state.selected_object.node_object.type !== 2){
                     i_node_array[game_state.current_node].nodeObjects.push(game_state.selected_object.node_object)
                     game_state.player_inventory[game_state.selected_object!.index] = undefined;
                     }
@@ -61,8 +65,6 @@ export function place_object_click_on(game_state: GameState){
                     
             }
         }
-    }
-}
 export function shop_item_block_click_on(game_state: GameState, self: ShopItemBlock,i: number){
     if (game_state.player_collectables[0].count >= self.cost) {
         let index = 0;
@@ -85,9 +87,12 @@ export function shop_item_block_click_on(game_state: GameState, self: ShopItemBl
 export function inventory_item_click_on(game_state: GameState, index: number){
 
     game_state.selected_object = game_state.player_inventory[index]
+    remove_id_arrray("place_object", game_state.gui_rectangles);
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on)
-    if(!find_id_arrray("place_object", game_state.gui_rectangles))
-        game_state.gui_rectangles.push(place_object_button);
+    if(game_state.selected_object?.node_object.type !== 2 && game_state.i_node_array[game_state.current_node].nodeObjects[0].type !== 3){
+        game_state.gui_rectangles.push(place_object_button)};
+    if(game_state.selected_object?.node_object.type === 2 && game_state.i_node_array[game_state.current_node].nodeObjects[0].type === 3){
+        game_state.gui_rectangles.push(place_object_button);}
 }
 
 

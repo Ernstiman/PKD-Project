@@ -1,24 +1,32 @@
 import { GameState, iNode } from "./types.js";
-import { remove_id_arrray } from "./id_array.js";
+import { find_id_arrray, in_inventory, remove_id_arrray } from "./id_array.js";
 import { node_activate_round_end } from "./node_objects.js";
-import { game_over_screen, shop_screen } from "./screens.js";
-import { construct_level_1_trap, construct_rectangle, construct_wolf } from "./contructors.js";
-import { i_node_array } from "./setup_game_state.js";
+import { game_over_screen, shop_screen, win_screen } from "./screens.js";
+import { construct_level_1_trap, construct_rectangle, construct_ring, construct_wolf } from "./contructors.js";
+import { i_node_array, basic_graph, shop_index } from "./setup_game_state.js";
 import { NodeObject } from "./types.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
 import { shop_item_block_click_on, submit_beavers_click_on } from "./click.js";
 import { play_music, stop_music } from "./music.js";
 import { check_quota } from "./round_end_functions.js";
-import { ctx } from "./draw.js";
+import { ctx, draw, draw_gui_rectangle } from "./draw.js";
+import { create_daughter_node } from "./generate_x_y.js";
+import { draw_daughter } from "./draw_functions.js";
+// import { create_daughter_node } from "./generate_x_y.js";
 
 
 
 function construct_shop_return_to_game_button(game_state: GameState, node: iNode){
     return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", 
         () => {
-        
-        game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
-        game_state.player_collectables[0].count = 0;
+        for (let inventory_item of game_state.player_inventory){
+            if(inventory_item?.node_object.type === 2){
+                // win_screen.draw_function(ctx, game_state)
+                // draw_daughter(game_state, ctx!)
+                // game_state.game_over = true
+                create_daughter_node(game_state.map_graph, game_state.i_node_array,shop_index, game_state)
+            }
+        }
 
         //Chance to add wolf on each empty node
         for(let i=0;i<game_state.i_node_array.length;i++){
@@ -50,6 +58,7 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
         }
         
 })
+
 }
 
 
@@ -72,12 +81,21 @@ export function shop_step_on(game_state: GameState, node: iNode){
             for(let i = 0; i < 3; i ++){
                 const test_trap_cost = 0;
                 const lvl_1_trap_cost = 5;
+                const ring_cost = 0;
 
                 const random_factor = Math.floor(Math.random() * number_of_traps);
                 console.log(random_factor);
                 
                 
                 // generate items in the shop when you step on it
+
+                if(game_state.game_rounds <= 1 && i === 0 && !in_inventory(game_state, 2)){
+                    let ring_item_button = construct_rectangle("ring", 200, 500, 100, 100, "Free", shop_item_block_click_on)
+                    let ring_item_block = construct_shop_item_block(ring_cost, construct_ring(), ring_item_button);
+                    game_state.shop_item_blocks.push(ring_item_block);
+                    continue
+                    
+                }
 
                 if (random_factor === 0) { // test trap
                     let shop_item_button = construct_rectangle("shop_item_block", 200 * i + 200, 500, 100, 100, "Free", shop_item_block_click_on);
@@ -123,11 +141,17 @@ export function trap_step_on(game_state: GameState,node: iNode, node_objects: No
     export function wolf_step_on(game_state: GameState, node: iNode, node_objects: NodeObject){
       
         game_state.player_collectables[0].count -= node_objects.collectables[0].count
+        if(game_state.player_collectables[0].count <= 0){
+            game_state.player_collectables[0].count = 0;
+        }
   
 }
 
 export function detective_step_on(game_state: GameState, node: iNode, node_objects: NodeObject){
       
     game_state.player_collectables[0].count -= node_objects.collectables[0].count
+    if(game_state.player_collectables[0].count <= 0){
+        game_state.player_collectables[0].count = 0;
+    }
 
 }

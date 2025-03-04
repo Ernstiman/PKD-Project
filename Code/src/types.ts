@@ -42,7 +42,9 @@ export type GameState = {
     songs: Array<HTMLAudioElement>,
     days_to_quota: number,
     quota_amount: number,
-    selected_object: InventoryNodeObject | undefined
+    selected_object: InventoryNodeObject | undefined,
+    game_rounds: number,
+    game_over: boolean
 }
 
 export type GuiRectangle = {

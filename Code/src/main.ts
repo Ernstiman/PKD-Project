@@ -17,6 +17,7 @@ draw(game_state);
 
 
 addEventListener('click', function(e){
+    if(!game_state.game_over){
     console.log(game_state.selected_object);
     const x: number = e.offsetX;
     const y: number = e.offsetY;
@@ -50,7 +51,7 @@ addEventListener('click', function(e){
     }
 
     draw(game_state);      
-}
+}}
 )
 
-   
+

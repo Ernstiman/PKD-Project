@@ -9,8 +9,15 @@ export function check_quota(game_state) {
         game_state.quota_amount = Math.floor(Math.pow(game_state.quota_amount, 1.5));
         game_state.shop_collectables[0].count = game_state.quota_amount;
         game_state.days_to_quota = 5;
+        game_state.game_rounds -= 1;
     }
     if (game_state.days_to_quota === 0) {
+        return true;
+    }
+    return false;
+}
+export function check_win(game_state) {
+    if (game_state.game_rounds === 0) {
         return true;
     }
     return false;

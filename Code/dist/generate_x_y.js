@@ -1,6 +1,8 @@
-import { construct_detective, construct_inode, construct_node_object } from './contructors.js';
-import { shop_draw_function } from './draw_functions.js';
-import { build_list, list, map, length as list_length, pair } from './lib/list.js';
+import { construct_inode, construct_node_object } from './contructors.js';
+import { canvas } from './draw.js';
+import { shop_draw_function, draw_daughter } from './draw_functions.js';
+import { remove_id_arrray } from './id_array.js';
+import { build_list, list, map, length as list_length, pair, append } from './lib/list.js';
 import { shop_step_on } from './step_on_functions.js';
 export function generate_x_y(graph, i_node_array, shop_index) {
     const center_x = 1280 / 2 + 200;
@@ -59,11 +61,11 @@ export function generate_x_y(graph, i_node_array, shop_index) {
             }
             else {
                 if (layer === 0 && i === Math.floor(circle_size / 2)) {
-                    construct_inode(nodes, [construct_detective(2)], 0, 0, i_node_array);
+                    construct_inode(nodes, [], 0, 0, i_node_array);
                 }
                 else {
                     if (Math.random() < 0.2) {
-                        construct_inode(nodes, [construct_detective(2)], 0, 0, i_node_array);
+                        construct_inode(nodes, [], 0, 0, i_node_array);
                     }
                     else {
                         construct_inode(nodes, [], 0, 0, i_node_array);
@@ -82,4 +84,14 @@ export function generate_x_y(graph, i_node_array, shop_index) {
         graph.adj[i] = map((index) => { return (index < nodes) ? index : 0; }, graph.adj[i]);
     }
     graph.adj[nodes - 1] = build_list((i) => { return i; }, 1);
+}
+export function create_daughter_node(graph, i_node_array, shop_index, game_state) {
+    graph.adj[graph.size] = list();
+    // console.log(graph.adj);
+    // console.log(graph.size)
+    construct_inode(graph.size, [construct_node_object(3, draw_daughter, () => { remove_id_arrray("place_object", game_state.gui_rectangles); }, () => { }, 0)], canvas.width / 2, canvas.height / 2, i_node_array);
+    graph.size += 1;
+    console.log(graph.adj[shop_index]);
+    let new_list = append(graph.adj[shop_index], list(graph.size - 1));
+    graph.adj[shop_index] = new_list;
 }

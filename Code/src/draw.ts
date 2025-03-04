@@ -5,6 +5,9 @@ import {for_each} from './lib/list.js';
 import { GameState, iNode,  NodeObject, GuiRectangle} from './types.js';
 import { play_music, stop_music } from "./music.js";
 import { get_detective_nodes_indexes } from './detective.js';
+import { List, list } from './lib/list.js';
+import { construct_inode } from './contructors.js';
+import { i_node_array, shop_index } from './setup_game_state.js';
 
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
 export const ctx = canvas!.getContext("2d");
@@ -87,21 +90,27 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
 }
 
 export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
-
+    let new_graph = game_state.map_graph
+    let new_array = game_state.i_node_array
+    // if(game_state.game_over){
+    //     new_graph = {adj: [list(1), list()], size: 1}
+    //     construct_inode(0, [], new_array[shop_index].x, new_array[shop_index].y, new_array);
+    //     construct_inode(1, [], 450, 450, new_array);
+    // }
     function draw_lines_and_arrows(): void {
         let detective_nodes=get_detective_nodes_indexes(game_state)
-        for(let i = 0; i < game_state.map_graph.size; i++){
+        for(let i = 0; i < new_graph.size; i++){
 
             
             ctx.font = "45px Arial";
-            let inode: iNode = game_state.i_node_array[i];
-            let adj_nodes = game_state.map_graph.adj[i];
+            let inode: iNode = new_array[i];
+            let adj_nodes = new_graph.adj[i];
         
             ctx.strokeStyle = "black";
 
             for_each((adj_index)=>{
      
-                let out_node = game_state.i_node_array[adj_index];
+                let out_node = new_array[adj_index];
                 const headlen = 10; // Length of the arrowhead
                 const angle = Math.atan2(out_node.y - inode.y, out_node.x - inode.x); // Direction of the line
      
@@ -156,8 +165,8 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
     }
 
     function draw_nodes() {
-        for(let i = 0; i < game_state.map_graph.size; i++){
-            let inode: iNode = game_state.i_node_array[i]
+        for(let i = 0; i < new_graph.size; i++){
+            let inode: iNode = new_array[i]
             const radius = 20;
             const start_angle = 0;
             const end_angle = 2 * Math.PI;
@@ -176,8 +185,8 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
     }
 
     function draw_node_objects() {
-        for(let i = 0; i < game_state.i_node_array.length; i++) {
-            let inode: iNode = game_state.i_node_array[i]
+        for(let i = 0; i < new_array.length; i++) {
+            let inode: iNode = new_array[i]
             for(let i_node_object = 0; i_node_object<inode.nodeObjects.length; i_node_object++) {
                 let node_object = inode.nodeObjects[i_node_object]
                 node_object.draw_function(ctx, inode.x, inode.y, inode.nodeObjects[i_node_object])
@@ -237,13 +246,22 @@ export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_
         const img = new Image();
         img.src = '../img/HOB-0.jpg'
         img.onload = () => {
-            function draw() {
-                ctx.clearRect(0, 0, canvas!.width, canvas!.height);  // Clear the canvas
-                ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF
-                requestAnimationFrame(draw);  // Continue to draw the image in sync with the animation
-              }
-              
-              draw();
+                ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF;  // Continue to draw the image in sync with the animation
+            
         }
         play_music(game_state.songs[2]);
+    }
+
+    export function draw_win_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
+        const img = new Image();
+        img.src = '../img/win_screen.jpg'
+                img.onload = () => {
+                        ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF   
+                      
+                }
+        for (let music of game_state.songs){
+            stop_music(music)
+        }
+        play_music(game_state.songs[3]);
+        
     }

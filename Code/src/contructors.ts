@@ -4,6 +4,7 @@ import { Collectable, GameState, GuiRectangle, iNode,  NodeObject, ShopItemBlock
 import { detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './draw_functions.js';
 import { detective_step_on, trap_step_on, wolf_step_on } from './step_on_functions.js';
 import { detective_end, lvl_1_trap_end, trap_round_end } from './round_end_functions.js';
+import { ring_draw_function } from './draw_functions.js';
 
 
 let global_node_object_id=0
@@ -14,7 +15,7 @@ export function get_node_object_id() : number{
 }
 
 export function construct_inode(index: number, node_objects: Array<NodeObject>, x: number, y: number, i_node_array: Array<iNode>) : void{
-    i_node_array.push({index: index, nodeObjects: node_objects, x : x, y : y})
+    i_node_array[index] = {index: index, nodeObjects: node_objects, x : x, y : y}
 }
 
 export function construct_node_object(type: number, draw_function: Function, player_step_on_function: Function, round_end_function: Function, collection_rate: number = 1) : NodeObject{
@@ -44,6 +45,10 @@ export function construct_level_1_trap(): NodeObject {
     return construct_node_object(0, lvl_1_trap_draw_function, trap_step_on, lvl_1_trap_end, 1)
 }
 
+export function construct_ring(): NodeObject {
+    return construct_node_object(2, ring_draw_function, () => {}, () => {})
+}
+
 export function construct_shop_item_block(cost: number, node_object: NodeObject, block: GuiRectangle): ShopItemBlock{
     return {cost: cost, node_object: node_object, block: block}
 }
@@ -58,7 +63,10 @@ export function construct_detective(danger: number){
     let detective=construct_node_object(10, detective_draw_function, detective_step_on, detective_end, 1)
     detective.collectables[0].count = danger;
     return detective}
-    
+
 export function construct_inventory_items(node_object: NodeObject, box: GuiRectangle, index: number){
     return {node_object: node_object, box: box, index: index};
 }
+
+
+
