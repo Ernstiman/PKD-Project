@@ -1,8 +1,9 @@
 import { is_adj_node } from './adj_nodes.js';
-import { clicked_on_node, get_clicked_node_index, mouse_in_rectangle} from './click.js';
+import { clicked_on_node, get_clicked_node_index, mouse_in_rectangle, place_object_click_on} from './click.js';
 import { construct_node_object } from './contructors.js';
 import { draw, list_graph_draw } from './draw.js';
 import { player_draw_function} from './draw_functions.js';
+import { find_id_arrray } from './id_array.js';
 import { remove_node_object, step_on_node } from './node_objects.js';
 import { get_base_game_state, } from './setup_game_state.js';
 import { Collectable, GameState, GuiRectangle, iNode } from './types.js';
@@ -57,3 +58,35 @@ function gameLoop() {
     game_state.ticks+=1
     requestAnimationFrame(gameLoop);
 }
+
+
+addEventListener('keydown', function(e) {
+    let i = 0;
+    
+    for (let game_object of game_state.player_inventory) {
+      
+            if (game_object !== undefined) {
+                if (e.key === (i + 1).toString()) {
+                    game_object.box.click_on_function(game_state, i);
+                }
+            }
+
+
+        i++;
+        
+    }
+
+    for (let button of game_state.gui_rectangles) {
+        
+        if (button.id === "collect" && e.code === 'KeyE') {
+            button.click_on_function(game_state);
+        } 
+
+        if (button.id === "place_object" && e.code === 'Space') {
+            button.click_on_function(game_state);
+        }
+        
+    }
+    draw(game_state);
+
+})

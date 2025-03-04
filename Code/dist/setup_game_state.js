@@ -26,7 +26,7 @@ export function get_base_game_state() {
     let start_shop_item_blocks = [];
     //Create array of songs
     let songs = [new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3"), new Audio("../soundtrack/love.mp3")];
-    let start_days_to_quota = 2;
+    let start_days_to_quota = 6;
     let player_inventory = [];
     let game_rounds = 1;
     //Skapa gamestate

@@ -46,3 +46,23 @@ function gameLoop() {
     game_state.ticks += 1;
     requestAnimationFrame(gameLoop);
 }
+addEventListener('keydown', function (e) {
+    let i = 0;
+    for (let game_object of game_state.player_inventory) {
+        if (game_object !== undefined) {
+            if (e.key === (i + 1).toString()) {
+                game_object.box.click_on_function(game_state, i);
+            }
+        }
+        i++;
+    }
+    for (let button of game_state.gui_rectangles) {
+        if (button.id === "collect" && e.code === 'KeyE') {
+            button.click_on_function(game_state);
+        }
+        if (button.id === "place_object" && e.code === 'Space') {
+            button.click_on_function(game_state);
+        }
+    }
+    draw(game_state);
+});

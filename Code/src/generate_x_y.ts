@@ -1,4 +1,4 @@
-import { construct_detective, construct_inode, construct_node_object } from './contructors.js';
+import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors.js';
 import { canvas } from './draw.js';
 import { shop_draw_function, draw_daughter } from './draw_functions.js';
 import { remove_id_arrray } from './id_array.js';
@@ -13,7 +13,7 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
     const radius = 220;
     const random_factor = 30;
 
-    let shop = construct_node_object(0, shop_draw_function,  shop_step_on, ()=>{})
+    let shop = construct_node_object(99, shop_draw_function,  shop_step_on, ()=>{})
  
     let circle_size=10
     let layers=3
@@ -71,7 +71,7 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
                     construct_inode(nodes,[], 0, 0, i_node_array);
                 }else{
                     if (Math.random()<0.2){
-                        construct_inode(nodes,[], 0, 0, i_node_array);
+                        construct_inode(nodes,[construct_wolf(2)], 0, 0, i_node_array);
                     }else{
                         construct_inode(nodes,[], 0, 0, i_node_array);
                     }
@@ -89,8 +89,6 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
 
     }
 
-    
- 
     graph.size=nodes
     for (let i = 0; i < graph.size; i++) {
         graph.adj[i] = map((index)=>{return (index<nodes) ? index : 0}, graph.adj[i])
