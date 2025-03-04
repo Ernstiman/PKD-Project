@@ -35,3 +35,6 @@ export function construct_level_1_trap() {
 export function construct_shop_item_block(cost, node_object, block) {
     return { cost: cost, node_object: node_object, block: block };
 }
+export function construct_inventory_items(node_object, box, index) {
+    return { node_object: node_object, box: box, index: index };
+}
