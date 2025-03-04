@@ -57,5 +57,8 @@ export function construct_wolf(danger: number){
 export function construct_detective(danger: number){
     let detective=construct_node_object(10, detective_draw_function, detective_step_on, detective_end, 1)
     detective.collectables[0].count = danger;
-    return detective
+    return detective}
+    
+export function construct_inventory_items(node_object: NodeObject, box: GuiRectangle, index: number){
+    return {node_object: node_object, box: box, index: index};
 }

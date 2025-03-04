@@ -17,6 +17,7 @@ draw(game_state);
 
 
 addEventListener('click', function(e){
+    console.log(game_state.selected_object);
     const x: number = e.offsetX;
     const y: number = e.offsetY;
     let i = 0;
@@ -35,6 +36,19 @@ addEventListener('click', function(e){
             shop_item_block.block.click_on_function(game_state, shop_item_block, i);  
         }
         i ++}
+    for (let game_object of game_state.player_inventory){
+        if(game_object !== undefined){
+        let x_1 = game_object.box.x;
+        let y_1 = game_object.box.y;
+        let x_2 = game_object.box.width;
+        let y_2 = game_object.box.height
+        if(mouse_in_rectangle(x, y, x_1, y_1, x_2 + x_1, y_2 + y_1)){
+            game_object.box.click_on_function(game_state, i);
+        }
+        }
+        i ++
+    }
+
     draw(game_state);      
 }
 )

@@ -21,6 +21,12 @@ export type NodeObject = {
     collection_rate: number
 }
 
+export type InventoryNodeObject = {
+    node_object: NodeObject,
+    box: GuiRectangle,
+    index: number
+}
+
 export type GameState = {
     i_node_array: Array<iNode>, 
     map_graph: ListGraph,
@@ -31,11 +37,12 @@ export type GameState = {
     gui_rectangles: Array<GuiRectangle>
     screens: Array<Screen>,
     active_screens: Array<string>,
-    player_inventory: Array<NodeObject>,
+    player_inventory: Array<InventoryNodeObject | undefined>,
     shop_item_blocks: Array<ShopItemBlock>,
     songs: Array<HTMLAudioElement>,
     days_to_quota: number,
-    quota_amount: number
+    quota_amount: number,
+    selected_object: InventoryNodeObject | undefined
 }
 
 export type GuiRectangle = {

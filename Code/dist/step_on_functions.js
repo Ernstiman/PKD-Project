@@ -4,7 +4,7 @@ import { game_over_screen, shop_screen } from "./screens.js";
 import { construct_level_1_trap, construct_rectangle, construct_wolf } from "./contructors.js";
 import { i_node_array } from "./setup_game_state.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
-import { shop_item_block_click_on } from "./click.js";
+import { shop_item_block_click_on, submit_beavers_click_on } from "./click.js";
 import { play_music, stop_music } from "./music.js";
 import { check_quota } from "./round_end_functions.js";
 import { ctx } from "./draw.js";
@@ -33,6 +33,7 @@ function construct_shop_return_to_game_button(game_state, node) {
                                 game_state.active_screens.splice(i, 1);
                             }
                             remove_id_arrray("return_to_game", game_state.gui_rectangles);
+                            remove_id_arrray("submit_beavers", game_state.gui_rectangles);
                             game_state.shop_item_blocks = [];
                         }
                     }
@@ -48,10 +49,12 @@ export function shop_step_on(game_state, node) {
     game_state.shop_item_blocks = [];
     //Increase round
     game_state.round = game_state.round + 1;
+    let submit_beavers_button = construct_rectangle("submit_beavers", 200, 700, 200, 100, "submit beavers", submit_beavers_click_on);
+    game_state.gui_rectangles.push(submit_beavers_button);
     //Add active screen
     //Play music
-    // stop_music(game_state.songs[1])
-    // play_music(game_state.songs[0])
+    stop_music(game_state.songs[1]);
+    play_music(game_state.songs[0]);
     function generate_shop_items() {
         const number_of_traps = 2;
         for (let i = 0; i < 3; i++) {

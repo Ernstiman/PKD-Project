@@ -33,8 +33,23 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
     let x=1600
     let y=150
     for(let i=0;i<game_state.player_inventory.length;i++){
-        game_state.player_inventory[i].draw_function(ctx, x, y, game_state.player_inventory[i])
-        y+=50
+        let inventory_object = game_state.player_inventory[i];
+        if (inventory_object !== undefined) {
+        
+            inventory_object.node_object.draw_function(ctx, inventory_object.box.x + 25, inventory_object.box.y + 25, inventory_object.node_object)
+            if(i === game_state.selected_object?.index){
+
+                ctx.fillStyle = "rgba(255, 255, 255, 0.34)";
+
+                ctx.fillRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
+                ctx.strokeStyle = "green";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
+
+            }
+            draw_gui_rectangle(ctx, inventory_object.box);
+            y+=50
+        }
     }
 }
 
@@ -58,7 +73,7 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
     }
 
     function draw_beaver_quota() {
-
+        console.log(game_state.shop_collectables[0].count)
         ctx.font = "45px Georgia";
         ctx.fillText("Quota: " + 
         game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100);

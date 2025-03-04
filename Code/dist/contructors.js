@@ -45,3 +45,6 @@ export function construct_detective(danger) {
     detective.collectables[0].count = danger;
     return detective;
 }
+export function construct_inventory_items(node_object, box, index) {
+    return { node_object: node_object, box: box, index: index };
+}
