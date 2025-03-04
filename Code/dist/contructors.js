@@ -1,6 +1,6 @@
-import { lvl_1_trap_draw_function, trap_draw_function } from './draw_functions.js';
-import { trap_step_on } from './step_on_functions.js';
-import { lvl_1_trap_end, trap_round_end } from './round_end_functions.js';
+import { detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './draw_functions.js';
+import { detective_step_on, trap_step_on, wolf_step_on } from './step_on_functions.js';
+import { detective_end, lvl_1_trap_end, trap_round_end } from './round_end_functions.js';
 let global_node_object_id = 0;
 export function get_node_object_id() {
     global_node_object_id = global_node_object_id + 1;
@@ -34,4 +34,14 @@ export function construct_level_1_trap() {
 }
 export function construct_shop_item_block(cost, node_object, block) {
     return { cost: cost, node_object: node_object, block: block };
+}
+export function construct_wolf(danger) {
+    let wolf = construct_node_object(0, wolf_draw_function, wolf_step_on, lvl_1_trap_end, 1);
+    wolf.collectables[0].count = danger;
+    return wolf;
+}
+export function construct_detective(danger) {
+    let detective = construct_node_object(10, detective_draw_function, detective_step_on, detective_end, 1);
+    detective.collectables[0].count = danger;
+    return detective;
 }

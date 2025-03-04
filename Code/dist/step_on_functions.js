@@ -1,7 +1,7 @@
 import { remove_id_arrray } from "./id_array.js";
 import { node_activate_round_end } from "./node_objects.js";
 import { game_over_screen, shop_screen } from "./screens.js";
-import { construct_level_1_trap, construct_rectangle } from "./contructors.js";
+import { construct_level_1_trap, construct_rectangle, construct_wolf } from "./contructors.js";
 import { i_node_array } from "./setup_game_state.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
 import { shop_item_block_click_on } from "./click.js";
@@ -12,6 +12,14 @@ function construct_shop_return_to_game_button(game_state, node) {
     return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", () => {
         game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
         game_state.player_collectables[0].count = 0;
+        //Chance to add wolf on each empty node
+        for (let i = 0; i < game_state.i_node_array.length; i++) {
+            if (game_state.i_node_array[i].nodeObjects.length < 1) {
+                if (Math.random() < 0.1) {
+                    game_state.i_node_array[i].nodeObjects.push(construct_wolf(1));
+                }
+            }
+        }
         if (!check_quota(game_state)) {
             stop_music(game_state.songs[0]);
             play_music(game_state.songs[1]);
@@ -79,4 +87,10 @@ export function trap_step_on(game_state, node, node_objects) {
         game_state.player_collectables[0].count += node_objects.collectables[0].count;
         node_objects.collectables[0].count = 0;
     }));
+}
+export function wolf_step_on(game_state, node, node_objects) {
+    game_state.player_collectables[0].count -= node_objects.collectables[0].count;
+}
+export function detective_step_on(game_state, node, node_objects) {
+    game_state.player_collectables[0].count -= node_objects.collectables[0].count;
 }
