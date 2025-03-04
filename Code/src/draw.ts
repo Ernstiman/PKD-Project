@@ -4,6 +4,7 @@ import { find_id_arrray } from './id_array.js';
 import {for_each} from './lib/list.js'; 
 import { GameState, iNode,  NodeObject, GuiRectangle} from './types.js';
 import { play_music, stop_music } from "./music.js";
+import { get_detective_nodes_indexes } from './detective.js';
 
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
 export const ctx = canvas!.getContext("2d");
@@ -73,11 +74,16 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
 export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
 
     function draw_lines_and_arrows(): void {
+        let detective_nodes=get_detective_nodes_indexes(game_state)
         for(let i = 0; i < game_state.map_graph.size; i++){
+
+            
             ctx.font = "45px Arial";
             let inode: iNode = game_state.i_node_array[i];
             let adj_nodes = game_state.map_graph.adj[i];
+        
             ctx.strokeStyle = "black";
+
             for_each((adj_index)=>{
      
                 let out_node = game_state.i_node_array[adj_index];
@@ -111,7 +117,16 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
                         ctx.stroke();
                         
                     }
-                } 
+                }
+
+                if (detective_nodes.find((indx)=>{return (indx===inode.index)})){
+                    ctx.strokeStyle =  "rgb(182, 32, 29)";
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX1, arrowY1);
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX2, arrowY2);
+                    ctx.stroke();
+                }
                 
                 // else draw them black
                 ctx.moveTo(draw_x, draw_y);

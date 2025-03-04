@@ -6,6 +6,8 @@ import { player_draw_function } from './draw_functions.js';
 import { step_on_node } from './node_objects.js';
 import { find_id_arrray, remove_id_arrray } from './id_array.js';
 import { i_node_array } from './setup_game_state.js';
+import { list_ref, length as list_length} from './lib/list.js';
+import { detective_walk } from './detective.js';
 
 
 export function get_clicked_node_index(nodes: Array<iNode>, x: number, y: number): number | undefined{
@@ -27,7 +29,12 @@ export function mouse_in_rectangle(x: number, y: number, x1: number, y1: number,
     return false
 }
 
+
+
 export function clicked_on_node(game_state: GameState, node_index: number ){
+
+    detective_walk(game_state)
+
     for(let i = 0; i < game_state.i_node_array.length; i ++){
         let my_node: iNode = game_state.i_node_array[i];
         my_node.nodeObjects = remove_node_object(my_node.nodeObjects, 1);
