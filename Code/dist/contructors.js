@@ -29,7 +29,7 @@ export function construct_rectangle(id, x, y, width, height, text, click_on_func
     return { id, x, y, width, height, text, click_on_function };
 }
 export function test_trap_constructor() {
-    return construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.5);
+    return construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.8);
 }
 export function construct_level_1_trap() {
     return construct_node_object(0, lvl_1_trap_draw_function, trap_step_on, lvl_1_trap_end, 1);
@@ -69,8 +69,8 @@ export function construct_beaver_icon_animations(game_state, start_x, start_y, t
     });
 }
 export function construct_beaver_move_function() {
-    let spd_x = Math.random() * 2 + 1;
-    let spd_y = Math.random() * 1 + 2;
+    let spd_x = Math.random() * 2 + 6;
+    let spd_y = Math.random() * 1 + 6;
     let wave_a = Math.random() * 1 + 0.4; // Random wave height
     let wave_f = Math.random() * 0.1 + 0.05; // Controls wavelength
     return (game_state, self, index) => {

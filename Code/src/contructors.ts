@@ -40,7 +40,7 @@ export function construct_rectangle(id: string, x: number, y: number, width: num
 }
 
 export function test_trap_constructor(): NodeObject {
-    return construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.5)
+    return construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.8)
 }
 
 export function construct_level_1_trap(): NodeObject {
@@ -89,8 +89,8 @@ export function construct_beaver_icon_animations(game_state: GameState, start_x:
 export function construct_beaver_move_function() {
 
 
-    let spd_x = Math.random()*2 + 1;
-    let spd_y = Math.random()*1 + 2;
+    let spd_x = Math.random()*2 + 6;
+    let spd_y = Math.random()*1 + 6;
     let wave_a = Math.random() * 1 + 0.4; // Random wave height
     let wave_f = Math.random() * 0.1 + 0.05; // Controls wavelength
 

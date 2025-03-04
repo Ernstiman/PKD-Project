@@ -42,7 +42,6 @@ export function detective_end(game_state: GameState, node_object: NodeObject) {
 }
 
 export function wolf_end(game_state: GameState, node_object: NodeObject) {
-
-    node_object.collectables[0].count += 1;
+    node_object.collectables[0].count += 0;
 
 }

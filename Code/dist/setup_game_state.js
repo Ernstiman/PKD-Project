@@ -18,7 +18,7 @@ export function get_base_game_state() {
     }
     generate_x_y(basic_graph, i_node_array, shop_index);
     //Setup collectables for player
-    let start_collectables = [construct_collectable("beaver", 100), construct_collectable("rabbit", 0)];
+    let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)];
     //Setup collectables quota
     let shop_start_collectables = [construct_collectable("beaver", quota_amount)];
     //Create place object button
@@ -28,7 +28,7 @@ export function get_base_game_state() {
     let songs = [new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3"), new Audio("../soundtrack/love.mp3")];
     let start_days_to_quota = 6;
     let player_inventory = [];
-    let game_rounds = 1;
+    let game_rounds = 5;
     //Skapa gamestate
     return { i_node_array: i_node_array,
         map_graph: basic_graph,

@@ -68,10 +68,10 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
                 construct_inode(nodes,[shop], 0, 0, i_node_array);
             }else{
                 if (layer===0 && i===Math.floor(circle_size/2)){
-                    construct_inode(nodes,[], 0, 0, i_node_array);
+                    construct_inode(nodes,[construct_detective(5)], 0, 0, i_node_array);
                 }else{
-                    if (Math.random()<0.2){
-                        construct_inode(nodes,[construct_wolf(2)], 0, 0, i_node_array);
+                    if (Math.random()<0.0005){
+                        construct_inode(nodes,[construct_wolf(1)], 0, 0, i_node_array);
                     }else{
                         construct_inode(nodes,[], 0, 0, i_node_array);
                     }
