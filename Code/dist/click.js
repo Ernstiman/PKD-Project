@@ -3,7 +3,6 @@ import { construct_inventory_items, construct_node_object, construct_rectangle }
 import { player_draw_function } from './draw_functions.js';
 import { step_on_node } from './node_objects.js';
 import { find_id_arrray, remove_id_arrray } from './id_array.js';
-import { i_node_array } from './setup_game_state.js';
 import { detective_walk } from './detective.js';
 export function get_clicked_node_index(nodes, x, y) {
     for (let node of nodes) {
@@ -35,22 +34,29 @@ export function clicked_on_node(game_state, node_index) {
     }
 }
 export function place_object_click_on(game_state) {
-    if (game_state.current_node !== undefined) {
-        if (game_state.player_inventory[0] !== undefined) {
-            //Om det inte finns något node object där man vill placera.
-            if (i_node_array[game_state.current_node].nodeObjects.length < 2) {
+    //Om det inte finns något node object där man vill placera.
+    if (game_state.i_node_array[game_state.current_node].nodeObjects.length < 2) {
+        if (game_state.selected_object !== undefined) {
+            game_state.i_node_array[game_state.current_node].nodeObjects.push(game_state.selected_object.node_object);
+            game_state.player_inventory[game_state.selected_object.index] = undefined;
+        }
+        remove_id_arrray("place_object", game_state.gui_rectangles);
+        game_state.selected_object = undefined;
+    }
+    else {
+        for (let node_object of game_state.i_node_array[game_state.current_node].nodeObjects) {
+            if (node_object.type === 0) {
+                game_state.i_node_array[game_state.current_node].nodeObjects = [];
                 if (game_state.selected_object !== undefined) {
-                    i_node_array[game_state.current_node].nodeObjects.push(game_state.selected_object.node_object);
+                    game_state.i_node_array[game_state.current_node].nodeObjects.push(game_state.selected_object.node_object);
                     game_state.player_inventory[game_state.selected_object.index] = undefined;
                 }
-                remove_id_arrray("place_object", game_state.gui_rectangles);
-                game_state.selected_object = undefined;
             }
         }
     }
 }
 export function shop_item_block_click_on(game_state, self, i) {
-    if (game_state.player_collectables[0].count >= self.cost) {
+    if (game_state.player_collectables[0].count >= self.cost && game_state.player_collectables.length < 5) {
         let index = 0;
         for (let inventory_item of game_state.player_inventory) {
             if (inventory_item === undefined) {

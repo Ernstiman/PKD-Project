@@ -36,7 +36,7 @@ export function construct_shop_item_block(cost, node_object, block) {
     return { cost: cost, node_object: node_object, block: block };
 }
 export function construct_wolf(danger) {
-    let wolf = construct_node_object(0, wolf_draw_function, wolf_step_on, lvl_1_trap_end, 1);
+    let wolf = construct_node_object(88, wolf_draw_function, wolf_step_on, lvl_1_trap_end, 1);
     wolf.collectables[0].count = danger;
     return wolf;
 }

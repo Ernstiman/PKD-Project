@@ -41,7 +41,7 @@ export function get_base_game_state() : GameState{
     generate_x_y(basic_graph, i_node_array, shop_index);
 
     //Setup collectables for player
-    let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)]
+    let start_collectables = [construct_collectable("beaver", 1000), construct_collectable("rabbit", 0)]
     //Setup collectables quota
     
     let shop_start_collectables = [construct_collectable("beaver",quota_amount)]

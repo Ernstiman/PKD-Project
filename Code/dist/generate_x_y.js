@@ -1,4 +1,4 @@
-import { construct_detective, construct_inode, construct_node_object } from './contructors.js';
+import { construct_inode, construct_node_object, construct_wolf } from './contructors.js';
 import { shop_draw_function } from './draw_functions.js';
 import { build_list, list, map, length as list_length, pair } from './lib/list.js';
 import { shop_step_on } from './step_on_functions.js';
@@ -7,7 +7,7 @@ export function generate_x_y(graph, i_node_array, shop_index) {
     const center_y = 500;
     const radius = 220;
     const random_factor = 30;
-    let shop = construct_node_object(0, shop_draw_function, shop_step_on, () => { });
+    let shop = construct_node_object(99, shop_draw_function, shop_step_on, () => { });
     let circle_size = 10;
     let layers = 3;
     let nodes = 0;
@@ -59,11 +59,11 @@ export function generate_x_y(graph, i_node_array, shop_index) {
             }
             else {
                 if (layer === 0 && i === Math.floor(circle_size / 2)) {
-                    construct_inode(nodes, [construct_detective(2)], 0, 0, i_node_array);
+                    construct_inode(nodes, [], 0, 0, i_node_array);
                 }
                 else {
                     if (Math.random() < 0.2) {
-                        construct_inode(nodes, [construct_detective(2)], 0, 0, i_node_array);
+                        construct_inode(nodes, [construct_wolf(2)], 0, 0, i_node_array);
                     }
                     else {
                         construct_inode(nodes, [], 0, 0, i_node_array);

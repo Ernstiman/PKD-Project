@@ -93,7 +93,13 @@ export function trap_step_on(game_state, node, node_objects) {
 }
 export function wolf_step_on(game_state, node, node_objects) {
     game_state.player_collectables[0].count -= node_objects.collectables[0].count;
+    if (game_state.player_collectables[0].count < 0) {
+        game_state.player_collectables[0].count = 0;
+    }
 }
 export function detective_step_on(game_state, node, node_objects) {
     game_state.player_collectables[0].count -= node_objects.collectables[0].count;
+    if (game_state.player_collectables[0].count < 0) {
+        game_state.player_collectables[0].count = 0;
+    }
 }

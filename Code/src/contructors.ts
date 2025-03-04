@@ -49,7 +49,7 @@ export function construct_shop_item_block(cost: number, node_object: NodeObject,
 }
 
 export function construct_wolf(danger: number){
-    let wolf=construct_node_object(0, wolf_draw_function, wolf_step_on, lvl_1_trap_end, 1)
+    let wolf=construct_node_object(88, wolf_draw_function, wolf_step_on, lvl_1_trap_end, 1)
     wolf.collectables[0].count = danger;
     return wolf
 }

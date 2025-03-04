@@ -11,8 +11,6 @@ import { play_music, stop_music } from "./music.js";
 import { check_quota } from "./round_end_functions.js";
 import { ctx } from "./draw.js";
 
-
-
 function construct_shop_return_to_game_button(game_state: GameState, node: iNode){
     return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", 
         () => {
@@ -94,10 +92,6 @@ export function shop_step_on(game_state: GameState, node: iNode){
                 // game_state.gui_rectangles.push(test_shop_item_block.button)
                 //Add exit button
             }   
-
-
-       
-          
         }
         generate_shop_items();
         game_state.gui_rectangles.push(construct_shop_return_to_game_button(game_state, node))       
@@ -120,14 +114,23 @@ export function trap_step_on(game_state: GameState,node: iNode, node_objects: No
     }
 
 
-    export function wolf_step_on(game_state: GameState, node: iNode, node_objects: NodeObject){
+export function wolf_step_on(game_state: GameState, node: iNode, node_objects: NodeObject){
       
-        game_state.player_collectables[0].count -= node_objects.collectables[0].count
+    game_state.player_collectables[0].count -= node_objects.collectables[0].count
+
+    if (game_state.player_collectables[0].count < 0) {
+        game_state.player_collectables[0].count = 0;
+    }
+
   
 }
 
 export function detective_step_on(game_state: GameState, node: iNode, node_objects: NodeObject){
       
     game_state.player_collectables[0].count -= node_objects.collectables[0].count
+
+    if (game_state.player_collectables[0].count < 0) {
+        game_state.player_collectables[0].count = 0;
+    }
 
 }

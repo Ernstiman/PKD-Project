@@ -2,14 +2,13 @@ import { ListGraph } from './lib/graphs.js';
 import { List } from './lib/list';
 
 
-
-
 export type iNode = {
     index: number,
     nodeObjects: Array<NodeObject>
     x: number,
     y: number,
 };
+
 export type NodeObject = {
 
     type: number

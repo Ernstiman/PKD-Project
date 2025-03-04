@@ -30,24 +30,31 @@ export function game_draw(ctx: CanvasRenderingContext2D,game_state: GameState){
 
 
 function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
-    let x=1600
-    let y=150
+    let x = 1600
+    let y = 150
     for(let i=0;i<game_state.player_inventory.length;i++){
         let inventory_object = game_state.player_inventory[i];
         if (inventory_object !== undefined) {
         
+            ctx.fillStyle = "black";      // Set text color
+            ctx.font ="25px Georgia";      // Set font size and type
+            ctx.textAlign = "center";     // Center the text horizontally
+            ctx.textBaseline = "middle";  // Center the text vertically
+            ctx.fillText((i + 1).toString(), inventory_object.box.x + 10, inventory_object.box.y - 10);
+
             inventory_object.node_object.draw_function(ctx, inventory_object.box.x + 25, inventory_object.box.y + 25, inventory_object.node_object)
             if(i === game_state.selected_object?.index){
-
-                ctx.fillStyle = "rgba(255, 255, 255, 0.34)";
-
+                
+                ctx.fillStyle = "rgba(173, 57, 25, 0.67)";
                 ctx.fillRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
-                ctx.strokeStyle = "green";
-                ctx.lineWidth = 2;
+                // ctx.strokeStyle = "rgba(75, 152, 52, 0.87)";
+                // ctx.lineWidth = 5;
                 ctx.strokeRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
-
+               
             }
             draw_gui_rectangle(ctx, inventory_object.box);
+            
+            
             y+=50
         }
     }

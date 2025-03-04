@@ -1,7 +1,7 @@
-import { construct_detective, construct_inode, construct_node_object } from './contructors.js';
+import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors.js';
 import { shop_draw_function } from './draw_functions.js';
 import { ListGraph } from './lib/graphs.js';
-import { build_list, for_each, list, list_ref, map, length as list_length, pair, List } from './lib/list.js';
+import { build_list, for_each, list, list_ref, map, length as list_length, pair, List, append } from './lib/list.js';
 import { shop_step_on } from './step_on_functions.js';
 import { GameState, iNode,  NodeObject} from './types.js';
  
@@ -11,7 +11,7 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
     const radius = 220;
     const random_factor = 30;
 
-    let shop = construct_node_object(0, shop_draw_function,  shop_step_on, ()=>{})
+    let shop = construct_node_object(99, shop_draw_function,  shop_step_on, ()=>{})
  
     let circle_size=10
     let layers=3
@@ -66,10 +66,10 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
                 construct_inode(nodes,[shop], 0, 0, i_node_array);
             }else{
                 if (layer===0 && i===Math.floor(circle_size/2)){
-                    construct_inode(nodes,[construct_detective(2)], 0, 0, i_node_array);
+                    construct_inode(nodes,[], 0, 0, i_node_array);
                 }else{
                     if (Math.random()<0.2){
-                        construct_inode(nodes,[construct_detective(2)], 0, 0, i_node_array);
+                        construct_inode(nodes,[construct_wolf(2)], 0, 0, i_node_array);
                     }else{
                         construct_inode(nodes,[], 0, 0, i_node_array);
                     }
@@ -87,8 +87,6 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
 
     }
 
-    
- 
     graph.size=nodes
     for (let i = 0; i < graph.size; i++) {
         graph.adj[i] = map((index)=>{return (index<nodes) ? index : 0}, graph.adj[i])
