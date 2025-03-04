@@ -41,7 +41,7 @@ export function get_base_game_state() : GameState{
     generate_x_y(basic_graph, i_node_array, shop_index);
 
     //Setup collectables for player
-    let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)]
+    let start_collectables = [construct_collectable("beaver", 100), construct_collectable("rabbit", 0)]
     //Setup collectables quota
     
     let shop_start_collectables = [construct_collectable("beaver",quota_amount)]
@@ -75,7 +75,9 @@ export function get_base_game_state() : GameState{
             songs: songs,
             days_to_quota: start_days_to_quota,
             quota_amount: quota_amount,
-            selected_object: undefined
+            selected_object: undefined,
+            icon_animations: [],
+            ticks: 0,
             
     }
 }

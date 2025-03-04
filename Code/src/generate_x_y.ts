@@ -69,7 +69,7 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
                     construct_inode(nodes,[construct_detective(2)], 0, 0, i_node_array);
                 }else{
                     if (Math.random()<0.2){
-                        construct_inode(nodes,[construct_detective(2)], 0, 0, i_node_array);
+                        construct_inode(nodes,[], 0, 0, i_node_array);
                     }else{
                         construct_inode(nodes,[], 0, 0, i_node_array);
                     }

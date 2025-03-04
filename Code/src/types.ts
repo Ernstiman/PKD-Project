@@ -18,7 +18,8 @@ export type NodeObject = {
     round_end_function: Function
     collectables: Array<Collectable>
     draw_function: Function,
-    collection_rate: number
+    collection_rate: number,
+    can_place: boolean,
 }
 
 export type InventoryNodeObject = {
@@ -43,6 +44,8 @@ export type GameState = {
     days_to_quota: number,
     quota_amount: number,
     selected_object: InventoryNodeObject | undefined
+    icon_animations: Array<IconAnimation>
+    ticks: number
 }
 
 export type GuiRectangle = {
@@ -60,6 +63,7 @@ export type ShopItemBlock = {
     node_object: NodeObject,
     block: GuiRectangle
 }
+//export type NonPlaceItem
 
 export type Screen = {
     id: string,
@@ -69,4 +73,16 @@ export type Screen = {
 export type Collectable = {
     name: string,
     count: number,
+}
+
+export type IconAnimation = {
+    x: number,
+    y: number,
+    image: HTMLImageElement,
+    move_function: Function,
+    size: number
+    target_x: number
+    target_y: number
+    target_function: Function
+
 }
