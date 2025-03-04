@@ -2,6 +2,7 @@ import { is_adj_node } from './adj_nodes.js';
 import { find_id_arrray } from './id_array.js';
 import { for_each } from './lib/list.js';
 import { play_music } from "./music.js";
+import { get_detective_nodes_indexes } from './detective.js';
 export const canvas = document.getElementById("canvas");
 export const ctx = canvas.getContext("2d");
 export function draw(game_state) {
@@ -56,6 +57,7 @@ export function draw_ui_elements(ctx, game_state) {
 }
 export function list_graph_draw(ctx, game_state) {
     function draw_lines_and_arrows() {
+        let detective_nodes = get_detective_nodes_indexes(game_state);
         for (let i = 0; i < game_state.map_graph.size; i++) {
             ctx.font = "45px Arial";
             let inode = game_state.i_node_array[i];
@@ -88,6 +90,14 @@ export function list_graph_draw(ctx, game_state) {
                         ctx.lineTo(arrowX2, arrowY2);
                         ctx.stroke();
                     }
+                }
+                if (detective_nodes.find((indx) => { return (indx === inode.index); })) {
+                    ctx.strokeStyle = "rgb(182, 32, 29)";
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX1, arrowY1);
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX2, arrowY2);
+                    ctx.stroke();
                 }
                 // else draw them black
                 ctx.moveTo(draw_x, draw_y);

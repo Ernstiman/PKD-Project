@@ -21,3 +21,8 @@ export function lvl_1_trap_end(game_state, node_object) {
     let y = 0;
     node_object.collectables[0].count += day;
 }
+export function detective_end(game_state, node_object) {
+}
+export function wolf_end(game_state, node_object) {
+    node_object.collectables[0].count += 1;
+}
