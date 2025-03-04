@@ -2,7 +2,7 @@ import { GameState, iNode } from "./types.js";
 import { find_id_arrray, in_inventory, remove_id_arrray } from "./id_array.js";
 import { node_activate_round_end } from "./node_objects.js";
 import { game_over_screen, shop_screen, win_screen } from "./screens.js";
-import { construct_level_1_trap, construct_rectangle, construct_ring, construct_wolf } from "./contructors.js";
+import { construct_level_1_trap, construct_rectangle, construct_ring, construct_wolf, construct_beaver_icon_animations, construct_dagger } from "./contructors.js";
 import { i_node_array, basic_graph, shop_index } from "./setup_game_state.js";
 import { NodeObject } from "./types.js";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
@@ -27,6 +27,11 @@ function construct_shop_return_to_game_button(game_state: GameState, node: iNode
                 create_daughter_node(game_state.map_graph, game_state.i_node_array,shop_index, game_state)
             }
         }
+        
+        game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;
+        game_state.player_collectables[0].count = 0;
+        
+      
 
         //Chance to add wolf on each empty node
         for(let i=0;i<game_state.i_node_array.length;i++){
@@ -77,12 +82,14 @@ export function shop_step_on(game_state: GameState, node: iNode){
         play_music(game_state.songs[0])
 
         function generate_shop_items() {
-            const number_of_traps = 2;
+            const number_of_traps = 3;
             for(let i = 0; i < 3; i ++){
                 const test_trap_cost = 0;
                 const lvl_1_trap_cost = 5;
                 const ring_cost = 0;
 
+                const dagger_cost = 2;
+                
                 const random_factor = Math.floor(Math.random() * number_of_traps);
                 console.log(random_factor);
                 
@@ -109,6 +116,12 @@ export function shop_step_on(game_state: GameState, node: iNode){
                     game_state.shop_item_blocks.push(test_shop_item_block);
                 }
 
+                if (random_factor===2){
+                    let shop_item_button = construct_rectangle("shop_item_block", 200 * i + 200, 500, 100, 100, dagger_cost.toString(), shop_item_block_click_on)
+                    let test_shop_item_block = construct_shop_item_block(dagger_cost, construct_dagger(), shop_item_button)
+                    game_state.shop_item_blocks.push(test_shop_item_block);
+                }
+
                 // game_state.gui_rectangles.push(test_shop_item_block.button)
                 //Add exit button
             }   
@@ -121,6 +134,10 @@ export function shop_step_on(game_state: GameState, node: iNode){
         game_state.gui_rectangles.push(construct_shop_return_to_game_button(game_state, node))       
         game_state.active_screens.push(shop_screen.id);
         
+        //Create beaver animation
+        for(let i=0;i<10;i++){
+            construct_beaver_icon_animations(game_state, Math.random()*500, 1000+Math.random()*200, -1, -1, undefined)
+        }
         //Activate round end for node objects
         for(let i=0; i<game_state.i_node_array.length; i++){
             node_activate_round_end(game_state, i_node_array[i])
@@ -138,13 +155,24 @@ export function trap_step_on(game_state: GameState,node: iNode, node_objects: No
     }
 
 
-    export function wolf_step_on(game_state: GameState, node: iNode, node_objects: NodeObject){
-      
-        game_state.player_collectables[0].count -= node_objects.collectables[0].count
-        if(game_state.player_collectables[0].count <= 0){
-            game_state.player_collectables[0].count = 0;
-        }
-  
+export function wolf_step_on(game_state: GameState, node: iNode, node_object: NodeObject){
+    let i=0
+    for(let inv_node_object of game_state.player_inventory){
+        if (inv_node_object!==undefined){
+            if (inv_node_object.node_object.type===8){
+                game_state.player_inventory[i]=undefined
+                for(let j=0;j<node.nodeObjects.length;j++){
+                    if (node.nodeObjects[j].type===4){
+                        node.nodeObjects.splice(j,1)
+                    }
+                }
+                return 
+            }
+        } 
+        i+=1
+    }
+    game_state.player_collectables[0].count -= node_object.collectables[0].count
+    
 }
 
 export function detective_step_on(game_state: GameState, node: iNode, node_objects: NodeObject){

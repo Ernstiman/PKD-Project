@@ -49,9 +49,11 @@ addEventListener('click', function(e){
         }
         i ++
     }
-
-    draw(game_state);      
-}}
-)
-
-
+}
+})
+gameLoop()
+function gameLoop() {
+    draw(game_state); 
+    game_state.ticks+=1
+    requestAnimationFrame(gameLoop);
+}

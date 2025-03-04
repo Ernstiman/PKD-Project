@@ -24,11 +24,68 @@ export function draw(game_state: GameState): void {
         }
     }
 
+    function applyOldMovieFilter() {
+        if (!ctx || !canvas) return;
+    
+        // Get the image data from canvas
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+    
+        // Overlay film grain (noise)
+        for (let i = 0; i < 4; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const intensity = Math.random() * 255;
+            ctx.fillStyle = `rgba(${intensity}, ${intensity}, ${intensity}, 0.1)`;
+            ctx.fillRect(x, y, 3, 3);
+        }
+
+        for (let i = 0; i < 6; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const intensity = Math.random() * 255;
+            ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+            ctx.fillRect(x, y, Math.random()*10, Math.random()*10);
+        }
+    
+        // Draw scratches (random thin lines)
+        if (Math.random()>0.5){
+        for (let i = 0; i < 1; i++) {
+            ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
+            ctx.beginPath();
+            let x=Math.random() * canvas.width
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+        }
+
+        // Apply vignette effect
+        const gradient = ctx.createRadialGradient(
+            canvas.width / 2, canvas.height / 2, canvas.width / 4,
+            canvas.width / 2, canvas.height / 2, canvas.width / 1.2
+        );
+        gradient.addColorStop(0, "rgba(0,0,0,0)");
+        gradient.addColorStop(1, "rgba(0,0,0,0.4)");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Apply filter at random intervals for flickering effect
+    setInterval(() => {
+        if (Math.random() > 0.8) {
+            ctx!.globalAlpha = 0.9 + Math.random() * 0.1; // Slight flicker
+        } else {
+            ctx!.globalAlpha = 1;
+        }
+    }, 200);
+    
 export function game_draw(ctx: CanvasRenderingContext2D,game_state: GameState){
     list_graph_draw(ctx, game_state);
     draw_gui_rectangles(ctx, game_state);
     draw_ui_elements(ctx, game_state);
     draw_inventory(ctx, game_state);
+    applyOldMovieFilter();
 }
 
 
@@ -58,36 +115,32 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
 
 export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: GameState) {
     function current_round_text() {
-        ctx.fillStyle = "black";      // Set text color
-        ctx.font ="45px Georgia";      // Set font size and type
-        ctx.textAlign = "center";     // Center the text horizontally
-        ctx.textBaseline = "middle";  // Center the text vertically
-        ctx.fillText("Day: "+game_state.round.toString(), 100, 100);
+        draw_default_text_style("Day: "+game_state.round.toString(), 100, 100, ctx, 40, 7)
     }
 
     function draw_player_collectables() {
-        ctx.font = "45px Georgia";
-        ctx.fillText("Beavers: " + 
-        game_state.player_collectables[0].count.toString(), 400, 100);
-
-        ctx.fillText("Rabbits: " + 
-        game_state.player_collectables[1].count.toString(), 700, 100);
-        
+        draw_default_text_style("Beavers: " + 
+        game_state.player_collectables[0].count.toString(), 400, 100, ctx, 40, 7)
+    
+        draw_default_text_style("Rabbits: " + 
+        game_state.player_collectables[1].count.toString(), 700, 100, ctx, 40, 7)
     }
 
     function draw_beaver_quota() {
-        console.log(game_state.shop_collectables[0].count)
-        ctx.font = "45px Georgia";
-        ctx.fillText("Quota: " + 
-        game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100);
-        ctx.fillText("Days Left: " + game_state.days_to_quota.toString(), 1085, 160)
+        ctx.textAlign = "left"
+        draw_default_text_style("Quota: " + game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100, ctx, 40, 7)
+        draw_default_text_style("Days Left: " + game_state.days_to_quota.toString(), 1200, 160, ctx, 40, 7)
         
     }
+
+
 
     current_round_text();
     draw_player_collectables();
     draw_beaver_quota();
+    
 }
+
 
 export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
     let new_graph = game_state.map_graph
@@ -123,6 +176,7 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
                 const arrowY2 = draw_y - headlen * Math.sin(angle + Math.PI / 6);
      
                 // Draw lines
+                ctx.lineWidth = 3.5;
                 ctx.beginPath(); 
                 ctx.moveTo(inode.x, inode.y); 
                 ctx.lineTo(out_node.x, out_node.y); 
@@ -178,7 +232,7 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
             ctx.fill();
     
             ctx.strokeStyle = "black";
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 4;
     
             ctx.stroke();
         }
@@ -193,11 +247,18 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
             }
         }
     }
-
+    function draw_icon_animations(){
+        for(let i = game_state.icon_animations.length-1; i>=0 ; i--){
+            let icon_animation=game_state.icon_animations[i]
+            icon_animation.move_function(game_state, icon_animation, i)
+            ctx.drawImage(icon_animation.image, icon_animation.x, icon_animation.y, icon_animation.size, icon_animation.size)
+        }
+    }
 
     draw_lines_and_arrows();
     draw_nodes();
     draw_node_objects();
+    draw_icon_animations();
 }
 
 export function draw_gui_rectangles(ctx: CanvasRenderingContext2D, game_state: GameState) {
@@ -206,23 +267,28 @@ export function draw_gui_rectangles(ctx: CanvasRenderingContext2D, game_state: G
         draw_gui_rectangle(ctx, rect);
     }
 }
-
+export function draw_default_text_style(text: string, pos_x: number, pos_y: number, ctx: CanvasRenderingContext2D, size: number, outline_width: number=5){
+    ctx.font = "bold "+size.toString()+"px Arial ";
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = outline_width;
+    ctx.strokeText(text, pos_x, pos_y);
+    ctx.fillStyle = 'white';
+    ctx.fillText(text, pos_x, pos_y);
+    ctx.lineWidth = 2;
+}
 export function draw_gui_rectangle(ctx: CanvasRenderingContext2D, rect: GuiRectangle){
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.34)";
+    ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 10);
+    ctx.fillStyle = 'rgba(97, 95, 95, 0.3)';
+    ctx.fill();
 
-    ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
     ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+    ctx.lineWidth = 6;
+    ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 10);
+    ctx.stroke();
+    ctx.lineWidth = 2
 
-
-    ctx.fillStyle = "black"; // Text color
-    ctx.font = "20px Georgia";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2);
-
+    draw_default_text_style(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2, ctx, 25)
 }
 
 export function draw_shop_gui(ctx: CanvasRenderingContext2D, game_state: GameState){

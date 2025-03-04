@@ -48,7 +48,7 @@ export function get_base_game_state() : GameState{
     generate_x_y(basic_graph, i_node_array, shop_index);
 
     //Setup collectables for player
-    let start_collectables = [construct_collectable("beaver", 1000), construct_collectable("rabbit", 0)]
+    let start_collectables = [construct_collectable("beaver", 100), construct_collectable("rabbit", 0)]
     //Setup collectables quota
     
     let shop_start_collectables = [construct_collectable("beaver",quota_amount)]
@@ -86,7 +86,9 @@ export function get_base_game_state() : GameState{
             quota_amount: quota_amount,
             selected_object: undefined,
             game_rounds: game_rounds,
-            game_over: false
+            game_over: false,
+            icon_animations: [],
+            ticks: 0,
             
     }
 }
