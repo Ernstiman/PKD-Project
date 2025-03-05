@@ -29,6 +29,7 @@ function applyOldMovieFilter(ctx, game_state) {
     // Get the image data from canvas
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
+    ctx.lineWidth = 2;
     // Overlay film grain (noise)
     for (let i = 0; i < 4; i++) {
         const x = Math.random() * canvas.width;
@@ -47,6 +48,7 @@ function applyOldMovieFilter(ctx, game_state) {
     // Draw scratches (random thin lines)
     if (Math.random() > 0.5) {
         for (let i = 0; i < 1; i++) {
+            ctx.lineWidth = 1;
             ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
             ctx.beginPath();
             let x = Math.random() * canvas.width;
@@ -89,7 +91,7 @@ function draw_inventory(ctx, game_state) {
             ctx.font = "25px Georgia"; // Set font size and type
             ctx.textAlign = "center"; // Center the text horizontally
             ctx.textBaseline = "middle"; // Center the text vertically
-            ctx.fillText((i + 1).toString(), inventory_object.box.x + 10, inventory_object.box.y - 10);
+            ctx.fillText((i + 1).toString(), inventory_object.box.x + 10, inventory_object.box.y - 15);
             inventory_object.node_object.draw_function(ctx, inventory_object.box.x + 25, inventory_object.box.y + 25, inventory_object.node_object);
             if (i === ((_a = game_state.selected_object) === null || _a === void 0 ? void 0 : _a.index)) {
                 ctx.fillStyle = "rgba(173, 57, 25, 0.67)";
@@ -186,14 +188,14 @@ export function list_graph_draw(ctx, game_state) {
     function draw_nodes() {
         for (let i = 0; i < new_graph.size; i++) {
             let inode = new_array[i];
-            const radius = 20;
+            const radius = 25;
             const start_angle = 0;
             const end_angle = 2 * Math.PI;
             ctx.beginPath();
             ctx.arc(inode.x, inode.y, radius, start_angle, end_angle);
-            ctx.fillStyle = "white";
+            ctx.fillStyle = "rgb(255, 255, 255)";
             ctx.fill();
-            ctx.strokeStyle = "black";
+            ctx.strokeStyle = "rgb(0, 0, 0)";
             ctx.lineWidth = 4;
             ctx.stroke();
         }
@@ -245,6 +247,7 @@ export function draw_gui_rectangle(ctx, rect) {
     draw_default_text_style(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2, ctx, 25);
 }
 export function draw_shop_gui(ctx, game_state) {
+    ctx.lineWidth = 2;
     ctx.fillStyle = "rgba(0, 0, 0, 0.37)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     draw_shop_block_item_blocks(ctx, game_state);

@@ -29,5 +29,7 @@ export function lvl_1_trap_end(game_state, node_object, node) {
 export function detective_end(game_state, node_object) {
 }
 export function wolf_end(game_state, node_object) {
-    node_object.collectables[0].count += 1;
+    if (game_state.round % 2 === 0) {
+        node_object.collectables[0].count += 1;
+    }
 }

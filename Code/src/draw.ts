@@ -39,7 +39,7 @@ export function draw(game_state: GameState): void {
         // Get the image data from canvas
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
-    
+        ctx.lineWidth = 2;
         // Overlay film grain (noise)
         for (let i = 0; i < 4; i++) {
             const x = Math.random() * canvas.width;
@@ -60,6 +60,7 @@ export function draw(game_state: GameState): void {
         // Draw scratches (random thin lines)
         if (Math.random()>0.5){
         for (let i = 0; i < 1; i++) {
+            ctx.lineWidth = 1;
             ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
             ctx.beginPath();
             let x=Math.random() * canvas.width
@@ -89,7 +90,7 @@ export function draw(game_state: GameState): void {
         }
     }, 200);
     
-export function game_draw(ctx: CanvasRenderingContext2D,game_state: GameState){
+export function game_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
     list_graph_draw(ctx, game_state);
     draw_gui_rectangles(ctx, game_state);
     draw_ui_elements(ctx, game_state);
@@ -109,7 +110,7 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
             ctx.font ="25px Georgia";      // Set font size and type
             ctx.textAlign = "center";     // Center the text horizontally
             ctx.textBaseline = "middle";  // Center the text vertically
-            ctx.fillText((i + 1).toString(), inventory_object.box.x + 10, inventory_object.box.y - 10);
+            ctx.fillText((i + 1).toString(), inventory_object.box.x + 10, inventory_object.box.y - 15);
 
             inventory_object.node_object.draw_function(ctx, inventory_object.box.x + 25, inventory_object.box.y + 25, inventory_object.node_object)
             if(i === game_state.selected_object?.index){
@@ -148,8 +149,6 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
         draw_default_text_style("Days Left: " + game_state.days_to_quota.toString(), 1200, 160, ctx, 40, 7)
         
     }
-
-
 
     current_round_text();
     draw_player_collectables();
@@ -237,17 +236,17 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
     function draw_nodes() {
         for(let i = 0; i < new_graph.size; i++){
             let inode: iNode = new_array[i]
-            const radius = 20;
+            const radius = 25;
             const start_angle = 0;
             const end_angle = 2 * Math.PI;
     
             ctx.beginPath();
             ctx.arc(inode.x, inode.y, radius, start_angle, end_angle);
            
-            ctx.fillStyle = "white";
+            ctx.fillStyle = "rgb(255, 255, 255)";
             ctx.fill();
     
-            ctx.strokeStyle = "black";
+            ctx.strokeStyle = "rgb(0, 0, 0)";
             ctx.lineWidth = 4;
     
             ctx.stroke();
@@ -308,6 +307,7 @@ export function draw_gui_rectangle(ctx: CanvasRenderingContext2D, rect: GuiRecta
 }
 
 export function draw_shop_gui(ctx: CanvasRenderingContext2D, game_state: GameState){
+    ctx.lineWidth = 2;
     ctx.fillStyle = "rgba(0, 0, 0, 0.37)";
     ctx.fillRect(0, 0, canvas!.width, canvas!.height)
     draw_shop_block_item_blocks(ctx, game_state);
@@ -323,19 +323,19 @@ export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_
         draw_gui_rectangle(ctx, shop_block_item_block.block);
     }}
 
-    export function draw_game_over_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
-    
-        const img = new Image();
-        img.src = '../img/HOB-0.jpg'
-        ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF;  // Continue to draw the image in sync with the animation
-        
-    }
+export function draw_game_over_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
 
-    export function draw_win_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
-        const img = new Image();
-        img.src = '../img/win_screen.jpg'
-        ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF   
-                      
-        
-        
-    }
+    const img = new Image();
+    img.src = '../img/HOB-0.jpg'
+    ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF;  // Continue to draw the image in sync with the animation
+    
+}
+
+export function draw_win_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
+    const img = new Image();
+    img.src = '../img/win_screen.jpg'
+    ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF   
+                    
+    
+    
+}

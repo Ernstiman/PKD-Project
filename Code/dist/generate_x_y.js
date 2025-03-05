@@ -1,4 +1,4 @@
-import { construct_inode, construct_node_object, construct_wolf } from './contructors.js';
+import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors.js';
 import { canvas } from './draw.js';
 import { shop_draw_function, draw_daughter } from './draw_functions.js';
 import { remove_id_arrray } from './id_array.js';
@@ -61,11 +61,11 @@ export function generate_x_y(graph, i_node_array, shop_index) {
             }
             else {
                 if (layer === 0 && i === Math.floor(circle_size / 2)) {
-                    construct_inode(nodes, [], 0, 0, i_node_array);
+                    construct_inode(nodes, [construct_detective(1)], 0, 0, i_node_array);
                 }
                 else {
-                    if (Math.random() < 0.2) {
-                        construct_inode(nodes, [construct_wolf(2)], 0, 0, i_node_array);
+                    if (Math.random() < 0.0005) {
+                        construct_inode(nodes, [construct_wolf(1)], 0, 0, i_node_array);
                     }
                     else {
                         construct_inode(nodes, [], 0, 0, i_node_array);
