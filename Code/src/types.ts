@@ -47,7 +47,7 @@ export type GameState = {
     game_over: boolean
     icon_animations: Array<IconAnimation>
     ticks: number,
-    not_win: boolean
+    not_win: boolean,
 }
 
 export type GuiRectangle = {
