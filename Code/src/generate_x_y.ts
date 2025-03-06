@@ -68,7 +68,7 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>, shop_
                 construct_inode(nodes,[shop], 0, 0, i_node_array);
             }else{
                 if (layer===0 && i===Math.floor(circle_size/2)){
-                    construct_inode(nodes,[construct_detective(5)], 0, 0, i_node_array);
+                    construct_inode(nodes,[construct_detective(1)], 0, 0, i_node_array);
                 }else{
                     if (Math.random()<0.0005){
                         construct_inode(nodes,[construct_wolf(1)], 0, 0, i_node_array);
@@ -103,7 +103,6 @@ export function create_daughter_node(graph: ListGraph, i_node_array: Array<iNode
     construct_inode(graph.size, [construct_node_object(3, draw_daughter, () => {remove_id_arrray("place_object",game_state.gui_rectangles)},() => {}, 0,)], canvas!.width / 2, canvas!.height / 2,i_node_array);
     graph.size += 1;
     console.log(graph.adj[shop_index]);
-    
     
     let new_list = append(graph.adj[shop_index], list(graph.size - 1));
     graph.adj[shop_index] = new_list;

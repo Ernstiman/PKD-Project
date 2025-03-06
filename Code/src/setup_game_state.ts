@@ -38,13 +38,6 @@ export function get_base_game_state() : GameState{
     }
 
     
-
-
-
-    
-
-
-
     generate_x_y(basic_graph, i_node_array, shop_index);
 
     //Setup collectables for player
@@ -93,3 +86,5 @@ export function get_base_game_state() : GameState{
             
     }
 }
+
+

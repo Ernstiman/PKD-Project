@@ -61,7 +61,11 @@ export function generate_x_y(graph, i_node_array, shop_index) {
             }
             else {
                 if (layer === 0 && i === Math.floor(circle_size / 2)) {
+<<<<<<< HEAD
                     construct_inode(nodes, [construct_detective(5)], 0, 0, i_node_array);
+=======
+                    construct_inode(nodes, [construct_detective(1)], 0, 0, i_node_array);
+>>>>>>> lindlund
                 }
                 else {
                     if (Math.random() < 0.0005) {
