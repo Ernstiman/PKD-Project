@@ -1,4 +1,4 @@
-import { Layer } from 'konva/lib/Layer.js';
+
 import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors.js';
 import { canvas } from './draw.js';
 import { shop_draw_function, draw_daughter } from './draw_functions.js';

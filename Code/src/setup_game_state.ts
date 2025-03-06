@@ -3,7 +3,7 @@ import { ListGraph } from './lib/graphs.js';
 import { GameState, iNode,  InventoryNodeObject,  NodeObject, Screen, ShopItemBlock} from './types.js';
 import { construct_inode, construct_level_1_trap, construct_node_object, construct_rectangle, construct_shop_item_block, test_trap_constructor } from './contructors.js';
 import { shop_draw_function, trap_draw_function } from './draw_functions.js';
-import { generate_x_y } from './generate_x_y.js';
+import { generate_x_y } from './graph_generation.js';
 import { node_activate_round_end } from './node_objects.js';
 import { construct_collectable } from './contructors.js';
 import { draw, draw_shop_gui, game_draw } from './draw.js';
@@ -38,7 +38,7 @@ export function get_base_game_state() : GameState{
     }
 
     
-    generate_x_y(basic_graph, i_node_array, shop_index);
+    generate_x_y(basic_graph, i_node_array);
 
     //Setup collectables for player
     let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)]

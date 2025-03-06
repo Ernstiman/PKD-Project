@@ -10,7 +10,7 @@ import { shop_item_block_click_on, submit_beavers_click_on } from "./click.js";
 import { play_music, stop_music } from "./music.js";
 import { check_quota } from "./round_end_functions.js";
 import { ctx, draw, draw_gui_rectangle } from "./draw.js";
-import { create_daughter_node } from "./generate_x_y.js";
+import { create_daughter_node } from "./graph_generation.js";
 import { draw_daughter } from "./draw_functions.js";
 // import { create_daughter_node } from "./generate_x_y.js";
 
