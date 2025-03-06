@@ -13,6 +13,8 @@ import { game_over_screen } from './screens.js';
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
 export const ctx = canvas!.getContext("2d");
 
+
+
 export function draw(game_state: GameState): void {
         if (!ctx) return;
 
@@ -28,37 +30,39 @@ export function draw(game_state: GameState): void {
             if(screen !== undefined){
                 screen.draw_function(ctx, game_state)
             }
-            
-        }}
+        }
+    }
         
+}
+
+function applyOldMovieFilter(ctx: CanvasRenderingContext2D, game_state: GameState) {
+    if (!ctx || !canvas || game_state.game_over) {
+        return;
+    }
+    
+    // Get the image data from canvas
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    ctx.lineWidth = 2;
+    // Overlay film grain (noise)
+    for (let i = 0; i < 4; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const intensity = Math.random() * 255;
+        ctx.fillStyle = `rgba(${intensity}, ${intensity}, ${intensity}, 0.1)`;
+        ctx.fillRect(x, y, 3, 3);
     }
 
-    function applyOldMovieFilter(ctx: CanvasRenderingContext2D, game_state: GameState) {
-        if (!ctx || !canvas || game_state.game_over) return;
-    
-        // Get the image data from canvas
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-        ctx.lineWidth = 2;
-        // Overlay film grain (noise)
-        for (let i = 0; i < 4; i++) {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            const intensity = Math.random() * 255;
-            ctx.fillStyle = `rgba(${intensity}, ${intensity}, ${intensity}, 0.1)`;
-            ctx.fillRect(x, y, 3, 3);
-        }
-
-        for (let i = 0; i < 6; i++) {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            const intensity = Math.random() * 255;
-            ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
-            ctx.fillRect(x, y, Math.random()*10, Math.random()*10);
-        }
+    for (let i = 0; i < 6; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const intensity = Math.random() * 255;
+        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        ctx.fillRect(x, y, Math.random()*10, Math.random()*10);
+    }
     
         // Draw scratches (random thin lines)
-        if (Math.random()>0.5){
+    if (Math.random()>0.5){
         for (let i = 0; i < 1; i++) {
             ctx.lineWidth = 1;
             ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
@@ -68,27 +72,27 @@ export function draw(game_state: GameState): void {
             ctx.lineTo(x, canvas.height);
             ctx.stroke();
         }
-        }
-
-        // Apply vignette effect
-        const gradient = ctx.createRadialGradient(
-            canvas.width / 2, canvas.height / 2, canvas.width / 4,
-            canvas.width / 2, canvas.height / 2, canvas.width / 1.2
-        );
-        gradient.addColorStop(0, "rgba(0,0,0,0)");
-        gradient.addColorStop(1, "rgba(0,0,0,0.4)");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
+
+    // Apply vignette effect
+    const gradient = ctx.createRadialGradient(
+        canvas.width / 2, canvas.height / 2, canvas.width / 4,
+        canvas.width / 2, canvas.height / 2, canvas.width / 1.2
+    );
+    gradient.addColorStop(0, "rgba(0,0,0,0)");
+    gradient.addColorStop(1, "rgba(0,0,0,0.4)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
     
-    // Apply filter at random intervals for flickering effect
-    setInterval(() => {
-        if (Math.random() > 0.8) {
-            ctx!.globalAlpha = 0.9 + Math.random() * 0.1; // Slight flicker
-        } else {
-            ctx!.globalAlpha = 1;
-        }
-    }, 200);
+// Apply filter at random intervals for flickering effect
+setInterval(() => {
+    if (Math.random() > 0.8) {
+        ctx!.globalAlpha = 0.9 + Math.random() * 0.1; // Slight flicker
+    } else {
+        ctx!.globalAlpha = 1;
+    }
+}, 200);
     
 export function game_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
     list_graph_draw(ctx, game_state);
@@ -116,37 +120,42 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
             if(i === game_state.selected_object?.index){
                 
                 ctx.fillStyle = "rgba(173, 57, 25, 0.67)";
-                ctx.fillRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
-                // ctx.strokeStyle = "rgba(75, 152, 52, 0.87)";
-                // ctx.lineWidth = 5;
-                ctx.strokeRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
+                ctx.fillRect(game_state.selected_object.box.x, 
+                             game_state.selected_object.box.y, 
+                             game_state.selected_object.box.width, 
+                             game_state.selected_object.box.height);
+
+                ctx.strokeRect(game_state.selected_object.box.x, 
+                               game_state.selected_object.box.y, 
+                               game_state.selected_object.box.width, 
+                               game_state.selected_object.box.height);
                
             }
             draw_gui_rectangle(ctx, inventory_object.box);
             
             
-            y+=50
+            y += 50;
         }
     }
 }
 
 export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: GameState) {
     function current_round_text() {
-        draw_default_text_style("Day: "+game_state.round.toString(), 100, 100, ctx, 40, 7)
+        draw_default_text_style("Day: "+game_state.round.toString(), 100, 100, ctx, 40, 7);
     }
 
     function draw_player_collectables() {
         draw_default_text_style("Beavers: " + 
-        game_state.player_collectables[0].count.toString(), 400, 100, ctx, 40, 7)
+                                game_state.player_collectables[0].count.toString(), 400, 100, ctx, 40, 7);
     
         draw_default_text_style("Rabbits: " + 
-        game_state.player_collectables[1].count.toString(), 700, 100, ctx, 40, 7)
+                                game_state.player_collectables[1].count.toString(), 700, 100, ctx, 40, 7);
     }
 
     function draw_beaver_quota() {
-        ctx.textAlign = "left"
-        draw_default_text_style("Quota: " + game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100, ctx, 40, 7)
-        draw_default_text_style("Days Left: " + game_state.days_to_quota.toString(), 1200, 160, ctx, 40, 7)
+        ctx.textAlign = "left";
+        draw_default_text_style("Quota: " + game_state.shop_collectables[0].count.toString() + " remaining...", 1200, 100, ctx, 40, 7);
+        draw_default_text_style("Days Left: " + game_state.days_to_quota.toString(), 1200, 160, ctx, 40, 7);
         
     }
 
@@ -190,6 +199,14 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
                 const arrowX2 = draw_x - headlen * Math.cos(angle + Math.PI / 6);
                 const arrowY2 = draw_y - headlen * Math.sin(angle + Math.PI / 6);
      
+                function draw_arrow() {
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX1, arrowY1);
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX2, arrowY2);
+                    ctx.stroke();
+                }
+
                 // Draw lines
                 ctx.lineWidth = 3.5;
                 ctx.beginPath(); 
@@ -203,32 +220,18 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
                     let is_walkable = is_adj_node(game_state, adj_index);
                     if (is_walkable) {
                         ctx.strokeStyle =  "rgb(46, 148, 63)";
-                        ctx.moveTo(draw_x, draw_y);
-                        ctx.lineTo(arrowX1, arrowY1);
-                        ctx.moveTo(draw_x, draw_y);
-                        ctx.lineTo(arrowX2, arrowY2);
-                        ctx.stroke();
+                        draw_arrow();
                         
                     }
                 }
 
                 if (detective_nodes.find((indx)=>{return (indx===inode.index)})){
                     ctx.strokeStyle =  "rgb(182, 32, 29)";
-                    ctx.moveTo(draw_x, draw_y);
-                    ctx.lineTo(arrowX1, arrowY1);
-                    ctx.moveTo(draw_x, draw_y);
-                    ctx.lineTo(arrowX2, arrowY2);
-                    ctx.stroke();
+                    draw_arrow();
                 }
                 
                 // else draw them black
-                ctx.moveTo(draw_x, draw_y);
-                ctx.lineTo(arrowX1, arrowY1);
-                ctx.moveTo(draw_x, draw_y);
-                ctx.lineTo(arrowX2, arrowY2);
-                ctx.stroke();
-                
-
+                draw_arrow();
             }, adj_nodes)
         }
     }
@@ -256,17 +259,17 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
     function draw_node_objects() {
         for(let i = 0; i < new_array.length; i++) {
             let inode: iNode = new_array[i]
-            for(let i_node_object = 0; i_node_object<inode.nodeObjects.length; i_node_object++) {
-                let node_object = inode.nodeObjects[i_node_object]
-                node_object.draw_function(ctx, inode.x, inode.y, inode.nodeObjects[i_node_object])
+            for(let i_node_object = 0; i_node_object < inode.nodeObjects.length; i_node_object++) {
+                let node_object = inode.nodeObjects[i_node_object];
+                node_object.draw_function(ctx, inode.x, inode.y, inode.nodeObjects[i_node_object]);
             }
         }
     }
     function draw_icon_animations(){
         for(let i = game_state.icon_animations.length-1; i>=0 ; i--){
-            let icon_animation=game_state.icon_animations[i]
-            icon_animation.move_function(game_state, icon_animation, i)
-            ctx.drawImage(icon_animation.image, icon_animation.x, icon_animation.y, icon_animation.size, icon_animation.size)
+            let icon_animation=game_state.icon_animations[i];
+            icon_animation.move_function(game_state, icon_animation, i);
+            ctx.drawImage(icon_animation.image, icon_animation.x, icon_animation.y, icon_animation.size, icon_animation.size);
         }
     }
 
@@ -301,15 +304,15 @@ export function draw_gui_rectangle(ctx: CanvasRenderingContext2D, rect: GuiRecta
     ctx.lineWidth = 6;
     ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 10);
     ctx.stroke();
-    ctx.lineWidth = 2
+    ctx.lineWidth = 2;
 
-    draw_default_text_style(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2, ctx, 25)
+    draw_default_text_style(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2, ctx, 25);
 }
 
 export function draw_shop_gui(ctx: CanvasRenderingContext2D, game_state: GameState){
     ctx.lineWidth = 2;
     ctx.fillStyle = "rgba(0, 0, 0, 0.37)";
-    ctx.fillRect(0, 0, canvas!.width, canvas!.height)
+    ctx.fillRect(0, 0, canvas!.width, canvas!.height);
     draw_shop_block_item_blocks(ctx, game_state);
     
 }
@@ -321,7 +324,8 @@ export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_
 
         shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x + 50, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
-    }}
+    }
+}
 
 export function draw_game_over_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
 
