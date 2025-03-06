@@ -1,4 +1,4 @@
-import { generate_x_y } from './generate_x_y.js';
+import { generate_x_y } from './graph_generation.js';
 import { construct_collectable } from './contructors.js';
 import { shop_screen } from './screens.js';
 import { game_screen } from './screens.js';
@@ -16,7 +16,7 @@ export function get_base_game_state() {
         return Math.floor(Math.random() * (max - min + 1)) + min;
         // from: https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
     }
-    generate_x_y(basic_graph, i_node_array, shop_index);
+    generate_x_y(basic_graph, i_node_array);
     //Setup collectables for player
     let start_collectables = [construct_collectable("beaver", 0), construct_collectable("rabbit", 0)];
     //Setup collectables quota

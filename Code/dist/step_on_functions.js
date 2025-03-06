@@ -7,7 +7,7 @@ import { construct_shop_item_block, test_trap_constructor } from "./contructors.
 import { shop_item_block_click_on, submit_beavers_click_on } from "./click.js";
 import { play_music, stop_music } from "./music.js";
 import { check_quota } from "./round_end_functions.js";
-import { create_daughter_node } from "./generate_x_y.js";
+import { create_daughter_node } from "./graph_generation.js";
 // import { create_daughter_node } from "./generate_x_y.js";
 function construct_shop_return_to_game_button(game_state, node) {
     return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", () => {
