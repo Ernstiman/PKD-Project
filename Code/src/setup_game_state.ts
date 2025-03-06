@@ -26,10 +26,12 @@ export const basic_graph: ListGraph = {
 
 export let shop_index = Math.floor(Math.random() * basic_graph.size)
 
+
+/**
+ * Creates the game_state
+ * @returns A record that contains all the states of the game
+ */
 export function get_base_game_state() : GameState{
-
-
-
     function random_shop_index(min: number, max: number): number {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -59,7 +61,7 @@ export function get_base_game_state() : GameState{
 
     let player_inventory: Array<InventoryNodeObject> = []
 
-    let game_rounds = 5;
+    let game_rounds = 1;
 
     //Skapa gamestate
     return {i_node_array: i_node_array, 

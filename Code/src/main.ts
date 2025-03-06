@@ -5,7 +5,7 @@ import { get_base_game_state, } from './setup_game_state.js';
 
 
 let game_state=get_base_game_state()
-
+console.log("hejj")
 clicked_on_node(game_state, game_state.current_node);
 
 // A event listner that checks wether the player clicked with the mouse

@@ -9,6 +9,10 @@ export const basic_graph = {
     size: 0
 };
 export let shop_index = Math.floor(Math.random() * basic_graph.size);
+/**
+ * Creates the game_state
+ * @returns A record that contains all the states of the game
+ */
 export function get_base_game_state() {
     function random_shop_index(min, max) {
         min = Math.ceil(min);
@@ -28,7 +32,7 @@ export function get_base_game_state() {
     let songs = [new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3"), new Audio("../soundtrack/love.mp3")];
     let start_days_to_quota = 6;
     let player_inventory = [];
-    let game_rounds = 5;
+    let game_rounds = 1;
     //Skapa gamestate
     return { i_node_array: i_node_array,
         map_graph: basic_graph,

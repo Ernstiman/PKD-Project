@@ -3,6 +3,7 @@ import { clicked_on_node, get_clicked_node_index, mouse_in_rectangle } from './c
 import { draw } from './draw.js';
 import { get_base_game_state, } from './setup_game_state.js';
 let game_state = get_base_game_state();
+console.log("hejj");
 clicked_on_node(game_state, game_state.current_node);
 // A event listner that checks wether the player clicked with the mouse
 addEventListener('click', function (e) {

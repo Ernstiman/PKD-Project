@@ -1,10 +1,13 @@
 import { remove_node_object } from './node_objects.js';
-import { construct_inventory_items, construct_node_object, construct_rectangle } from './contructors.js';
+import { construct_inventory_items, construct_node_object, construct_rectangle, construct_wolf } from './contructors.js';
 import { player_draw_function } from './draw_functions.js';
 import { step_on_node } from './node_objects.js';
 import { remove_id_arrray } from './id_array.js';
 import { detective_walk } from './detective.js';
 import { stop_music, play_music } from './music.js';
+import { create_daughter_node } from './graph_generation.js';
+import { shop_index } from './setup_game_state.js';
+import { check_quota } from './round_end_functions.js';
 /**
 * Get the clicked on nodes index
 * @param nodes the nodes on the map
@@ -138,7 +141,7 @@ export function inventory_item_click_on(game_state, index) {
     //Constructs a new place_object button
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on);
     //Checks whether you are not with the love interest and does not hold the ring selected
-    if (((_a = game_state.selected_object) === null || _a === void 0 ? void 0 : _a.node_object.type) !== 2 && game_state.i_node_array[game_state.current_node].nodeObjects[0].type !== 3) {
+    if (((_a = game_state.selected_object) === null || _a === void 0 ? void 0 : _a.node_object.type) === 0 && game_state.i_node_array[game_state.current_node].nodeObjects[0].type !== 3) {
         game_state.gui_rectangles.push(place_object_button);
     }
     ;
@@ -156,4 +159,45 @@ export function submit_beavers_click_on(game_state) {
         game_state.shop_collectables[0].count = 0;
     }
     game_state.player_collectables[0].count -= (current_shop - game_state.shop_collectables[0].count);
+}
+export function return_to_game_click_on_function(game_state) {
+    for (let inventory_item of game_state.player_inventory) {
+        if ((inventory_item === null || inventory_item === void 0 ? void 0 : inventory_item.node_object.type) === 2) {
+            create_daughter_node(game_state.map_graph, game_state.i_node_array, shop_index, game_state);
+        }
+    }
+    for (let i = 0; i < game_state.i_node_array.length; i++) {
+        if (game_state.i_node_array[i].nodeObjects.length < 1) {
+            if (Math.random() < 0.1) {
+                game_state.i_node_array[i].nodeObjects.push(construct_wolf(1));
+            }
+        }
+    }
+    if (!check_quota(game_state)) {
+        remove_shop_screen(game_state);
+    }
+    else {
+        game_state.not_win = true;
+        play_music(game_state.songs[2]);
+    }
+}
+/**
+ * Rmoves the shop_screen
+ * @param game_state the state of the game
+ */
+export function remove_shop_screen(game_state) {
+    stop_music(game_state.songs[0]);
+    play_music(game_state.songs[1]);
+    for (let i = 0; i < game_state.active_screens.length; i++) {
+        if (game_state.active_screens[i] === "shop_screen") {
+            for (let i = 0; i < game_state.active_screens.length; i++) {
+                if (game_state.active_screens[i] === "shop_screen") {
+                    game_state.active_screens.splice(i, 1);
+                }
+                remove_id_arrray("return_to_game", game_state.gui_rectangles);
+                remove_id_arrray("submit_beavers", game_state.gui_rectangles);
+                game_state.shop_item_blocks = [];
+            }
+        }
+    }
 }

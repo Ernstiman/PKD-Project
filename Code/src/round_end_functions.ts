@@ -5,7 +5,7 @@ import { quota_amount } from "./setup_game_state.js";
 import { construct_beaver_icon_animations } from "./contructors.js";
 
 /**
- * Handles the logic at the end of a round for a trap
+ * Handles the logic at the end of a round for a regular trap
  * @param game_state The state of the game
  * @param node_object The targeted node_object
  * @param node The node which the trap is on
@@ -41,10 +41,10 @@ export function check_quota(game_state: GameState): boolean{
 }
 
 /**
- * 
- * @param game_state 
- * @param node_object 
- * @param node 
+ * Runs the logic at the end of the round for the lvl_1_trap
+ * @param game_state The state of the game
+ * @param node_object The trap
+ * @param node The node that the trap is on
  */
 export function lvl_1_trap_end(game_state: GameState, node_object: NodeObject, node : iNode) {
     let day = game_state.round;
@@ -60,8 +60,14 @@ export function detective_end(game_state: GameState, node_object: NodeObject) {
 
 }
 
+ /**
+  * Runs the logif for the wolf at the end of a round
+  * @param game_state The state of the game
+  * @param node_object The Wolf
+  */
 export function wolf_end(game_state: GameState, node_object: NodeObject) {
     if (game_state.round % 2 === 0) {
+        //Increases the amount of beavers that the wolf will take
         node_object.collectables[0].count += 1;
     }
 }
