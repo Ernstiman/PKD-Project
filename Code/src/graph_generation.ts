@@ -9,13 +9,18 @@ import { shop_step_on } from './step_on_functions.js';
 import { GameState, iNode,  NodeObject} from './types.js';
 
 
-
+/**
+ * Creates a daughter node and a connection to it from the shop.
+ * @param graph the graph to connect the new node to
+ * @param i_node_array the array of iNodes to the graph
+ * @param shop_index the index of the shop node in the iNode
+ * @param game_state the current game state
+*/
 export function create_daughter_node(graph: ListGraph, i_node_array: Array<iNode>, shop_index: number, game_state: GameState) : void{
     graph.adj[graph.size] = list()
 
     construct_inode(graph.size, [construct_node_object(3, draw_daughter, () => {remove_id_arrray("place_object",game_state.gui_rectangles)},() => {}, 0,)], canvas!.width / 2, canvas!.height / 2,i_node_array);
     graph.size += 1;
-    console.log(graph.adj[shop_index]);
     
     let new_list = append(graph.adj[shop_index], list(graph.size - 1));
     graph.adj[shop_index] = new_list;
