@@ -24,8 +24,9 @@ export function draw(game_state) {
     }
 }
 function applyOldMovieFilter(ctx, game_state) {
-    if (!ctx || !canvas || game_state.game_over)
+    if (!ctx || !canvas || game_state.game_over) {
         return;
+    }
     // Get the image data from canvas
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
@@ -96,8 +97,6 @@ function draw_inventory(ctx, game_state) {
             if (i === ((_a = game_state.selected_object) === null || _a === void 0 ? void 0 : _a.index)) {
                 ctx.fillStyle = "rgba(173, 57, 25, 0.67)";
                 ctx.fillRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
-                // ctx.strokeStyle = "rgba(75, 152, 52, 0.87)";
-                // ctx.lineWidth = 5;
                 ctx.strokeRect(game_state.selected_object.box.x, game_state.selected_object.box.y, game_state.selected_object.box.width, game_state.selected_object.box.height);
             }
             draw_gui_rectangle(ctx, inventory_object.box);
@@ -150,6 +149,13 @@ export function list_graph_draw(ctx, game_state) {
                 const arrowY1 = draw_y - headlen * Math.sin(angle - Math.PI / 6);
                 const arrowX2 = draw_x - headlen * Math.cos(angle + Math.PI / 6);
                 const arrowY2 = draw_y - headlen * Math.sin(angle + Math.PI / 6);
+                function draw_arrow() {
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX1, arrowY1);
+                    ctx.moveTo(draw_x, draw_y);
+                    ctx.lineTo(arrowX2, arrowY2);
+                    ctx.stroke();
+                }
                 // Draw lines
                 ctx.lineWidth = 3.5;
                 ctx.beginPath();
@@ -161,27 +167,15 @@ export function list_graph_draw(ctx, game_state) {
                     let is_walkable = is_adj_node(game_state, adj_index);
                     if (is_walkable) {
                         ctx.strokeStyle = "rgb(46, 148, 63)";
-                        ctx.moveTo(draw_x, draw_y);
-                        ctx.lineTo(arrowX1, arrowY1);
-                        ctx.moveTo(draw_x, draw_y);
-                        ctx.lineTo(arrowX2, arrowY2);
-                        ctx.stroke();
+                        draw_arrow();
                     }
                 }
                 if (detective_nodes.find((indx) => { return (indx === inode.index); })) {
                     ctx.strokeStyle = "rgb(182, 32, 29)";
-                    ctx.moveTo(draw_x, draw_y);
-                    ctx.lineTo(arrowX1, arrowY1);
-                    ctx.moveTo(draw_x, draw_y);
-                    ctx.lineTo(arrowX2, arrowY2);
-                    ctx.stroke();
+                    draw_arrow();
                 }
                 // else draw them black
-                ctx.moveTo(draw_x, draw_y);
-                ctx.lineTo(arrowX1, arrowY1);
-                ctx.moveTo(draw_x, draw_y);
-                ctx.lineTo(arrowX2, arrowY2);
-                ctx.stroke();
+                draw_arrow();
             }, adj_nodes);
         }
     }

@@ -148,6 +148,10 @@ export function construct_beaver_icon_animations(game_state, start_x, start_y, t
         }
     });
 }
+/**
+ * Computes a path at which the flying beavers travels when the round ends.
+ * @returns 'Function' that moves the beavers in the specified direction.
+ */
 export function construct_beaver_move_function() {
     let spd_x = Math.random() * 2 + 6;
     let spd_y = Math.random() * 1 + 6;
@@ -166,7 +170,7 @@ export function construct_beaver_move_function() {
                 move_y = (dy / dist) * spd_y * 1.5;
             }
             else {
-                self.target_function();
+                self.target_function(); // moves to specific target
                 game_state.icon_animations.splice(index, 1);
             }
         }
