@@ -15,17 +15,23 @@ export const ctx = canvas!.getContext("2d");
 
 
 
+/**
+ * Draws the game
+ * @param game_state the state of the game
+ */
 export function draw(game_state: GameState): void {
-        if (!ctx) return;
+    if (!ctx) return;
 
-        ctx.clearRect(0, 0, canvas!.width, canvas!.height);
-        if(game_state.game_over){
-            draw_win_screen(ctx, game_state)
-        }
-        else if(game_state.not_win){
+    //clears the screen before next draw
+    ctx.clearRect(0, 0, canvas!.width, canvas!.height);
+    if(game_state.game_over){
+        draw_win_screen(ctx, game_state)
+    }
+    else if(game_state.not_win){
         draw_game_over_screen(ctx, game_state)
-        }
-        else{for (let screen_id of game_state.active_screens){
+    }
+    else{
+        for (let screen_id of game_state.active_screens){
             let screen = find_id_arrray(screen_id, game_state.screens);
             if(screen !== undefined){
                 screen.draw_function(ctx, game_state)
@@ -35,7 +41,13 @@ export function draw(game_state: GameState): void {
         
 }
 
-function applyOldMovieFilter(ctx: CanvasRenderingContext2D, game_state: GameState) {
+/**
+ * Draws the oldMovei effect
+ * @param ctx the context for the canvas
+ * @param game_state the state of the game
+ * @returns 
+ */
+function applyOldMovieFilter(ctx: CanvasRenderingContext2D, game_state: GameState): void {
     if (!ctx || !canvas || game_state.game_over) {
         return;
     }
@@ -79,6 +91,7 @@ function applyOldMovieFilter(ctx: CanvasRenderingContext2D, game_state: GameStat
         canvas.width / 2, canvas.height / 2, canvas.width / 4,
         canvas.width / 2, canvas.height / 2, canvas.width / 1.2
     );
+
     gradient.addColorStop(0, "rgba(0,0,0,0)");
     gradient.addColorStop(1, "rgba(0,0,0,0.4)");
     ctx.fillStyle = gradient;
@@ -94,7 +107,12 @@ setInterval(() => {
     }
 }, 200);
     
-export function game_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
+/**
+ * Draws the game visuals
+ * @param ctx the context of the canvas
+ * @param game_state the state of the game
+ */
+export function game_draw(ctx: CanvasRenderingContext2D, game_state: GameState): void{
     list_graph_draw(ctx, game_state);
     draw_gui_rectangles(ctx, game_state);
     draw_ui_elements(ctx, game_state);
@@ -102,8 +120,12 @@ export function game_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
     applyOldMovieFilter(ctx, game_state);
 }
 
-
-function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
+/**
+ * Draws the inventoy
+ * @param ctx the context of the canvas
+ * @param game_state the state of the game
+ */
+function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState): void{
     let x = 1600
     let y = 150
     for(let i=0;i<game_state.player_inventory.length;i++){
@@ -117,6 +139,7 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
             ctx.fillText((i + 1).toString(), inventory_object.box.x + 10, inventory_object.box.y - 15);
 
             inventory_object.node_object.draw_function(ctx, inventory_object.box.x + 25, inventory_object.box.y + 25, inventory_object.node_object)
+            //Highlights the selected item in the inventory
             if(i === game_state.selected_object?.index){
                 
                 ctx.fillStyle = "rgba(173, 57, 25, 0.67)";
@@ -129,17 +152,21 @@ function draw_inventory(ctx: CanvasRenderingContext2D, game_state: GameState){
                                game_state.selected_object.box.y, 
                                game_state.selected_object.box.width, 
                                game_state.selected_object.box.height);
-               
             }
             draw_gui_rectangle(ctx, inventory_object.box);
-            
-            
             y += 50;
         }
     }
 }
 
-export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: GameState) {
+/**
+ * Draws the UI elements
+ * @param ctx the context of the canvas
+ * @param game_state the state of the game
+ */
+
+export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: GameState): void {
+
     function current_round_text() {
         draw_default_text_style("Day: "+game_state.round.toString(), 100, 100, ctx, 40, 7);
     }
@@ -165,29 +192,29 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
     
 }
 
-
+/**
+ * Visualizes the list_graph (map) with nodes, edges and arrowheads
+ * @param ctx the context of the canvas
+ * @param game_state the state of the game              
+ */
 export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
-    let new_graph = game_state.map_graph
-    let new_array = game_state.i_node_array
-    // if(game_state.game_over){
-    //     new_graph = {adj: [list(1), list()], size: 1}
-    //     construct_inode(0, [], new_array[shop_index].x, new_array[shop_index].y, new_array);
-    //     construct_inode(1, [], 450, 450, new_array);
-    // }
+    /**
+     * Draws the edges and arrowheads
+     */
     function draw_lines_and_arrows(): void {
         let detective_nodes=get_detective_nodes_indexes(game_state)
-        for(let i = 0; i < new_graph.size; i++){
+        for(let i = 0; i < game_state.map_graph.size; i++){
 
             
             ctx.font = "45px Arial";
-            let inode: iNode = new_array[i];
-            let adj_nodes = new_graph.adj[i];
+            let inode: iNode = game_state.i_node_array[i];
+            let adj_nodes = game_state.map_graph.adj[i];
         
             ctx.strokeStyle = "black";
 
             for_each((adj_index)=>{
      
-                let out_node = new_array[adj_index];
+                let out_node = game_state.i_node_array[adj_index];
                 const headlen = 10; // Length of the arrowhead
                 const angle = Math.atan2(out_node.y - inode.y, out_node.x - inode.x); // Direction of the line
      
@@ -224,7 +251,7 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
                         
                     }
                 }
-
+                // Draws the detectives adjescent nodes edges red
                 if (detective_nodes.find((indx)=>{return (indx===inode.index)})){
                     ctx.strokeStyle =  "rgb(182, 32, 29)";
                     draw_arrow();
@@ -236,9 +263,12 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
         }
     }
 
+    /**
+     * Draws the nodes on the map
+     */
     function draw_nodes() {
-        for(let i = 0; i < new_graph.size; i++){
-            let inode: iNode = new_array[i]
+        for(let i = 0; i < game_state.map_graph.size; i++){
+            let inode: iNode = game_state.i_node_array[i]
             const radius = 25;
             const start_angle = 0;
             const end_angle = 2 * Math.PI;
@@ -256,15 +286,22 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
         }
     }
 
+    /**
+     * Draws the node_objects 
+     */
     function draw_node_objects() {
-        for(let i = 0; i < new_array.length; i++) {
-            let inode: iNode = new_array[i]
+        for(let i = 0; i < game_state.i_node_array.length; i++) {
+            let inode: iNode = game_state.i_node_array[i]
             for(let i_node_object = 0; i_node_object < inode.nodeObjects.length; i_node_object++) {
                 let node_object = inode.nodeObjects[i_node_object];
                 node_object.draw_function(ctx, inode.x, inode.y, inode.nodeObjects[i_node_object]);
             }
         }
     }
+
+    /**
+     * Draws the different icon animations
+     */
     function draw_icon_animations(){
         for(let i = game_state.icon_animations.length-1; i>=0 ; i--){
             let icon_animation=game_state.icon_animations[i];
@@ -273,18 +310,32 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
         }
     }
 
-    draw_lines_and_arrows();
+    draw_lines_and_arrows(); //Här händer något konstigt
     draw_nodes();
     draw_node_objects();
     draw_icon_animations();
 }
 
+/**
+ * Draws all the gui_rectangles
+ * @param ctx the context of the canvas
+ * @param game_state 
+ */
 export function draw_gui_rectangles(ctx: CanvasRenderingContext2D, game_state: GameState) {
 
     for (let rect of game_state.gui_rectangles){
         draw_gui_rectangle(ctx, rect);
     }
 }
+/**
+ * Sets up the default text style
+ * @param text the text that is to be written
+ * @param pos_x the x-position of the text
+ * @param pos_y the y-pisition of the text
+ * @param ctx the context of the canvas
+ * @param size the size of the text
+ * @param outline_width the line width
+ */
 export function draw_default_text_style(text: string, pos_x: number, pos_y: number, ctx: CanvasRenderingContext2D, size: number, outline_width: number=5){
     ctx.font = "bold "+size.toString()+"px Arial ";
     ctx.strokeStyle = 'black';
@@ -294,9 +345,15 @@ export function draw_default_text_style(text: string, pos_x: number, pos_y: numb
     ctx.fillText(text, pos_x, pos_y);
     ctx.lineWidth = 2;
 }
-export function draw_gui_rectangle(ctx: CanvasRenderingContext2D, rect: GuiRectangle){
 
+/**
+ * Draws a gui_rectangle
+ * @param ctx the context of the canvas
+ * @param rect the rectangle that we want to draw
+ */
+export function draw_gui_rectangle(ctx: CanvasRenderingContext2D, rect: GuiRectangle){
     ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 10);
+    console.log(rect.x)
     ctx.fillStyle = 'rgba(97, 95, 95, 0.3)';
     ctx.fill();
 
@@ -309,6 +366,11 @@ export function draw_gui_rectangle(ctx: CanvasRenderingContext2D, rect: GuiRecta
     draw_default_text_style(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2, ctx, 25);
 }
 
+/**
+ * Draws the gui for the shop
+ * @param ctx the context of the canvas
+ * @param game_state the state of the game
+ */
 export function draw_shop_gui(ctx: CanvasRenderingContext2D, game_state: GameState){
     ctx.lineWidth = 2;
     ctx.fillStyle = "rgba(0, 0, 0, 0.37)";
@@ -317,16 +379,30 @@ export function draw_shop_gui(ctx: CanvasRenderingContext2D, game_state: GameSta
     
 }
 
+/**
+ * Draws the buy buttons for the shop items
+ * @param ctx the context of the canvas
+ * @param game_state the state of the game
+ */
 export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_state: GameState){
     let x = 700;
     let y = 700;
+    let i = 0
+    console.log("hejdär")
     for(let shop_block_item_block of game_state.shop_item_blocks){
+        // console.log(shop_block_item_block.block)
 
         shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x + 50, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
+        i ++;
     }
 }
 
+/**
+ * Draws the game over screen
+ * @param ctx the context of the game
+ * @param game_state the state of the game
+ */
 export function draw_game_over_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
 
     const img = new Image();
@@ -335,11 +411,14 @@ export function draw_game_over_screen(ctx: CanvasRenderingContext2D, game_state:
     
 }
 
+/**
+ * Draws the win screen
+ * @param ctx 
+ * @param game_state 
+ */
+
 export function draw_win_screen(ctx: CanvasRenderingContext2D, game_state: GameState){
     const img = new Image();
     img.src = '../img/win_screen.jpg'
-    ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);  // Draw the GIF   
-                    
-    
-    
+    ctx.drawImage(img, 0, 0, canvas!.width, canvas!.height);        
 }

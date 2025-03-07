@@ -19,7 +19,7 @@ function construct_shop_return_to_game_button() {
  */
 function generate_shop_items(game_state) {
     const number_of_traps = 3;
-    const number_of_shop_items = 3;
+    const number_of_shop_items = 8;
     for (let i = 0; i < number_of_shop_items; i++) {
         //Generates a random number that will correlate to a certain item
         const random_factor = Math.floor(Math.random() * number_of_traps);
@@ -32,14 +32,17 @@ function generate_shop_items(game_state) {
         //constructs the test_trap
         if (random_factor === 0) { // test trap
             construct_shop_block_item_block_test_trap(game_state, i);
+            continue;
         }
         //constructs the lvl_1_trap
         if (random_factor === 1) { // level 1 trap
             construct_shop_block_item_block_lvl_1_trap(game_state, i);
+            continue;
         }
         //constructs the dagger
         if (random_factor === 2) {
             construct_shop_block_item_block_dagger(game_state, i);
+            continue;
         }
     }
 }

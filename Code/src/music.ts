@@ -1,5 +1,10 @@
 
 
+/**
+ * Playes the music
+ * @param song the path to the song
+ * @returns 
+ */
 export function play_music(song: HTMLAudioElement) {
     song.currentTime = 0;
     song.loop = true;
@@ -17,6 +22,11 @@ export function play_music(song: HTMLAudioElement) {
     return true;
 }
 
+/**
+ * Stops the music
+ * @param song 
+ * @returns 
+ */
 export function stop_music(song: HTMLAudioElement): boolean {
 
     song.pause();

@@ -50,6 +50,7 @@ gameLoop();
 function gameLoop() {
     draw(game_state);
     game_state.ticks += 1;
+    console.log(game_state.shop_item_blocks);
     requestAnimationFrame(gameLoop);
 }
 //A even listner that checks wether a player presses a specific key

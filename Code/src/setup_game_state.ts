@@ -16,6 +16,7 @@ import { place_object_click_on, shop_item_block_click_on, submit_beavers_click_o
 import { play_music } from './music.js';
 
 export const i_node_array: Array<iNode>=[];
+
 export let quota_amount: number = 3;
 
 export const basic_graph: ListGraph = {
@@ -39,17 +40,15 @@ export function get_base_game_state() : GameState{
         // from: https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
     }
 
-    
+    //generates the cordinates for the nodes on the map
     generate_x_y(basic_graph, i_node_array);
 
     //Setup collectables for player
     let start_collectables = [construct_collectable("beaver", 100), construct_collectable("rabbit", 0)]
     //Setup collectables quota
+
     
     let shop_start_collectables = [construct_collectable("beaver",quota_amount)]
-    
-    //Create place object button
-    
 
     //Skapa shop item blocks
     let start_shop_item_blocks: Array<ShopItemBlock> = []
@@ -57,10 +56,14 @@ export function get_base_game_state() : GameState{
     //Create array of songs
     let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3"), new Audio("../soundtrack/love.mp3")]
 
+
+    // How many days you will have to complete the quota
     let start_days_to_quota = 6;
 
+    //The players inventory
     let player_inventory: Array<InventoryNodeObject> = []
 
+    // The amount of quotas you have to complete before you can buy the ring in the shop
     let game_rounds = 1;
 
     //Skapa gamestate

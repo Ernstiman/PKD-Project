@@ -52,6 +52,7 @@ gameLoop()
 function gameLoop() {
     draw(game_state); 
     game_state.ticks+=1
+    console.log(game_state.shop_item_blocks)
     requestAnimationFrame(gameLoop);
 }
 

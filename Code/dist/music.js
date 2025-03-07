@@ -1,3 +1,8 @@
+/**
+ * Playes the music
+ * @param song the path to the song
+ * @returns
+ */
 export function play_music(song) {
     song.currentTime = 0;
     song.loop = true;
@@ -13,6 +18,11 @@ export function play_music(song) {
     });
     return true;
 }
+/**
+ * Stops the music
+ * @param song
+ * @returns
+ */
 export function stop_music(song) {
     song.pause();
     song.currentTime = 0;
