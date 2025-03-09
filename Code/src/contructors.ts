@@ -171,8 +171,8 @@ export function construct_beaver_icon_animations(game_state: GameState, start_x:
  */
 export function construct_beaver_move_function(): Function {
 
-    let spd_x = Math.random()*2 + 6;
-    let spd_y = Math.random()*1 + 6;
+    let spd_x = Math.random()*2 + 2;
+    let spd_y = Math.random()*1 + 2;
     let wave_a = Math.random() * 1 + 0.4; // Random wave height
     let wave_f = Math.random() * 0.1 + 0.05; // Controls wavelength
 

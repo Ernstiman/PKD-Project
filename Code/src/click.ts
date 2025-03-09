@@ -178,12 +178,16 @@ export function return_to_game_click_on_function(game_state: GameState){
             create_daughter_node(game_state.map_graph, game_state.i_node_array, shop_index, game_state)
                 }
             }
-            
-    for(let i=0;i<game_state.i_node_array.length;i++){
-        if (game_state.i_node_array[i].nodeObjects.length<1){
-            if (Math.random()<0.1){
-                game_state.i_node_array[i].nodeObjects.push(construct_wolf(1))
-            }
+        if (game_state.round===1){
+            game_state.i_node_array[9].nodeObjects.push(construct_wolf(1))
+        }else{
+            for(let i=0;i<game_state.i_node_array.length;i++){
+                if (game_state.i_node_array[i].nodeObjects.length<1){
+                    
+                    if (Math.random()<0.02){
+                        game_state.i_node_array[i].nodeObjects.push(construct_wolf(1))
+                    }
+                }
         }
     }
     if(!check_quota(game_state)){

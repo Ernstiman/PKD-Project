@@ -153,8 +153,8 @@ export function construct_beaver_icon_animations(game_state, start_x, start_y, t
  * @returns 'Function' that moves the beavers in the specified direction.
  */
 export function construct_beaver_move_function() {
-    let spd_x = Math.random() * 2 + 6;
-    let spd_y = Math.random() * 1 + 6;
+    let spd_x = Math.random() * 2 + 2;
+    let spd_y = Math.random() * 1 + 2;
     let wave_a = Math.random() * 1 + 0.4; // Random wave height
     let wave_f = Math.random() * 0.1 + 0.05; // Controls wavelength
     return (game_state, self, index) => {

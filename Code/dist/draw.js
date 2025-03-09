@@ -26,6 +26,8 @@ export function draw(game_state) {
                 screen.draw_function(ctx, game_state);
             }
         }
+        draw_gui_rectangles(ctx, game_state);
+        applyOldMovieFilter(ctx, game_state);
     }
 }
 /**
@@ -60,13 +62,14 @@ function applyOldMovieFilter(ctx, game_state) {
     // Draw scratches (random thin lines)
     if (Math.random() > 0.5) {
         for (let i = 0; i < 1; i++) {
-            ctx.lineWidth = 1;
+            ctx.lineWidth = Math.random() * 3;
             ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
             ctx.beginPath();
             let x = Math.random() * canvas.width;
             ctx.moveTo(x, 0);
             ctx.lineTo(x, canvas.height);
             ctx.stroke();
+            ctx.closePath();
         }
     }
     // Apply vignette effect
@@ -77,14 +80,15 @@ function applyOldMovieFilter(ctx, game_state) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 // Apply filter at random intervals for flickering effect
+/*/
 setInterval(() => {
     if (Math.random() > 0.8) {
-        ctx.globalAlpha = 0.9 + Math.random() * 0.1; // Slight flicker
-    }
-    else {
-        ctx.globalAlpha = 1;
+        ctx!.globalAlpha = 0.9 + Math.random() * 0.1; // Slight flicker
+    } else {
+        ctx!.globalAlpha = 1;
     }
 }, 200);
+/*/
 /**
  * Draws the game visuals
  * @param ctx the context of the canvas
@@ -92,10 +96,8 @@ setInterval(() => {
  */
 export function game_draw(ctx, game_state) {
     list_graph_draw(ctx, game_state);
-    draw_gui_rectangles(ctx, game_state);
     draw_ui_elements(ctx, game_state);
     draw_inventory(ctx, game_state);
-    applyOldMovieFilter(ctx, game_state);
 }
 /**
  * Draws the inventoy
@@ -222,8 +224,10 @@ export function list_graph_draw(ctx, game_state) {
             ctx.fillStyle = "rgb(255, 255, 255)";
             ctx.fill();
             ctx.strokeStyle = "rgb(0, 0, 0)";
-            ctx.lineWidth = 4;
+            ctx.lineWidth = 0;
             ctx.stroke();
+            ctx.beginPath();
+            ctx.closePath();
         }
     }
     /**
@@ -287,15 +291,16 @@ export function draw_default_text_style(text, pos_x, pos_y, ctx, size, outline_w
  * @param rect the rectangle that we want to draw
  */
 export function draw_gui_rectangle(ctx, rect) {
-    ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 10);
-    console.log(rect.x);
     ctx.fillStyle = 'rgba(97, 95, 95, 0.3)';
-    ctx.fill();
+    ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 10);
+    ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
     ctx.strokeStyle = "black";
     ctx.lineWidth = 6;
     ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 10);
     ctx.stroke();
     ctx.lineWidth = 2;
+    ctx.fillStyle = 'rgba(97, 95, 95, 0.3)';
+    ctx.textAlign = "center";
     draw_default_text_style(rect.text, rect.x + rect.width / 2, rect.y + rect.height / 2, ctx, 25);
 }
 /**
@@ -304,7 +309,6 @@ export function draw_gui_rectangle(ctx, rect) {
  * @param game_state the state of the game
  */
 export function draw_shop_gui(ctx, game_state) {
-    ctx.lineWidth = 2;
     ctx.fillStyle = "rgba(0, 0, 0, 0.37)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     draw_shop_block_item_blocks(ctx, game_state);
@@ -318,11 +322,10 @@ export function draw_shop_block_item_blocks(ctx, game_state) {
     let x = 700;
     let y = 700;
     let i = 0;
-    console.log("hejdär");
     for (let shop_block_item_block of game_state.shop_item_blocks) {
         // console.log(shop_block_item_block.block)
-        shop_block_item_block.node_object.draw_function(ctx, shop_block_item_block.block.x + 50, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         draw_gui_rectangle(ctx, shop_block_item_block.block);
+        shop_block_item_block.node_object.draw_function(ctx, shop_block_item_block.block.x + 50, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         i++;
     }
 }
