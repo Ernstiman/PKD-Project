@@ -2,14 +2,13 @@ import { ListGraph } from './lib/graphs.js';
 import { List } from './lib/list';
 
 
-
-
 export type iNode = {
     index: number,
     nodeObjects: Array<NodeObject>
     x: number,
     y: number,
 };
+
 export type NodeObject = {
 
     type: number
@@ -18,7 +17,14 @@ export type NodeObject = {
     round_end_function: Function
     collectables: Array<Collectable>
     draw_function: Function,
-    collection_rate: number
+    collection_rate: number,
+    can_place: boolean,
+}
+
+export type InventoryNodeObject = {
+    node_object: NodeObject,
+    box: GuiRectangle,
+    index: number
 }
 
 export type GameState = {
@@ -31,11 +37,17 @@ export type GameState = {
     gui_rectangles: Array<GuiRectangle>
     screens: Array<Screen>,
     active_screens: Array<string>,
-    player_inventory: Array<NodeObject>,
+    player_inventory: Array<InventoryNodeObject | undefined>,
     shop_item_blocks: Array<ShopItemBlock>,
     songs: Array<HTMLAudioElement>,
     days_to_quota: number,
-    quota_amount: number
+    quota_amount: number,
+    selected_object: InventoryNodeObject | undefined,
+    game_rounds: number,
+    game_over: boolean
+    icon_animations: Array<IconAnimation>
+    ticks: number,
+    not_win: boolean,
 }
 
 export type GuiRectangle = {
@@ -53,6 +65,7 @@ export type ShopItemBlock = {
     node_object: NodeObject,
     block: GuiRectangle
 }
+//export type NonPlaceItem
 
 export type Screen = {
     id: string,
@@ -62,4 +75,16 @@ export type Screen = {
 export type Collectable = {
     name: string,
     count: number,
+}
+
+export type IconAnimation = {
+    x: number,
+    y: number,
+    image: HTMLImageElement,
+    move_function: Function,
+    size: number
+    target_x: number
+    target_y: number
+    target_function: Function
+
 }

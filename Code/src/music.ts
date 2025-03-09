@@ -1,6 +1,11 @@
 
 
-export function play_music(song: HTMLAudioElement) {
+/**
+ * Playes the music
+ * @param song the path to the song
+ * @returns if the sons is good then returns true
+ */
+export function play_music(song: HTMLAudioElement): boolean {
     song.currentTime = 0;
     song.loop = true;
     song.volume = 1;
@@ -17,6 +22,11 @@ export function play_music(song: HTMLAudioElement) {
     return true;
 }
 
+/**
+ * Stops the music
+ * @param song 
+ * @returns 
+ */
 export function stop_music(song: HTMLAudioElement): boolean {
 
     song.pause();

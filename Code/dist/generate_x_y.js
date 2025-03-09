@@ -1,13 +1,21 @@
+<<<<<<< HEAD
 import { construct_detective, construct_inode, construct_node_object } from './contructors.js';
 import { shop_draw_function } from './draw_functions.js';
 import { build_list, list, map, length as list_length, pair } from './lib/list.js';
+=======
+import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors.js';
+import { canvas } from './draw.js';
+import { shop_draw_function, draw_daughter } from './draw_functions.js';
+import { remove_id_arrray } from './id_array.js';
+import { build_list, list, map, length as list_length, pair, append } from './lib/list.js';
+>>>>>>> 8cf278b8149fb592ccbc5c8e1c083dee5b5fab09
 import { shop_step_on } from './step_on_functions.js';
 export function generate_x_y(graph, i_node_array, shop_index) {
     const center_x = 1280 / 2 + 200;
     const center_y = 500;
     const radius = 220;
     const random_factor = 30;
-    let shop = construct_node_object(0, shop_draw_function, shop_step_on, () => { });
+    let shop = construct_node_object(99, shop_draw_function, shop_step_on, () => { });
     let circle_size = 10;
     let layers = 3;
     let nodes = 0;
@@ -59,11 +67,23 @@ export function generate_x_y(graph, i_node_array, shop_index) {
             }
             else {
                 if (layer === 0 && i === Math.floor(circle_size / 2)) {
+<<<<<<< HEAD
                     construct_inode(nodes, [construct_detective(2)], 0, 0, i_node_array);
                 }
                 else {
                     if (Math.random() < 0.2) {
                         construct_inode(nodes, [construct_detective(2)], 0, 0, i_node_array);
+=======
+<<<<<<< HEAD
+                    construct_inode(nodes, [construct_detective(5)], 0, 0, i_node_array);
+=======
+                    construct_inode(nodes, [construct_detective(1)], 0, 0, i_node_array);
+>>>>>>> lindlund
+                }
+                else {
+                    if (Math.random() < 0.0005) {
+                        construct_inode(nodes, [construct_wolf(1)], 0, 0, i_node_array);
+>>>>>>> 8cf278b8149fb592ccbc5c8e1c083dee5b5fab09
                     }
                     else {
                         construct_inode(nodes, [], 0, 0, i_node_array);
@@ -82,4 +102,14 @@ export function generate_x_y(graph, i_node_array, shop_index) {
         graph.adj[i] = map((index) => { return (index < nodes) ? index : 0; }, graph.adj[i]);
     }
     graph.adj[nodes - 1] = build_list((i) => { return i; }, 1);
+}
+export function create_daughter_node(graph, i_node_array, shop_index, game_state) {
+    graph.adj[graph.size] = list();
+    // console.log(graph.adj);
+    // console.log(graph.size)
+    construct_inode(graph.size, [construct_node_object(3, draw_daughter, () => { remove_id_arrray("place_object", game_state.gui_rectangles); }, () => { }, 0)], canvas.width / 2, canvas.height / 2, i_node_array);
+    graph.size += 1;
+    console.log(graph.adj[shop_index]);
+    let new_list = append(graph.adj[shop_index], list(graph.size - 1));
+    graph.adj[shop_index] = new_list;
 }
