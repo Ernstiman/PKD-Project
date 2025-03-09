@@ -1,7 +1,7 @@
 /**
  * Playes the music
  * @param song the path to the song
- * @returns
+ * @returns if the sons is good then returns true
  */
 export function play_music(song) {
     song.currentTime = 0;

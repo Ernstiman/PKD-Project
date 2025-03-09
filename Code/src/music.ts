@@ -3,9 +3,9 @@
 /**
  * Playes the music
  * @param song the path to the song
- * @returns 
+ * @returns if the sons is good then returns true
  */
-export function play_music(song: HTMLAudioElement) {
+export function play_music(song: HTMLAudioElement): boolean {
     song.currentTime = 0;
     song.loop = true;
     song.volume = 1;
