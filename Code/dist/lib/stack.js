@@ -1,4 +1,4 @@
-import { head, tail, is_null, pair } from './list';
+import { head, tail, is_null, pair } from './list.js';
 /**
  * Constructs a stack without any elements.
  * @template T type of all stack elements

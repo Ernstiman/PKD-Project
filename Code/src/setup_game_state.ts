@@ -1,19 +1,11 @@
-import {for_each, list, List} from './lib/list.js'; 
-import { ListGraph } from './lib/graphs.js';
-import { GameState, iNode,  InventoryNodeObject,  NodeObject, Screen, ShopItemBlock} from './types.js';
-import { construct_inode, construct_level_1_trap, construct_node_object, construct_rectangle, construct_shop_item_block, test_trap_constructor } from './contructors.js';
-import { shop_draw_function, trap_draw_function } from './draw_functions.js';
-import { generate_x_y } from './graph_generation.js';
-import { node_activate_round_end } from './node_objects.js';
-import { construct_collectable } from './contructors.js';
-import { draw, draw_shop_gui, game_draw } from './draw.js';
-import { remove_id_arrray } from './id_array.js';
-import { shop_screen, win_screen } from './screens.js';
-import { game_screen } from './screens.js';
-import { shop_step_on, trap_step_on } from './step_on_functions.js';
-import { trap_round_end } from './round_end_functions.js';
-import { place_object_click_on, shop_item_block_click_on, submit_beavers_click_on } from './click.js';
-import { play_music } from './music.js';
+
+import { ListGraph } from './lib/graphs';
+import { GameState, iNode,  InventoryNodeObject, ShopItemBlock} from './types';
+import { generate_x_y } from './graph_generation';
+import { construct_collectable } from './contructors';
+import { shop_screen} from './screens';
+import { game_screen } from './screens';
+
 
 export const i_node_array: Array<iNode>=[];
 

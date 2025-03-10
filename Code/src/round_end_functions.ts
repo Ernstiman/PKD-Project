@@ -1,8 +1,8 @@
 
-import { GameState, iNode } from "./types.js";
-import { NodeObject } from "./types.js";
-import { quota_amount } from "./setup_game_state.js";
-import { construct_beaver_icon_animations } from "./contructors.js";
+import { GameState, iNode } from "./types";
+import { NodeObject } from "./types";
+import { quota_amount } from "./setup_game_state";
+import { construct_beaver_icon_animations } from "./contructors";
 
 /**
  * Handles the logic at the end of a round for a regular trap

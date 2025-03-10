@@ -1,7 +1,7 @@
-import { is_adj_node } from './adj_nodes.js';
-import { clicked_on_node, get_clicked_node_index, mouse_in_rectangle} from './click.js';
-import {draw} from './draw.js';
-import { get_base_game_state, } from './setup_game_state.js';
+import { is_adj_node } from './adj_nodes';
+import { clicked_on_node, get_clicked_node_index, mouse_in_rectangle} from './click';
+import {draw} from './draw';
+import { get_base_game_state, } from './setup_game_state';
 
 
 let game_state=get_base_game_state()

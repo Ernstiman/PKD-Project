@@ -1,7 +1,7 @@
- import { Screen } from "./types.js"
- import { game_draw, draw_game_over_screen } from "./draw.js"
- import { draw_shop_gui } from "./draw.js"
-import { draw_win_screen } from "./draw.js"
+ import { Screen } from "./types"
+ import { game_draw, draw_game_over_screen } from "./draw"
+ import { draw_shop_gui } from "./draw"
+import { draw_win_screen } from "./draw"
 
 
 //The screen that shows the game

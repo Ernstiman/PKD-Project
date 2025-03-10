@@ -1,4 +1,4 @@
-import { head as list_head, tail, is_null, list, append } from './list';
+import { head as list_head, tail, is_null, list, append } from './list.js';
 /**
  * Constructs a queue without any elements.
  * @template T type of all queue elements

@@ -1,5 +1,5 @@
-import { list_ref, length as list_length } from "./lib/list.js";
-import { GameState, iNode } from "./types.js";
+import { list_ref, length as list_length } from "./lib/list";
+import { GameState, iNode } from "./types";
 
 
 /**

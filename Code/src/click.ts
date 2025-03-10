@@ -1,15 +1,15 @@
 
-import { GameState, iNode, InventoryNodeObject, ShopItemBlock } from './types.js';
-import { remove_node_object } from './node_objects.js';
-import { construct_inventory_items, construct_node_object, construct_rectangle, construct_wolf } from './contructors.js';
-import { player_draw_function } from './draw_functions.js';
-import { step_on_node } from './node_objects.js';
-import { remove_id_arrray } from './id_array.js';
-import { detective_walk } from './detective.js';
-import { stop_music, play_music } from './music.js';
-import { create_daughter_node } from './graph_generation.js';
-import { shop_index } from './setup_game_state.js';
-import { check_quota } from './round_end_functions.js';
+import { GameState, iNode, InventoryNodeObject, ShopItemBlock } from './types';
+import { remove_node_object } from './node_objects';
+import { construct_inventory_items, construct_node_object, construct_rectangle, construct_wolf } from './contructors';
+import { player_draw_function } from './draw_functions';
+import { step_on_node } from './node_objects';
+import { remove_id_arrray } from './id_array';
+import { detective_walk } from './detective';
+import { stop_music, play_music } from './music';
+import { create_daughter_node } from './graph_generation';
+import { shop_index } from './setup_game_state';
+import { check_quota } from './round_end_functions';
 
 
 

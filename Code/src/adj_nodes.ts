@@ -1,5 +1,5 @@
-import { for_each } from "./lib/list.js";
-import { GameState, iNode } from "./types.js";
+import { for_each } from "./lib/list";
+import { GameState, iNode } from "./types";
 
 /**
  * Check whether the node we click on is adjacent (walkable) to the node the 

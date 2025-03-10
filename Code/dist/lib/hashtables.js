@@ -1,4 +1,4 @@
-import { head, tail, flatten, build_list, map, filter, pair, is_null } from './list';
+import { head, tail, flatten, build_list, map, filter, pair, is_null } from './list.js';
 /**
  * The identity function as an auxiliary hash function
  * Do not use except for learning about hash tables

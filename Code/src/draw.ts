@@ -1,14 +1,10 @@
-import { is_adj_node } from './adj_nodes.js';
-import { shop_item_block_click_on } from './click.js';
-import { find_id_arrray } from './id_array.js';
-import {for_each} from './lib/list.js'; 
-import { GameState, iNode,  NodeObject, GuiRectangle} from './types.js';
-import { play_music, stop_music } from "./music.js";
-import { get_detective_nodes_indexes } from './detective.js';
-import { List, list } from './lib/list.js';
-import { construct_inode } from './contructors.js';
-import { i_node_array, shop_index } from './setup_game_state.js';
-import { game_over_screen } from './screens.js';
+import { is_adj_node } from './adj_nodes';
+import { shop_item_block_click_on } from './click';
+import { find_id_arrray } from './id_array';
+import {for_each} from './lib/list'; 
+import { GameState, iNode,  NodeObject, GuiRectangle} from './types';
+import { play_music, stop_music } from "./music";
+import { get_detective_nodes_indexes } from './detective';
 
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
 export const ctx = canvas!.getContext("2d");

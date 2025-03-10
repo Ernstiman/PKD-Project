@@ -1,5 +1,5 @@
-import { canvas, draw_default_text_style } from "./draw.js";
-import { GameState, NodeObject } from "./types.js";
+import { canvas, draw_default_text_style } from "./draw";
+import { GameState, NodeObject } from "./types";
 
 
 // Load in all the images

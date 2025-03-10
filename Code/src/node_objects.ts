@@ -1,4 +1,4 @@
-import { GameState, iNode, NodeObject } from "./types.js";
+import { GameState, iNode, NodeObject } from "./types";
 
 
 

@@ -1,12 +1,12 @@
 
-import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors.js';
-import { canvas } from './draw.js';
-import { shop_draw_function, draw_daughter } from './draw_functions.js';
-import { remove_id_arrray } from './id_array.js';
-import { ListGraph } from './lib/graphs.js';
-import { build_list, for_each, list, list_ref, map, length as list_length, pair, List, append } from './lib/list.js';
-import { shop_step_on } from './step_on_functions.js';
-import { GameState, iNode,  NodeObject} from './types.js';
+import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors';
+import { canvas } from './draw';
+import { shop_draw_function, draw_daughter } from './draw_functions';
+import { remove_id_arrray } from './id_array';
+import { ListGraph } from './lib/graphs';
+import { build_list, for_each, list, list_ref, map, length as list_length, pair, List, append } from './lib/list';
+import { shop_step_on } from './step_on_functions';
+import { GameState, iNode,  NodeObject} from './types';
 
 
 /**

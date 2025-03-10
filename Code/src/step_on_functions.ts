@@ -1,18 +1,18 @@
-import { GameState, GuiRectangle, iNode } from "./types.js";
-import { find_id_arrray, in_inventory, remove_id_arrray } from "./id_array.js";
-import { node_activate_round_end } from "./node_objects.js";
-import { game_over_screen, shop_screen, win_screen } from "./screens.js";
-import { construct_level_1_trap, construct_rectangle, construct_ring, construct_wolf, construct_beaver_icon_animations, construct_dagger } from "./contructors.js";
-import { i_node_array, basic_graph, shop_index } from "./setup_game_state.js";
-import { NodeObject } from "./types.js";
-import { construct_shop_item_block, test_trap_constructor } from "./contructors.js";
-import { return_to_game_click_on_function, shop_item_block_click_on, submit_beavers_click_on } from "./click.js";
-import { play_music, stop_music } from "./music.js";
-import { check_quota } from "./round_end_functions.js";
-import { ctx, draw, draw_gui_rectangle } from "./draw.js";
-import { create_daughter_node } from "./graph_generation.js";
-import { draw_daughter } from "./draw_functions.js";
-import { construct_shop_block_item_block_dagger, construct_shop_block_item_block_lvl_1_trap, construct_shop_block_item_block_ring, construct_shop_block_item_block_test_trap } from "./shop_block_item_blocks.js";
+import { GameState, GuiRectangle, iNode } from "./types";
+import { in_inventory} from "./id_array";
+import { node_activate_round_end } from "./node_objects";
+import { shop_screen, win_screen } from "./screens";
+import { construct_level_1_trap, construct_rectangle, construct_ring, construct_wolf, construct_beaver_icon_animations, construct_dagger } from "./contructors";
+import { i_node_array, basic_graph, shop_index } from "./setup_game_state";
+import { NodeObject } from "./types";
+import { construct_shop_item_block, test_trap_constructor } from "./contructors";
+import { return_to_game_click_on_function, shop_item_block_click_on, submit_beavers_click_on } from "./click";
+import { play_music, stop_music } from "./music";
+import { check_quota } from "./round_end_functions";
+import { ctx, draw, draw_gui_rectangle } from "./draw";
+import { create_daughter_node } from "./graph_generation";
+import { draw_daughter } from "./draw_functions";
+import { construct_shop_block_item_block_dagger, construct_shop_block_item_block_lvl_1_trap, construct_shop_block_item_block_ring, construct_shop_block_item_block_test_trap } from "./shop_block_item_blocks";
 
 
 /**

@@ -1,6 +1,6 @@
-import { shop_item_block_click_on } from "./click.js";
-import { construct_dagger, construct_level_1_trap, construct_rectangle, construct_ring, construct_shop_item_block, test_trap_constructor } from "./contructors.js";
-import { GameState } from "./types.js";
+import { shop_item_block_click_on } from "./click";
+import { construct_dagger, construct_level_1_trap, construct_rectangle, construct_ring, construct_shop_item_block, test_trap_constructor } from "./contructors";
+import { GameState } from "./types";
 
 
 /**

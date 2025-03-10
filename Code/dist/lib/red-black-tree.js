@@ -1,4 +1,4 @@
-import { head, tail, list, append, is_null } from './list';
+import { head, tail, list, append, is_null } from './list.js';
 const black = false;
 const red = true;
 /**

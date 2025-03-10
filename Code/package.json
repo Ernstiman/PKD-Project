@@ -1,5 +1,11 @@
 {
-    "scripts": {
-      "build": "tsc"
-    }
+  "scripts": {
+    "build": "tsc && node postprocess.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest-canvas-mock": "^2.5.2",
+    "ts-jest": "^29.2.6"
   }
+}

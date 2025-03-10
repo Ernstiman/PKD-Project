@@ -1,4 +1,4 @@
-import { ListGraph } from './lib/graphs.js';
+import { ListGraph } from './lib/graphs';
 import { List } from './lib/list';
 
 
@@ -86,5 +86,7 @@ export type IconAnimation = {
     target_x: number
     target_y: number
     target_function: Function
-
+    audio: HTMLAudioElement
+    delay: number
+    spd_factor: number
 }

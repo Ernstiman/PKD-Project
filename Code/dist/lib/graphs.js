@@ -1,5 +1,5 @@
-import { pair, head, tail, is_null, for_each, filter, enum_list } from './list';
-import { empty, is_empty, enqueue, dequeue, head as qhead } from './queue_array';
+import { pair, head, tail, is_null, for_each, filter, enum_list } from './list.js';
+import { empty, is_empty, enqueue, dequeue, head as qhead } from './queue_array.js';
 // Helper functions
 /**
  * Add all reverse edges to an edge list, and remove all self loops.

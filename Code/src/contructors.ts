@@ -1,10 +1,11 @@
-import {for_each, list, List} from './lib/list.js'; 
-import { ListGraph } from './lib/graphs.js';
-import { Collectable, GameState, GuiRectangle, IconAnimation, iNode,  InventoryNodeObject,  NodeObject, ShopItemBlock} from './types.js';
-import { dagger_draw_function, detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './draw_functions.js';
-import { detective_step_on, trap_step_on, wolf_step_on } from './step_on_functions.js';
-import { ring_draw_function } from './draw_functions.js';
-import { detective_end, lvl_1_trap_end, trap_round_end, wolf_end } from './round_end_functions.js';
+import {for_each, list, List} from './lib/list'; 
+import { ListGraph } from './lib/graphs';
+import { Collectable, GameState, GuiRectangle, IconAnimation, iNode,  InventoryNodeObject,  NodeObject, ShopItemBlock} from './types';
+import { dagger_draw_function, detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './draw_functions';
+import { detective_step_on, trap_step_on, wolf_step_on } from './step_on_functions';
+import { ring_draw_function } from './draw_functions';
+import { detective_end, lvl_1_trap_end, trap_round_end, wolf_end } from './round_end_functions';
+import { play_music, stop_music } from './music';
 
 
 /**
@@ -156,12 +157,24 @@ export function construct_shop_item_block(cost: number, node_object: NodeObject,
 export function construct_beaver_icon_animations(game_state: GameState, start_x: number, start_y: number, target_x: number, target_y: number, target_node_object?: NodeObject) : void{
     let image=new Image(20,20)
     image.src = "../img/Beaver.png";
-    
-    game_state.icon_animations.push({x: start_x, y: start_y, 
-        move_function: construct_beaver_move_function(), image: image, size: 80+Math.random()*10, 
-        target_x: target_x, target_y: target_y, target_function: ()=>{if (target_node_object!=undefined) 
-        {target_node_object.collectables[0].count+=1}}
-    })
+   
+    let fast_audio=new Audio("../soundtrack/Fast.mp3")
+
+    if (Math.random()<0.1 && game_state.round!=1){
+        image.src = "../img/Slow.png";
+        game_state.icon_animations.push({spd_factor: 0, delay: 0, audio: fast_audio,x: start_x, y: start_y, 
+            move_function: construct_beaver_move_function(), image: image, size: 120+Math.random()*10, 
+            target_x: target_x, target_y: target_y, target_function: ()=>{if (target_node_object!=undefined) 
+            {target_node_object.collectables[0].count+=1}}
+        })
+    }else{
+        
+        game_state.icon_animations.push({spd_factor: 1, delay: -1, audio: fast_audio, x: start_x, y: start_y, 
+            move_function: construct_beaver_move_function(), image: image, size: 80+Math.random()*10, 
+            target_x: target_x, target_y: target_y, target_function: ()=>{if (target_node_object!=undefined) 
+            {target_node_object.collectables[0].count+=1}}
+        })
+    }
 }
 
 
@@ -171,12 +184,26 @@ export function construct_beaver_icon_animations(game_state: GameState, start_x:
  */
 export function construct_beaver_move_function(): Function {
 
-    let spd_x = Math.random()*2 + 2;
-    let spd_y = Math.random()*1 + 2;
+    let spd_x = (Math.random()*2 + 2);
+    let spd_y = (Math.random()*1 + 2);
     let wave_a = Math.random() * 1 + 0.4; // Random wave height
     let wave_f = Math.random() * 0.1 + 0.05; // Controls wavelength
-
+    let time_to_spd=Math.random()*50+65
     return (game_state: GameState, self: IconAnimation, index: number) => {
+        
+        if (self.delay!=-1){
+            self.delay+=1
+            if (self.delay>100 && self.delay<105){
+                self.spd_factor=1.3
+            }
+            if (self.delay>time_to_spd+100){
+                play_music(self.audio)
+                self.spd_factor=4
+                self.delay=-1
+                self.image.src = "../img/Fast.png";
+            }
+        }
+
         let move_x = spd_x;
         let move_y = -spd_y;
 
@@ -192,14 +219,16 @@ export function construct_beaver_move_function(): Function {
             }else{
                 self.target_function() // moves to specific target
                 game_state.icon_animations.splice(index,1)
+                stop_music(self.audio)
             }
         }
         if (self.y<10){
             game_state.icon_animations.splice(index,1)
+            stop_music(self.audio)
         }
         // Apply movement + wave effect
-        self.x += move_x;
-        self.y += move_y + Math.sin(game_state.ticks * wave_f + index) * wave_a;
+        self.x += move_x * self.spd_factor;
+        self.y += (move_y + Math.sin(game_state.ticks * wave_f + index) * wave_a) * self.spd_factor;
     };
     
 }

@@ -1,5 +1,5 @@
 // NOTE: these heaps are MIN-heaps, meaning that the smallest element is on top.
-import { pair } from './list';
+import { pair } from './list.js';
 /**
  * The empty tree heap
  * Convenience function, with given key and data types.
