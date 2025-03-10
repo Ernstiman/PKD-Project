@@ -8,7 +8,7 @@ import { shop_step_on, trap_step_on } from '../src/step_on_functions';
 import { lvl_1_trap_end, trap_round_end } from '../src/round_end_functions';
 import { construct_shop_block_item_block_dagger } from '../src/shop_block_item_blocks';
 import { find_id_arrray, in_inventory, remove_id_arrray } from '../src/id_array';
-import { construct_shop_block_item_block_ring } from '../src/shop_block_item_blocks';
+import { construct_shop_block_item_block_ring, construct_shop_block_item_block_test_trap, construct_shop_block_item_block_lvl_1_trap } from '../src/shop_block_item_blocks';
 import { shop_item_block_click_on } from '../src/click';
 import {create_daughter_node, generate_x_y, construct_node_on_circle_step_layer, build_first_layer_connections, build_last_layer_connections, build_middle_layer_connections, build_connections, generate_array_with_random_integers} from '../src/graph_generation';
 import { exitCode } from 'process';
@@ -125,8 +125,22 @@ test('id_arrays', () => {
 test('Shop_block_item_blocks', () => {
     let ring_rect = construct_rectangle("ring", 200, 500, 100, 100, "Free", shop_item_block_click_on)
     let test_ring = {cost: 0,node_object: construct_ring(),block: ring_rect}
+    let shop_rect = construct_rectangle("shop_item_block", 200 * 0 + 200, 500, 100, 100, "Free", shop_item_block_click_on);
+    let test_test_trap = {cost: 0, node_object: test_trap_constructor(),shop_rect}
+    let test_lvl_1_trap = {cost: 5, node_object: construct_level_1_trap(), shop_rect}
+    let test_dagger = {cost: 2, node_object: construct_dagger, shop_rect}
+
+    
+    
     construct_shop_block_item_block_ring(game_state)
-    expect(test_ring.toString()).toEqual(game_state.shop_item_blocks[0].toString())
+    construct_shop_block_item_block_test_trap(game_state, 0)
+    construct_shop_block_item_block_lvl_1_trap(game_state, 0);
+    construct_shop_block_item_block_dagger(game_state, 0);
+
+    expect(test_ring.toString()).toEqual(game_state.shop_item_blocks[0].toString());
+    expect(test_test_trap.toString()).toEqual(game_state.shop_item_blocks[1].toString());
+    expect(test_lvl_1_trap.toString()).toEqual(game_state.shop_item_blocks[2].toString());
+    expect(test_dagger.toString()).toEqual(game_state.shop_item_blocks[3].toString());
 })
 
 test('Shop_block_item_blocks', () => {
@@ -235,3 +249,5 @@ test('create_daughter_node should create a inode with a daughter and add it to m
     expect(my_graph_map.size).toBe(5);
     
 })
+
+

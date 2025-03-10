@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <coverage generated="1741637352451" clover="3.2.0">
   <project timestamp="1741637352451" name="All files">
     <metrics statements="803" coveredstatements="282" conditionals="188" coveredconditionals="38" methods="159" coveredmethods="45" elements="1150" coveredelements="365" complexity="0" loc="803" ncloc="803" packages="2" files="16" classes="16"/>
     <package name="src">
       <metrics statements="728" coveredstatements="234" conditionals="144" coveredconditionals="28" methods="121" coveredmethods="27"/>
       <file name="adj_nodes.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\adj_nodes.ts">
+=======
+<coverage generated="1741631251293" clover="3.2.0">
+  <project timestamp="1741631251293" name="All files">
+    <metrics statements="797" coveredstatements="216" conditionals="188" coveredconditionals="8" methods="159" coveredmethods="24" elements="1144" coveredelements="248" complexity="0" loc="797" ncloc="797" packages="2" files="16" classes="16"/>
+    <package name="src">
+      <metrics statements="722" coveredstatements="179" conditionals="144" coveredconditionals="8" methods="121" coveredmethods="18"/>
+      <file name="adj_nodes.ts" path="C:\Users\vikto\PKD-Project\Code\src\adj_nodes.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
@@ -16,7 +25,11 @@
         <line num="19" count="1" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="click.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\click.ts">
+=======
+      <file name="click.ts" path="C:\Users\vikto\PKD-Project\Code\src\click.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="101" coveredstatements="19" conditionals="51" coveredconditionals="0" methods="11" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -120,8 +133,13 @@
         <line num="217" count="0" type="stmt"/>
         <line num="218" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="contructors.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\contructors.ts">
         <metrics statements="78" coveredstatements="32" conditionals="18" coveredconditionals="1" methods="21" coveredmethods="11"/>
+=======
+      <file name="contructors.ts" path="C:\Users\vikto\PKD-Project\Code\src\contructors.ts">
+        <metrics statements="78" coveredstatements="28" conditionals="18" coveredconditionals="1" methods="21" coveredmethods="9"/>
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -130,6 +148,7 @@
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="4" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
+<<<<<<< HEAD
         <line num="31" count="23" type="stmt"/>
         <line num="43" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="44" count="19" type="stmt"/>
@@ -143,11 +162,27 @@
         <line num="92" count="1" type="stmt"/>
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="5" type="stmt"/>
+=======
+        <line num="31" count="0" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="17" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="8" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="4" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="100" count="3" type="stmt"/>
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <line num="108" count="1" type="stmt"/>
         <line num="109" count="0" type="stmt"/>
         <line num="110" count="0" type="stmt"/>
         <line num="111" count="0" type="stmt"/>
         <line num="119" count="1" type="stmt"/>
+<<<<<<< HEAD
         <line num="120" count="1" type="stmt"/>
         <line num="121" count="1" type="stmt"/>
         <line num="122" count="1" type="stmt"/>
@@ -155,6 +190,15 @@
         <line num="134" count="2" type="stmt"/>
         <line num="144" count="1" type="stmt"/>
         <line num="145" count="3" type="stmt"/>
+=======
+        <line num="120" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="133" count="1" type="stmt"/>
+        <line num="134" count="2" type="stmt"/>
+        <line num="144" count="1" type="stmt"/>
+        <line num="145" count="5" type="stmt"/>
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <line num="157" count="1" type="stmt"/>
         <line num="158" count="0" type="stmt"/>
         <line num="159" count="0" type="stmt"/>
@@ -201,7 +245,11 @@
         <line num="230" count="0" type="stmt"/>
         <line num="231" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="detective.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\detective.ts">
+=======
+      <file name="detective.ts" path="C:\Users\vikto\PKD-Project\Code\src\detective.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="20" coveredstatements="3" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -224,7 +272,11 @@
         <line num="46" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="draw.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\draw.ts">
+=======
+      <file name="draw.ts" path="C:\Users\vikto\PKD-Project\Code\src\draw.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="188" coveredstatements="17" conditionals="21" coveredconditionals="0" methods="23" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -415,7 +467,11 @@
         <line num="428" count="0" type="stmt"/>
         <line num="429" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="draw_functions.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\draw_functions.ts">
+=======
+      <file name="draw_functions.ts" path="C:\Users\vikto\PKD-Project\Code\src\draw_functions.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="84" coveredstatements="21" conditionals="3" coveredconditionals="0" methods="20" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -502,8 +558,13 @@
         <line num="217" count="0" type="stmt"/>
         <line num="218" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="graph_generation.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\graph_generation.ts">
         <metrics statements="71" coveredstatements="71" conditionals="20" coveredconditionals="20" methods="13" coveredmethods="10"/>
+=======
+      <file name="graph_generation.ts" path="C:\Users\vikto\PKD-Project\Code\src\graph_generation.ts">
+        <metrics statements="65" coveredstatements="8" conditionals="20" coveredconditionals="0" methods="13" coveredmethods="0"/>
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -511,6 +572,7 @@
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
+<<<<<<< HEAD
         <line num="20" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
@@ -577,6 +639,68 @@
         <line num="238" count="1" type="stmt"/>
       </file>
       <file name="id_array.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\id_array.ts">
+=======
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="100" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="122" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="126" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="159" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="163" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="180" count="1" type="stmt"/>
+        <line num="183" count="0" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="187" count="0" type="stmt"/>
+        <line num="188" count="0" type="stmt"/>
+        <line num="192" count="0" type="stmt"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="199" count="0" type="stmt"/>
+        <line num="202" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="211" count="0" type="stmt"/>
+        <line num="212" count="0" type="stmt"/>
+        <line num="215" count="0" type="stmt"/>
+        <line num="218" count="0" type="stmt"/>
+        <line num="221" count="0" type="stmt"/>
+        <line num="227" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
+        <line num="234" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="238" count="0" type="stmt"/>
+      </file>
+      <file name="id_array.ts" path="C:\Users\vikto\PKD-Project\Code\src\id_array.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="15" coveredstatements="14" conditionals="7" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -594,7 +718,11 @@
         <line num="42" count="1" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="music.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\music.ts">
+=======
+      <file name="music.ts" path="C:\Users\vikto\PKD-Project\Code\src\music.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="15" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -612,7 +740,11 @@
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="node_objects.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\node_objects.ts">
+=======
+      <file name="node_objects.ts" path="C:\Users\vikto\PKD-Project\Code\src\node_objects.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="12" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -627,7 +759,11 @@
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="round_end_functions.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\round_end_functions.ts">
+=======
+      <file name="round_end_functions.ts" path="C:\Users\vikto\PKD-Project\Code\src\round_end_functions.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="23" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="5" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
@@ -653,7 +789,11 @@
         <line num="69" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="71" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="screens.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\screens.ts">
+=======
+      <file name="screens.ts" path="C:\Users\vikto\PKD-Project\Code\src\screens.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -663,7 +803,11 @@
         <line num="20" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="setup_game_state.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\setup_game_state.ts">
+=======
+      <file name="setup_game_state.ts" path="C:\Users\vikto\PKD-Project\Code\src\setup_game_state.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="21" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -687,6 +831,7 @@
         <line num="59" count="0" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="shop_block_item_blocks.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\shop_block_item_blocks.ts">
         <metrics statements="22" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -713,6 +858,34 @@
         <line num="50" count="0" type="stmt"/>
       </file>
       <file name="step_on_functions.ts" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\step_on_functions.ts">
+=======
+      <file name="shop_block_item_blocks.ts" path="C:\Users\vikto\PKD-Project\Code\src\shop_block_item_blocks.ts">
+        <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+      </file>
+      <file name="step_on_functions.ts" path="C:\Users\vikto\PKD-Project\Code\src\step_on_functions.ts">
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <metrics statements="62" coveredstatements="12" conditionals="12" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -779,9 +952,15 @@
       </file>
     </package>
     <package name="src.lib">
+<<<<<<< HEAD
       <metrics statements="75" coveredstatements="48" conditionals="44" coveredconditionals="10" methods="38" coveredmethods="18"/>
       <file name="list.js" path="C:\Users\vikto\Desktop\hundreds of beavers\PKD-Project\Code\src\lib\list.js">
         <metrics statements="75" coveredstatements="48" conditionals="44" coveredconditionals="10" methods="38" coveredmethods="18"/>
+=======
+      <metrics statements="75" coveredstatements="37" conditionals="44" coveredconditionals="0" methods="38" coveredmethods="6"/>
+      <file name="list.js" path="C:\Users\vikto\PKD-Project\Code\src\lib\list.js">
+        <metrics statements="75" coveredstatements="37" conditionals="44" coveredconditionals="0" methods="38" coveredmethods="6"/>
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -805,6 +984,7 @@
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
+<<<<<<< HEAD
         <line num="35" count="122" type="stmt"/>
         <line num="43" count="73" type="stmt"/>
         <line num="51" count="87" type="stmt"/>
@@ -816,12 +996,26 @@
         <line num="74" count="36" type="stmt"/>
         <line num="75" count="43" type="stmt"/>
         <line num="77" count="36" type="stmt"/>
+=======
+        <line num="35" count="3" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="73" count="3" type="stmt"/>
+        <line num="74" count="3" type="stmt"/>
+        <line num="75" count="3" type="stmt"/>
+        <line num="77" count="3" type="stmt"/>
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <line num="86" count="0" type="stmt"/>
         <line num="96" count="0" type="stmt"/>
         <line num="97" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="101" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="102" count="0" type="stmt"/>
         <line num="105" count="0" type="stmt"/>
+<<<<<<< HEAD
         <line num="117" count="26" type="cond" truecount="2" falsecount="0"/>
         <line num="119" count="12" type="stmt"/>
         <line num="132" count="56" type="cond" truecount="2" falsecount="0"/>
@@ -836,6 +1030,22 @@
         <line num="194" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="196" count="1" type="stmt"/>
         <line num="198" count="1" type="stmt"/>
+=======
+        <line num="117" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="132" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="148" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="163" count="2" type="stmt"/>
+        <line num="164" count="2" type="stmt"/>
+        <line num="165" count="2" type="stmt"/>
+        <line num="177" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="194" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="196" count="0" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+>>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
         <line num="210" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="227" count="0" type="stmt"/>
         <line num="228" count="0" type="stmt"/>
