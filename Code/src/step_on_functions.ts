@@ -19,7 +19,7 @@ import { construct_shop_block_item_block_dagger, construct_shop_block_item_block
  * Constructs the return to game button
  * @returns The return_to_game button
  */
-function construct_shop_return_to_game_button(): GuiRectangle{
+export function construct_shop_return_to_game_button(): GuiRectangle{
     return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", return_to_game_click_on_function)
 }
 
@@ -27,7 +27,7 @@ function construct_shop_return_to_game_button(): GuiRectangle{
  * Generates the items in the shop
  * @param game_state The state of the game 
  */
-function generate_shop_items(game_state: GameState): void{
+export function generate_shop_items(game_state: GameState): void{
     const number_of_traps: number = 3;
     const number_of_shop_items: number = 8;
     for(let i = 0; i < number_of_shop_items; i ++){

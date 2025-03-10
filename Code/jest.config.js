@@ -4,5 +4,7 @@ module.exports = {
     setupFilesAfterEnv: ['./jest.setup.js'],
     moduleNameMapper: {
         '^canvas$': '../__mocks__/canvas.js'
-      }
+      },
+    collectCoverage: true,
+    // coverageReporters: ['text', 'lcov'],
   };
