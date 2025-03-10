@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,13 +115,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,8 +130,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,8 +142,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { GameState, iNode, NodeObject } from "./types";
 &nbsp;
@@ -155,14 +155,14 @@
  * @param type The type that we don't want in the copy
  * @returns A new array with object_types
  */
-export function <span class="fstat-no" title="function not covered" >remove_node_object(</span>node_objects: Array&lt;NodeObject&gt;, type: number): Array&lt;NodeObject&gt;{
-    const return_array: Array&lt;NodeObject&gt; = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >    for(let node_object of node_objects){</span>
-<span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if(node_object.type !== type){</span>
-<span class="cstat-no" title="statement not covered" >            return_array.push(node_object)</span>
+export function remove_node_object(node_objects: Array&lt;NodeObject&gt;, type: number): Array&lt;NodeObject&gt;{
+    const return_array: Array&lt;NodeObject&gt; = []
+    for(let node_object of node_objects){
+        if(node_object.type !== type){
+            return_array.push(node_object)
         }
     }
-<span class="cstat-no" title="statement not covered" >    return return_array;</span>
+    return return_array;
 }
 &nbsp;
 /**
@@ -170,9 +170,9 @@ export function <span class="fstat-no" title="function not covered" >remove_node
  * @param game_state the state of the game
  * @param node the node that the player steps to
  */
-export function <span class="fstat-no" title="function not covered" >step_on_node(</span>game_state: GameState, node: iNode): void{
-<span class="cstat-no" title="statement not covered" >    for(let i=<span class="cstat-no" title="statement not covered" >0;</span>i&lt;node.nodeObjects.length;i++){</span>
-<span class="cstat-no" title="statement not covered" >        node.nodeObjects[i].player_step_on_function(game_state, node, node.nodeObjects[i])</span>
+export function step_on_node(game_state: GameState, node: iNode): void{
+    for(let i=0;i&lt;node.nodeObjects.length;i++){
+        node.nodeObjects[i].player_step_on_function(game_state, node, node.nodeObjects[i])
     }
 &nbsp;
 }
@@ -182,9 +182,9 @@ export function <span class="fstat-no" title="function not covered" >step_on_nod
  * @param game_state The state of the game
  * @param node The selected node
  */
-export function <span class="fstat-no" title="function not covered" >node_activate_round_end(</span>game_state: GameState, node: iNode){
-<span class="cstat-no" title="statement not covered" >    for(let i=<span class="cstat-no" title="statement not covered" >0;</span>i&lt;node.nodeObjects.length;i++){</span>
-<span class="cstat-no" title="statement not covered" >        node.nodeObjects[i].round_end_function(game_state, node.nodeObjects[i], node)</span>
+export function node_activate_round_end(game_state: GameState, node: iNode){
+    for(let i=0;i&lt;node.nodeObjects.length;i++){
+        node.nodeObjects[i].round_end_function(game_state, node.nodeObjects[i], node)
     }
 }</pre></td></tr></table></pre>
 
@@ -193,11 +193,7 @@ export function <span class="fstat-no" title="function not covered" >node_activa
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2025-03-10T20:09:12.411Z
-=======
-                at 2025-03-10T18:27:31.163Z
->>>>>>> 2a1d33a758d7f9cb2c1c80068ff5001536009ad1
+                at 2025-03-10T21:09:32.011Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -9,10 +9,12 @@ import { lvl_1_trap_end, trap_round_end } from '../src/round_end_functions';
 import { construct_shop_block_item_block_dagger } from '../src/shop_block_item_blocks';
 import { find_id_arrray, in_inventory, remove_id_arrray } from '../src/id_array';
 import { construct_shop_block_item_block_ring, construct_shop_block_item_block_test_trap, construct_shop_block_item_block_lvl_1_trap } from '../src/shop_block_item_blocks';
-import { shop_item_block_click_on } from '../src/click';
 import {create_daughter_node, generate_x_y, construct_node_on_circle_step_layer, build_first_layer_connections, build_last_layer_connections, build_middle_layer_connections, build_connections, generate_array_with_random_integers} from '../src/graph_generation';
 import { exitCode } from 'process';
 import { exec } from 'child_process';
+import { mouse_in_rectangle, shop_item_block_click_on, clicked_on_node, place_object_click_on, inventory_item_click_on, submit_beavers_click_on } from '../src/click';
+import { node_activate_round_end, remove_node_object, step_on_node } from '../src/node_objects';
+import { play_music } from '../src/music';
 
 export const basic_graph: Graph.ListGraph = {
 
@@ -126,9 +128,11 @@ test('Shop_block_item_blocks', () => {
     let ring_rect = construct_rectangle("ring", 200, 500, 100, 100, "Free", shop_item_block_click_on)
     let test_ring = {cost: 0,node_object: construct_ring(),block: ring_rect}
     let shop_rect = construct_rectangle("shop_item_block", 200 * 0 + 200, 500, 100, 100, "Free", shop_item_block_click_on);
-    let test_test_trap = {cost: 0, node_object: test_trap_constructor(),shop_rect}
-    let test_lvl_1_trap = {cost: 5, node_object: construct_level_1_trap(), shop_rect}
-    let test_dagger = {cost: 2, node_object: construct_dagger, shop_rect}
+    let shop_rect_lvl1 = construct_rectangle("shop_item_block", 200 * 0 + 200, 500, 100, 100, "5", shop_item_block_click_on);
+    let shop_rect_dagger = construct_rectangle("shop_item_block", 200 * 0 + 200, 500, 100, 100, "2", shop_item_block_click_on);
+    let test_test_trap = {cost: 0, node_object: test_trap_constructor(),block: shop_rect}
+    let test_lvl_1_trap = {cost: 5, node_object: construct_level_1_trap(), block: shop_rect_lvl1}
+    let test_dagger = {cost: 2, node_object: construct_dagger(), block: shop_rect_dagger}
 
     
     
@@ -137,10 +141,57 @@ test('Shop_block_item_blocks', () => {
     construct_shop_block_item_block_lvl_1_trap(game_state, 0);
     construct_shop_block_item_block_dagger(game_state, 0);
 
-    expect(test_ring.toString()).toEqual(game_state.shop_item_blocks[0].toString());
-    expect(test_test_trap.toString()).toEqual(game_state.shop_item_blocks[1].toString());
-    expect(test_lvl_1_trap.toString()).toEqual(game_state.shop_item_blocks[2].toString());
-    expect(test_dagger.toString()).toEqual(game_state.shop_item_blocks[3].toString());
+    expect(JSON.stringify(test_ring)).toBe(JSON.stringify(game_state.shop_item_blocks[0]));
+    expect(JSON.stringify(test_test_trap)).toBe(JSON.stringify(game_state.shop_item_blocks[1]));
+    expect(JSON.stringify(test_lvl_1_trap)).toBe(JSON.stringify(game_state.shop_item_blocks[2]));
+    expect(JSON.stringify(test_dagger)).toBe(JSON.stringify(game_state.shop_item_blocks[3]));
+})
+
+test('node_objects', () => {
+    let test_arr: Array<Types.iNode> = []
+    let my_node_objs = [construct_node_object(0, () => {}, () => {}, () => {}, 0), construct_node_object(1, () => {}, () => {}, () => {}, 0)];
+    let my_node_obj = construct_node_object(1, () => {}, (game_state: Types.GameState, node: Types.iNode, node_objects: Array<Types.NodeObject>) => {game_state.i_node_array.push(node)}, (game_state: Types.GameState, node_obj: Types.NodeObject, node: Types.iNode) => {game_state.i_node_array.pop()}, 0);
+    construct_inode(0, [my_node_obj, my_node_obj, my_node_obj], 0,0, test_arr)
+    step_on_node(game_state, test_arr[0])
+    
+    expect(game_state.i_node_array.length).toBe(3);
+    node_activate_round_end(game_state, test_arr[0]);
+    expect(game_state.i_node_array.length).toBe(0);   
+    expect(remove_node_object(my_node_objs, 1).length).toBe(1);
+
+})
+
+test('click', () => {
+   construct_inode(0, [construct_node_object(1, () => {}, () => {}, () => {}, 0)], 0, 0, game_state.i_node_array);
+   expect(mouse_in_rectangle(0, 0, 0, 0, 100, 100)).toBe(true);
+   expect(mouse_in_rectangle(0, 0, 100, 100, 200, 200)).toBe(false); 
+   clicked_on_node(game_state, 0);
+   expect(game_state.current_node).toBe(0);
+
+   game_state.selected_object = construct_inventory_items(construct_level_1_trap(), construct_rectangle("lvl_1_trap", 0, 0, 0, 0, "", () => {}), 0);
+   construct_inode(1, [], 0, 0, game_state.i_node_array);
+   game_state.current_node = 1;
+   place_object_click_on(game_state);
+   expect(game_state.i_node_array[game_state.current_node].nodeObjects[0].type).toBe(0);
+
+   let my_shop_block_item_block = construct_shop_item_block(0, construct_level_1_trap(), construct_rectangle("lvl_1_trap", 0, 0, 0, 0, "", () => {}));
+   shop_item_block_click_on(game_state, my_shop_block_item_block, 0);
+    expect(game_state.player_inventory[0]?.node_object.type).toBe(0);
+    
+    game_state.selected_object = construct_inventory_items(construct_ring(), construct_rectangle("ring", 0, 0, 0, 0, "", () => {}), 0);
+    construct_inode(2, [construct_node_object(0, () => {}, () => {}, () => {}, 0)], 0, 0, game_state.i_node_array);
+    let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on)
+    inventory_item_click_on(game_state, 0);
+    expect(find_id_arrray("place_object", game_state.gui_rectangles)).toEqual(place_object_button);
+
+    game_state.player_collectables[0].count = 10;
+    game_state.shop_collectables[0].count = 5;
+    submit_beavers_click_on(game_state);
+    expect(game_state.shop_collectables[0].count).toBe(0);
+
+    
+
+
 })
 
 test('Shop_block_item_blocks', () => {

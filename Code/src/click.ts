@@ -45,7 +45,7 @@ export function get_clicked_node_index(nodes: Array<iNode>, x: number, y: number
  */
 
 export function mouse_in_rectangle(x: number, y: number, x1: number, y1: number, x2: number, y2: number): boolean{
-    if (x>x1 && x<x2 && y>y1 &&y<y2){
+    if (x>=x1 && x<=x2 && y>=y1 &&y<=y2){
         return true
     }
     return false
@@ -147,7 +147,7 @@ export function shop_item_block_click_on(game_state: GameState, self: ShopItemBl
 export function inventory_item_click_on(game_state: GameState, index: number): void{
     //Updates the selected_object
     game_state.selected_object = game_state.player_inventory[index]
-    //Remoes the existing place_object button gui_rectangles
+    //Removes the existing place_object button gui_rectangles
     remove_id_arrray("place_object", game_state.gui_rectangles);
     //Constructs a new place_object button
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on)
@@ -172,7 +172,7 @@ export function submit_beavers_click_on(game_state: GameState){
     game_state.player_collectables[0].count -= (current_shop - game_state.shop_collectables[0].count);
 }
 
-export function return_to_game_click_on_function(game_state: GameState){
+export function return_to_game_click_on_function(game_state: GameState): void{
     for (let inventory_item of game_state.player_inventory){
         if(inventory_item?.node_object.type === 2){
             create_daughter_node(game_state.map_graph, game_state.i_node_array, shop_index, game_state)
