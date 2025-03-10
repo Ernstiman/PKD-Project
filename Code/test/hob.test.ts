@@ -2,9 +2,9 @@ import * as AdjNodes from '../src/adj_nodes';
 import * as Types from '../src/types';
 import * as List from '../src/lib/list';
 import * as Graph from '../src/lib/graphs';
-import { construct_collectable, construct_inventory_items, construct_node_object, construct_rectangle, construct_ring } from '../src/contructors';
+import { construct_collectable, construct_inventory_items, construct_node_object, construct_rectangle, construct_ring, test_trap_constructor } from '../src/contructors';
 import { find_id_arrray, in_inventory, remove_id_arrray } from '../src/id_array';
-import { construct_shop_block_item_block_ring } from '../src/shop_block_item_blocks';
+import { construct_shop_block_item_block_ring, construct_shop_block_item_block_test_trap, construct_shop_block_item_block_lvl_1_trap } from '../src/shop_block_item_blocks';
 import { shop_item_block_click_on } from '../src/click';
 
 export const basic_graph: Graph.ListGraph = {
@@ -92,7 +92,12 @@ test('id_arrays', () => {
 test('Shop_block_item_blocks', () => {
     let ring_rect = construct_rectangle("ring", 200, 500, 100, 100, "Free", shop_item_block_click_on)
     let test_ring = {cost: 0,node_object: construct_ring(),block: ring_rect}
+    let shop_item_button = construct_rectangle("shop_item_block", 200 * 0 + 200, 500, 100, 100, "Free", shop_item_block_click_on);
+    let test_test_trap = {cost: 0, node_object: test_trap_constructor(),shop_item_button}
+    let shop_item_button = construct_rectangle("shop_item_block", 200 * i + 200, 500, 100, 100, lvl_1_trap_cost.toString(), shop_item_block_click_on)
     construct_shop_block_item_block_ring(game_state)
-    expect(test_ring.toString()).toEqual(game_state.shop_item_blocks[0].toString())
+    construct_shop_block_item_block_test_trap(game_state, 0)
+    expect(test_ring.toString()).toEqual(game_state.shop_item_blocks[0].toString());
+    expect(test_test_trap.toString()).toEqual(game_state.shop_item_blocks[1].toString());
 })
 
