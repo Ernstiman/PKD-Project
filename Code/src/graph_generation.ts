@@ -36,7 +36,7 @@ export function create_daughter_node(graph: ListGraph, i_node_array: Array<iNode
  * @param circle_step the circle step we are on
  * @return a new list with the connections of the node
 */
-function build_first_layer_connections(circle_size: number, node: number, layer: number, layers_per_circle_step_array: Array<number>, circle_step: number): List<number>{
+export function build_first_layer_connections(circle_size: number, node: number, layer: number, layers_per_circle_step_array: Array<number>, circle_step: number): List<number>{
     
     let xs: List<number>
 
@@ -66,7 +66,7 @@ function build_first_layer_connections(circle_size: number, node: number, layer:
  * @param circle_step the circle step we are on
  * @return a new list with the connections of the node
 */
-function build_middle_layer_connections(circle_size: number, node: number, layer: number, layers_per_circle_step_array: Array<number>, circle_step: number): List<number>{
+export function build_middle_layer_connections(circle_size: number, node: number, layer: number, layers_per_circle_step_array: Array<number>, circle_step: number): List<number>{
     
     let xs: List<number> = list(node+1)
     
@@ -91,7 +91,7 @@ function build_middle_layer_connections(circle_size: number, node: number, layer
  * @param circle_step the circle step we are on
  * @return a new list with the connections of the node
 */
-function build_last_layer_connections(circle_size: number, node: number, layer: number, layers_per_circle_step_array: Array<number>, circle_step: number): List<number>{
+export function build_last_layer_connections(circle_size: number, node: number, layer: number, layers_per_circle_step_array: Array<number>, circle_step: number): List<number>{
     
     let xs: List<number>
 
@@ -114,7 +114,7 @@ function build_last_layer_connections(circle_size: number, node: number, layer: 
  * @return An updated browser history with 'page' as the current page and
  *     no forward pages stored.
 */
-function build_connections(circle_size: number, layers: number, node: number, layer: number, circle_step: number, layers_per_circle_step_array: Array<number>) : List<number>{
+export function build_connections(circle_size: number, layers: number, node: number, layer: number, circle_step: number, layers_per_circle_step_array: Array<number>) : List<number>{
     //The list of connections to be created
     let xs: List<number>
 
@@ -141,7 +141,7 @@ function build_connections(circle_size: number, layers: number, node: number, la
  * @param max generates a number between 0 and max for each element
  * @return An array with random integers between 0 and max
 */
-function generate_array_with_random_integers(length: number, max: number) : Array<number>{
+export function generate_array_with_random_integers(length: number, max: number) : Array<number>{
 
     let arr = []
 
@@ -153,7 +153,7 @@ function generate_array_with_random_integers(length: number, max: number) : Arra
 }
 
 
-function construct_node_on_circle_step_layer(layer: number, circle_size: number, circle_step: number, node: number, i_node_array: Array<iNode>) : void{
+export function construct_node_on_circle_step_layer(layer: number, circle_size: number, circle_step: number, node: number, i_node_array: Array<iNode>) : void{
 
     //On the first node place a shop
     if (layer===0 && circle_step===0){
