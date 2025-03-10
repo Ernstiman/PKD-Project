@@ -50,7 +50,7 @@ export function get_base_game_state() : GameState{
 
 
     // How many days you will have to complete the quota
-    let start_days_to_quota = 6;
+    let start_days_to_quota = 1;
 
     //The players inventory
     let player_inventory: Array<InventoryNodeObject> = []

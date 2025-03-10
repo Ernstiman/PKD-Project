@@ -38,7 +38,7 @@ export function get_clicked_node_index(nodes, x, y) {
  * @returns true if your within the rectangle, else false
  */
 export function mouse_in_rectangle(x, y, x1, y1, x2, y2) {
-    if (x > x1 && x < x2 && y > y1 && y < y2) {
+    if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
         return true;
     }
     return false;

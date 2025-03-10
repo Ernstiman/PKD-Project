@@ -31,7 +31,7 @@ export function get_base_game_state() {
     //Create array of songs
     let songs = [new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3"), new Audio("../soundtrack/love.mp3")];
     // How many days you will have to complete the quota
-    let start_days_to_quota = 6;
+    let start_days_to_quota = 1;
     //The players inventory
     let player_inventory = [];
     // The amount of quotas you have to complete before you can buy the ring in the shop
