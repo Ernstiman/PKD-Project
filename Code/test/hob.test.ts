@@ -7,6 +7,9 @@ import { dagger_draw_function, lvl_1_trap_draw_function, ring_draw_function, tra
 import { trap_step_on } from '../src/step_on_functions';
 import { lvl_1_trap_end, trap_round_end } from '../src/round_end_functions';
 import { construct_shop_block_item_block_dagger } from '../src/shop_block_item_blocks';
+import { find_id_arrray, in_inventory, remove_id_arrray } from '../src/id_array';
+import { construct_shop_block_item_block_ring } from '../src/shop_block_item_blocks';
+import { shop_item_block_click_on } from '../src/click';
 
 export const basic_graph: Graph.ListGraph = {
 
@@ -44,6 +47,7 @@ let test_graph: Graph.ListGraph  = {
     }
     
 
+
 let game_state: Types.GameState={i_node_array: [], 
             map_graph: test_graph, 
             current_node: 0, 
@@ -68,9 +72,7 @@ let game_state: Types.GameState={i_node_array: [],
             
     }
 
-
-
-
+const mock_func = jest.fn();
 // adj_nodes.ts tests
 test('adj_nodes', () => {
 
@@ -79,26 +81,48 @@ test('adj_nodes', () => {
 });
 
 
+
 // constuctors
-const mock_func = jest.fn();
 
 test('constructors', () => {
 
-    const inventory_box = construct_rectangle('test', 50, 50, 100, 100, "item", () => {});
+    const test_box = construct_rectangle('test', 50, 50, 100, 100, "item", () => {});
     const inventory_trap = construct_level_1_trap();
-    const test_dagger = construct_dagger().toString();
-    const expected_dagger = construct_node_object(8, dagger_draw_function, mock_func, mock_func, 1).toString();
-    const test_ring = construct_node_object(2, ring_draw_function, mock_func, mock_func).toString();
-    const expected_ring = construct_node_object(2, ring_draw_function, mock_func, mock_func).toString();
-    
+    const test_dagger = construct_dagger();
+    const expected_dagger = construct_node_object(8, dagger_draw_function, mock_func, mock_func, 1);
+    const test_ring = construct_ring();
+    const expected_ring = construct_node_object(2, ring_draw_function, mock_func, mock_func);
+    const test_SBIB = construct_shop_item_block(5, test_dagger, test_box);
+    const expected_SBIB = {cost: 5, node_object: test_dagger, block: test_box};
+
+
     expect(construct_collectable("beaver", 5)).toStrictEqual({name: "beaver", count: 5});
     expect(test_trap_constructor()).toStrictEqual(construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.8));
     expect(construct_level_1_trap()).toStrictEqual(construct_node_object(0, lvl_1_trap_draw_function, trap_step_on, lvl_1_trap_end, 1));
-    expect(test_dagger).toEqual(expected_dagger);
-    expect(test_ring).toEqual(expected_ring);
-    expect(construct_inventory_items(inventory_trap, inventory_box, 0)).toEqual({node_object: inventory_trap, box: inventory_box, index: 0});
-    // expect(construct_shop_item_block())
+    expect(test_dagger.toString()).toEqual(expected_dagger.toString());
+    expect(test_ring.toString()).toEqual(expected_ring.toString());
+    expect(construct_inventory_items(inventory_trap, test_box, 0)).toEqual({node_object: inventory_trap, box: test_box, index: 0});
+    expect(test_SBIB.toString()).toEqual(expected_SBIB.toString());
 })
 
 
+test('id_arrays', () => {
+    let my_rect = construct_rectangle("test_rectangle", 0, 0, 0, 0, "", () => {});
+    let my_node_obj = construct_node_object(0, () => {}, () => {}, () => {}, 0);
+    let my_inventory_item = construct_inventory_items(my_node_obj, my_rect, 0)
+    game_state.gui_rectangles.push(my_rect)
+    expect(find_id_arrray("test_rectangle", game_state.gui_rectangles)).toEqual(my_rect);
+    remove_id_arrray("test_rectangle", game_state.gui_rectangles)
+    expect(game_state.gui_rectangles).toEqual([]);
+    game_state.player_inventory.push(my_inventory_item)
+    expect(in_inventory(game_state,0 )).toEqual(true);
+
+})
+
+test('Shop_block_item_blocks', () => {
+    let ring_rect = construct_rectangle("ring", 200, 500, 100, 100, "Free", shop_item_block_click_on)
+    let test_ring = {cost: 0,node_object: construct_ring(),block: ring_rect}
+    construct_shop_block_item_block_ring(game_state)
+    expect(test_ring.toString()).toEqual(game_state.shop_item_blocks[0].toString())
+})
 
