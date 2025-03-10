@@ -2,15 +2,18 @@ import * as AdjNodes from '../src/adj_nodes';
 import * as Types from '../src/types';
 import * as List from '../src/lib/list';
 import * as Graph from '../src/lib/graphs';
-import { construct_collectable, construct_dagger, construct_inode, construct_level_1_trap, construct_node_object, test_trap_constructor, construct_ring, construct_inventory_items, construct_rectangle, construct_shop_item_block } from '../src/contructors';
+import { construct_collectable, construct_dagger, construct_wolf, construct_inode, construct_level_1_trap, construct_node_object, test_trap_constructor, construct_ring, construct_inventory_items, construct_rectangle, construct_shop_item_block, construct_detective } from '../src/contructors';
 import { dagger_draw_function, lvl_1_trap_draw_function, ring_draw_function, trap_draw_function } from '../src/draw_functions';
-import { trap_step_on } from '../src/step_on_functions';
+import { detective_step_on, trap_step_on, wolf_step_on } from '../src/step_on_functions';
 import { lvl_1_trap_end, trap_round_end } from '../src/round_end_functions';
 import { construct_shop_block_item_block_dagger } from '../src/shop_block_item_blocks';
 import { find_id_arrray, in_inventory, remove_id_arrray } from '../src/id_array';
 import { construct_shop_block_item_block_ring } from '../src/shop_block_item_blocks';
-import { shop_item_block_click_on } from '../src/click';
-
+import { return_to_game_click_on_function, shop_item_block_click_on } from '../src/click';
+import { i_node_array } from '../src/setup_game_state';
+import { detective_walk, get_detective_nodes_indexes } from '../src/detective';
+import { construct_shop_return_to_game_button } from '../src/step_on_functions';
+import { step_on_node } from '../src/node_objects';
 export const basic_graph: Graph.ListGraph = {
 
     adj: [],
@@ -48,7 +51,8 @@ let test_graph: Graph.ListGraph  = {
     
 
 
-let game_state: Types.GameState={i_node_array: [], 
+let game_state: Types.GameState={
+            i_node_array: [], 
             map_graph: test_graph, 
             current_node: 0, 
             round: 0, 
@@ -56,8 +60,7 @@ let game_state: Types.GameState={i_node_array: [],
             shop_collectables: shop_start_collectables, 
             gui_rectangles: [], 
             screens: [], 
-            active_screens: 
-            [],
+            active_screens: [],
             player_inventory: player_inventory,
             shop_item_blocks: start_shop_item_blocks,
             songs: [],
@@ -99,10 +102,10 @@ test('constructors', () => {
     expect(construct_collectable("beaver", 5)).toStrictEqual({name: "beaver", count: 5});
     expect(test_trap_constructor()).toStrictEqual(construct_node_object(0, trap_draw_function, trap_step_on, trap_round_end, 0.8));
     expect(construct_level_1_trap()).toStrictEqual(construct_node_object(0, lvl_1_trap_draw_function, trap_step_on, lvl_1_trap_end, 1));
-    expect(test_dagger.toString()).toEqual(expected_dagger.toString());
-    expect(test_ring.toString()).toEqual(expected_ring.toString());
+    expect(JSON.stringify(test_dagger)).toEqual(JSON.stringify(expected_dagger));
+    expect(JSON.stringify(test_ring)).toEqual(JSON.stringify(expected_ring));
     expect(construct_inventory_items(inventory_trap, test_box, 0)).toEqual({node_object: inventory_trap, box: test_box, index: 0});
-    expect(test_SBIB.toString()).toEqual(expected_SBIB.toString());
+    expect(JSON.stringify(test_SBIB)).toEqual(JSON.stringify(expected_SBIB));
 })
 
 
@@ -123,6 +126,28 @@ test('Shop_block_item_blocks', () => {
     let ring_rect = construct_rectangle("ring", 200, 500, 100, 100, "Free", shop_item_block_click_on)
     let test_ring = {cost: 0,node_object: construct_ring(),block: ring_rect}
     construct_shop_block_item_block_ring(game_state)
-    expect(test_ring.toString()).toEqual(game_state.shop_item_blocks[0].toString())
+    expect(JSON.stringify(test_ring)).toEqual(JSON.stringify(game_state.shop_item_blocks[0]))
 })
+
+test('step on functions', () => {
+    let button = construct_shop_return_to_game_button();
+    let expected_button = construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", return_to_game_click_on_function);
+    expect(button.toString()).toEqual(expected_button.toString());
+
+    //wolf step on
+    let my_i_node_array: Array<Types.iNode> = []
+    construct_inode(0, [construct_wolf(1)], 0, 0, my_i_node_array);
+    
+    step_on_node(game_state, my_i_node_array[0]);
+    wolf_step_on(game_state, my_i_node_array[0], construct_wolf(0));
+    expect(game_state.player_collectables[0].count).toBe(99);
+
+    construct_inode(1, [construct_detective(1)], 0, 0, my_i_node_array);
+    step_on_node(game_state, my_i_node_array[1]);
+    detective_step_on(game_state, my_i_node_array[1], construct_detective(0));
+    detective_walk(game_state);
+    expect(game_state.player_collectables[0].count).toBe(98);
+
+})
+
 
