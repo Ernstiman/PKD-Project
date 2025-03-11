@@ -3,7 +3,7 @@ import * as Types from '../src/types';
 import * as List from '../src/lib/list';
 import * as Graph from '../src/lib/graphs';
 import { construct_collectable, construct_dagger, construct_wolf, construct_inode, construct_level_1_trap, construct_node_object, test_trap_constructor, construct_ring, construct_inventory_items, construct_rectangle, construct_shop_item_block, construct_detective } from '../src/contructors';
-import { dagger_draw_function, lvl_1_trap_draw_function, ring_draw_function, trap_draw_function } from '../src/draw_functions';
+import { dagger_draw_function, lvl_1_trap_draw_function, ring_draw_function, trap_draw_function } from '../src/test_coverage_ignore/draw_functions';
 import { detective_step_on, trap_step_on, wolf_step_on } from '../src/step_on_functions';
 import { lvl_1_trap_end, trap_round_end } from '../src/round_end_functions';
 import { construct_shop_block_item_block_dagger } from '../src/shop_block_item_blocks';
@@ -13,13 +13,13 @@ import { return_to_game_click_on_function, shop_item_block_click_on } from '../s
 import { i_node_array } from '../src/setup_game_state';
 import { detective_walk, get_detective_nodes_indexes } from '../src/detective';
 import { construct_shop_return_to_game_button } from '../src/step_on_functions';
-import { shop_draw_function} from '../src/draw_functions';
+import { shop_draw_function} from '../src/test_coverage_ignore/draw_functions';
 import { shop_step_on, } from '../src/step_on_functions';
 import { construct_shop_block_item_block_test_trap, construct_shop_block_item_block_lvl_1_trap } from '../src/shop_block_item_blocks';
 import {create_daughter_node, generate_x_y, construct_node_on_circle_step_layer, build_first_layer_connections, build_last_layer_connections, build_middle_layer_connections, build_connections, generate_array_with_random_integers} from '../src/graph_generation';
 import { mouse_in_rectangle, clicked_on_node, place_object_click_on, inventory_item_click_on, submit_beavers_click_on } from '../src/click';
 import { node_activate_round_end, remove_node_object, step_on_node } from '../src/node_objects';
-import { play_music } from '../src/music';
+import { play_music } from '../src/test_coverage_ignore/music';
 import { check_quota, wolf_end } from '../src/round_end_functions';
 
 export const basic_graph: Graph.ListGraph = {
@@ -169,27 +169,33 @@ test('node_objects', () => {
 
 test('click', () => {
    construct_inode(0, [construct_node_object(1, () => {}, () => {}, () => {}, 0)], 0, 0, game_state.i_node_array);
+   //Tests the mouse in rectangle function
    expect(mouse_in_rectangle(0, 0, 0, 0, 100, 100)).toBe(true);
    expect(mouse_in_rectangle(0, 0, 100, 100, 200, 200)).toBe(false); 
+    //Tests the clicked on node function
    clicked_on_node(game_state, 0);
    expect(game_state.current_node).toBe(0);
 
+   //Tests the place object click on
    game_state.selected_object = construct_inventory_items(construct_level_1_trap(), construct_rectangle("lvl_1_trap", 0, 0, 0, 0, "", () => {}), 0);
    construct_inode(1, [], 0, 0, game_state.i_node_array);
    game_state.current_node = 1;
    place_object_click_on(game_state);
    expect(game_state.i_node_array[game_state.current_node].nodeObjects[0].type).toBe(0);
 
+   //Tests shop item block click on
    let my_shop_block_item_block = construct_shop_item_block(0, construct_level_1_trap(), construct_rectangle("lvl_1_trap", 0, 0, 0, 0, "", () => {}));
    shop_item_block_click_on(game_state, my_shop_block_item_block, 0);
     expect(game_state.player_inventory[0]?.node_object.type).toBe(0);
     
+    //Tests inventory item click on
     game_state.selected_object = construct_inventory_items(construct_ring(), construct_rectangle("ring", 0, 0, 0, 0, "", () => {}), 0);
     construct_inode(2, [construct_node_object(0, () => {}, () => {}, () => {}, 0)], 0, 0, game_state.i_node_array);
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on)
     inventory_item_click_on(game_state, 0);
     expect(find_id_arrray("place_object", game_state.gui_rectangles)).toEqual(place_object_button);
 
+    //Tests submit beavers click on
     game_state.player_collectables[0].count = 10;
     game_state.shop_collectables[0].count = 5;
     submit_beavers_click_on(game_state);
