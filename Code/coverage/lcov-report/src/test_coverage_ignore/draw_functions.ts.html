@@ -506,49 +506,49 @@ import { GameState, NodeObject } from "../types";
 &nbsp;
 &nbsp;
 // Load in all the images
-export function <span class="fstat-no" title="function not covered" >draw_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number, path: string, size: number){
+export function <span class="fstat-no" title="function not covered" >draw_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number, path: string, size: number): void{
     const img = <span class="cstat-no" title="statement not covered" >new Image();</span>
 <span class="cstat-no" title="statement not covered" >    img.src = path</span>
 <span class="cstat-no" title="statement not covered" >    ctx.drawImage(img, x, y, size, size)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_beaver_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number){
+export function <span class="fstat-no" title="function not covered" >draw_beaver_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void{
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Beaver.png", 50)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_dagger_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_dagger_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Dagger.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_ring_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_ring_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Ring.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_shop_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_shop_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Shop.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_trap_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_trap_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Trap.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_trap1_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_trap1_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Trap1.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_wolf_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_wolf_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Wolf.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_detective_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_detective_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Detective.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_daughter_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_daughter_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Daughter.png", 70)</span>
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >draw_player_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function <span class="fstat-no" title="function not covered" >draw_player_icon(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void {
 <span class="cstat-no" title="statement not covered" >    draw_icon(ctx, x, y, "../img/Player.png", 70)</span>
 }
 &nbsp;
@@ -696,7 +696,7 @@ export function <span class="fstat-no" title="function not covered" >player_draw
  * @param y - y value to draw at
  * @param self - the ring ('NodeObject') that we want to draw
  */
-export function <span class="fstat-no" title="function not covered" >ring_draw_function(</span>ctx: CanvasRenderingContext2D, x: number, y: number){
+export function <span class="fstat-no" title="function not covered" >ring_draw_function(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void{
 <span class="cstat-no" title="statement not covered" >    draw_ring_icon(ctx, x - 35, y - 35);</span>
 <span class="cstat-no" title="statement not covered" >    draw_default_text_style("Ring",x-25,y+30,ctx, 20)</span>
 }
@@ -709,7 +709,7 @@ export function <span class="fstat-no" title="function not covered" >ring_draw_f
  * @param y - y value to draw at
  * @param self - the love interest ('NodeObject') that we want to draw
  */
-export function <span class="fstat-no" title="function not covered" >draw_daughter(</span>ctx: CanvasRenderingContext2D, x: number, y: number){
+export function <span class="fstat-no" title="function not covered" >draw_daughter(</span>ctx: CanvasRenderingContext2D, x: number, y: number): void{
     // NOTE: In the movie this game is based on, the main character falls in love with
     //       the daughter of the shop owner, but when the shop owner catches on, he gets 
     //       angry and demands "hundreds of beavers" to allow the main character (you) to 
@@ -727,7 +727,7 @@ export function <span class="fstat-no" title="function not covered" >draw_daught
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-11T09:57:40.122Z
+                at 2025-03-11T10:45:19.752Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -159,10 +159,11 @@ test('node_objects', () => {
     let my_node_obj = construct_node_object(1, () => {}, (game_state: Types.GameState, node: Types.iNode, node_objects: Array<Types.NodeObject>) => {game_state.i_node_array.push(node)}, (game_state: Types.GameState, node_obj: Types.NodeObject, node: Types.iNode) => {game_state.i_node_array.pop()}, 0);
     construct_inode(0, [my_node_obj, my_node_obj, my_node_obj], 0,0, test_arr)
     step_on_node(game_state, test_arr[0])
-    
     expect(game_state.i_node_array.length).toBe(3);
+
     node_activate_round_end(game_state, test_arr[0]);
     expect(game_state.i_node_array.length).toBe(0);   
+    
     expect(remove_node_object(my_node_objs, 1).length).toBe(1);
 
 })

@@ -482,17 +482,7 @@
 <a name='L417'></a><a href='#L417'>417</a>
 <a name='L418'></a><a href='#L418'>418</a>
 <a name='L419'></a><a href='#L419'>419</a>
-<a name='L420'></a><a href='#L420'>420</a>
-<a name='L421'></a><a href='#L421'>421</a>
-<a name='L422'></a><a href='#L422'>422</a>
-<a name='L423'></a><a href='#L423'>423</a>
-<a name='L424'></a><a href='#L424'>424</a>
-<a name='L425'></a><a href='#L425'>425</a>
-<a name='L426'></a><a href='#L426'>426</a>
-<a name='L427'></a><a href='#L427'>427</a>
-<a name='L428'></a><a href='#L428'>428</a>
-<a name='L429'></a><a href='#L429'>429</a>
-<a name='L430'></a><a href='#L430'>430</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L420'></a><a href='#L420'>420</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -598,16 +588,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -698,7 +678,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -894,6 +873,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1021,17 +1001,7 @@ function <span class="fstat-no" title="function not covered" >applyOldMovieFilte
 <span class="cstat-no" title="statement not covered" >    ctx.fillRect(0, 0, canvas.width, canvas.height);</span>
 }
     
-// Apply filter at random intervals for flickering effect
-/*/
-setInterval(() =&gt; {
-    if (Math.random() &gt; 0.8) {
-        ctx!.globalAlpha = 0.9 + Math.random() * 0.1; // Slight flicker
-    } else {
-        ctx!.globalAlpha = 1;
-    }
-}, 200);
-/*/
-    
+  
 /**
  * Draws the game visuals
  * @param ctx the context of the canvas
@@ -1120,7 +1090,7 @@ export function <span class="fstat-no" title="function not covered" >draw_ui_ele
  * @param ctx the context of the canvas
  * @param game_state the state of the game              
  */
-export function <span class="fstat-no" title="function not covered" >list_graph_draw(</span>ctx: CanvasRenderingContext2D, game_state: GameState){
+export function <span class="fstat-no" title="function not covered" >list_graph_draw(</span>ctx: CanvasRenderingContext2D, game_state: GameState): void{
     /**
      * Draws the edges and arrowheads
      */
@@ -1128,7 +1098,6 @@ export function <span class="fstat-no" title="function not covered" >list_graph_
         let detective_nodes=<span class="cstat-no" title="statement not covered" >get_detective_nodes_indexes(game_state)</span>
 <span class="cstat-no" title="statement not covered" >        for(let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; game_state.map_graph.size; i++){</span>
 &nbsp;
-            
 <span class="cstat-no" title="statement not covered" >            ctx.font = "45px Arial";</span>
             let inode: iNode = <span class="cstat-no" title="statement not covered" >game_state.i_node_array[i];</span>
             let adj_nodes = <span class="cstat-no" title="statement not covered" >game_state.map_graph.adj[i];</span>
@@ -1322,7 +1291,8 @@ export function <span class="fstat-no" title="function not covered" >draw_shop_b
 &nbsp;
         
 <span class="cstat-no" title="statement not covered" >        draw_gui_rectangle(ctx, shop_block_item_block.block);</span>
-<span class="cstat-no" title="statement not covered" >        shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x + 50, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);</span>
+<span class="cstat-no" title="statement not covered" >        shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x + 50, </span>
+            shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
 <span class="cstat-no" title="statement not covered" >        i ++;</span>
     }
 }
@@ -1357,7 +1327,7 @@ export function <span class="fstat-no" title="function not covered" >draw_win_sc
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-11T09:57:40.122Z
+                at 2025-03-11T10:45:19.752Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
