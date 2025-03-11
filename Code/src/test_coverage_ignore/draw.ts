@@ -1,10 +1,10 @@
-import { is_adj_node } from './adj_nodes';
-import { shop_item_block_click_on } from './click';
-import { find_id_arrray } from './id_array';
-import {for_each} from './lib/list'; 
-import { GameState, iNode,  NodeObject, GuiRectangle} from './types';
+import { is_adj_node } from '../adj_nodes';
+import { shop_item_block_click_on } from '../click';
+import { find_id_arrray } from '../id_array';
+import {for_each} from '../lib/list'; 
+import { GameState, iNode,  NodeObject, GuiRectangle} from '../types';
 import { play_music, stop_music } from "./music";
-import { get_detective_nodes_indexes } from './detective';
+import { get_detective_nodes_indexes } from '../detective';
 
 export const canvas = document.getElementById("canvas") as HTMLCanvasElement | null;
 export const ctx = canvas!.getContext("2d");

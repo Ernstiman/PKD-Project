@@ -1,11 +1,11 @@
 import {for_each, list, List} from './lib/list'; 
 import { ListGraph } from './lib/graphs';
 import { Collectable, GameState, GuiRectangle, IconAnimation, iNode,  InventoryNodeObject,  NodeObject, ShopItemBlock} from './types';
-import { dagger_draw_function, detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './draw_functions';
+import { dagger_draw_function, detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './test_coverage_ignore/draw_functions';
 import { detective_step_on, trap_step_on, wolf_step_on } from './step_on_functions';
-import { ring_draw_function } from './draw_functions';
+import { ring_draw_function } from './test_coverage_ignore/draw_functions';
 import { detective_end, lvl_1_trap_end, trap_round_end, wolf_end } from './round_end_functions';
-import { play_music, stop_music } from './music';
+import { play_music, stop_music } from './test_coverage_ignore/music';
 
 
 /**

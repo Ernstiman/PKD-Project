@@ -7,11 +7,11 @@ import { i_node_array, basic_graph, shop_index } from "./setup_game_state";
 import { NodeObject } from "./types";
 import { construct_shop_item_block, test_trap_constructor } from "./contructors";
 import { return_to_game_click_on_function, shop_item_block_click_on, submit_beavers_click_on } from "./click";
-import { play_music, stop_music } from "./music";
+import { play_music, stop_music } from "./test_coverage_ignore/music";
 import { check_quota } from "./round_end_functions";
-import { ctx, draw, draw_gui_rectangle } from "./draw";
+import { ctx, draw, draw_gui_rectangle } from "./test_coverage_ignore/draw";
 import { create_daughter_node } from "./graph_generation";
-import { draw_daughter } from "./draw_functions";
+import { draw_daughter } from "./test_coverage_ignore/draw_functions";
 import { construct_shop_block_item_block_dagger, construct_shop_block_item_block_lvl_1_trap, construct_shop_block_item_block_ring, construct_shop_block_item_block_test_trap } from "./shop_block_item_blocks";
 
 

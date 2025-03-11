@@ -1,7 +1,7 @@
  import { Screen } from "./types"
- import { game_draw, draw_game_over_screen } from "./draw"
- import { draw_shop_gui } from "./draw"
-import { draw_win_screen } from "./draw"
+ import { game_draw, draw_game_over_screen } from "./test_coverage_ignore/draw"
+ import { draw_shop_gui } from "./test_coverage_ignore/draw"
+import { draw_win_screen } from "./test_coverage_ignore/draw"
 
 
 //The screen that shows the game

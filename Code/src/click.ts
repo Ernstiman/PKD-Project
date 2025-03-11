@@ -2,11 +2,11 @@
 import { GameState, iNode, InventoryNodeObject, ShopItemBlock } from './types';
 import { remove_node_object } from './node_objects';
 import { construct_inventory_items, construct_node_object, construct_rectangle, construct_wolf } from './contructors';
-import { player_draw_function } from './draw_functions';
+import { player_draw_function } from './test_coverage_ignore/draw_functions';
 import { step_on_node } from './node_objects';
 import { remove_id_arrray } from './id_array';
 import { detective_walk } from './detective';
-import { stop_music, play_music } from './music';
+import { stop_music, play_music } from './test_coverage_ignore/music';
 import { create_daughter_node } from './graph_generation';
 import { shop_index } from './setup_game_state';
 import { check_quota } from './round_end_functions';

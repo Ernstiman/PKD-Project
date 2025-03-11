@@ -1,6 +1,6 @@
 import { is_adj_node } from './adj_nodes';
 import { clicked_on_node, get_clicked_node_index, mouse_in_rectangle} from './click';
-import {draw} from './draw';
+import {draw} from './test_coverage_ignore/draw';
 import { get_base_game_state, } from './setup_game_state';
 
 

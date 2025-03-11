@@ -1,7 +1,7 @@
 
 import { construct_detective, construct_inode, construct_node_object, construct_wolf } from './contructors';
-import { canvas } from './draw';
-import { shop_draw_function, draw_daughter } from './draw_functions';
+import { canvas } from './test_coverage_ignore/draw';
+import { shop_draw_function, draw_daughter } from './test_coverage_ignore/draw_functions';
 import { remove_id_arrray } from './id_array';
 import { ListGraph } from './lib/graphs';
 import { build_list, for_each, list, list_ref, map, length as list_length, pair, List, append } from './lib/list';

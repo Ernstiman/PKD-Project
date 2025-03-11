@@ -1,5 +1,5 @@
 import { canvas, draw_default_text_style } from "./draw";
-import { GameState, NodeObject } from "./types";
+import { GameState, NodeObject } from "../types";
 
 
 // Load in all the images
@@ -94,7 +94,6 @@ export function lvl_1_trap_draw_function(ctx: CanvasRenderingContext2D, x: numbe
     }
     
     draw_trap1_icon(ctx, x - 35, y - 35);
-    //draw_default_text_style("Beaver Magnet", x, y+30, ctx, 20);
 
 }
 
