@@ -46,7 +46,10 @@ export function get_base_game_state() : GameState{
     let start_shop_item_blocks: Array<ShopItemBlock> = []
 
     //Create array of songs
-    let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), new Audio("../soundtrack/War.mp3"), new Audio("../soundtrack/ohShit.mp3"), new Audio("../soundtrack/love.mp3")]
+    let songs=[new Audio("../soundtrack/The Merchant's Shop.mp3"), 
+        new Audio("../soundtrack/War.mp3"), 
+        new Audio("../soundtrack/ohShit.mp3"), 
+        new Audio("../soundtrack/love.mp3")]
 
 
     // How many days you will have to complete the quota

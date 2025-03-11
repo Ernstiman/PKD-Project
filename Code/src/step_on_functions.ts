@@ -97,10 +97,11 @@ export function shop_step_on(game_state: GameState, node: iNode, node_object: No
  * @param node_objects the node_objects on the node
  */
 export function trap_step_on(game_state: GameState,node: iNode, node_objects: NodeObject){
-    game_state.gui_rectangles.push(construct_rectangle("collect", node.x + 50, node.y + 50, 130, 50, "collect beavers",(game_state: GameState) => {
-    game_state.player_collectables[0].count += node_objects.collectables[0].count;
-    node_objects.collectables[0].count = 0;
-    }))
+    game_state.gui_rectangles.push(construct_rectangle("collect", node.x + 50, node.y + 50, 130, 50, "collect beavers",
+        (game_state: GameState) => {
+            game_state.player_collectables[0].count += node_objects.collectables[0].count;
+            node_objects.collectables[0].count = 0;
+        }))
 }
 
 

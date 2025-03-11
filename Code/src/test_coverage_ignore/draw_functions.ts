@@ -3,49 +3,49 @@ import { GameState, NodeObject } from "../types";
 
 
 // Load in all the images
-export function draw_icon(ctx: CanvasRenderingContext2D, x: number, y: number, path: string, size: number){
+export function draw_icon(ctx: CanvasRenderingContext2D, x: number, y: number, path: string, size: number): void{
     const img = new Image();
     img.src = path
     ctx.drawImage(img, x, y, size, size)
 }
 
-export function draw_beaver_icon(ctx: CanvasRenderingContext2D, x: number, y: number){
+export function draw_beaver_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void{
     draw_icon(ctx, x, y, "../img/Beaver.png", 50)
 }
 
-export function draw_dagger_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_dagger_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Dagger.png", 70)
 }
 
-export function draw_ring_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_ring_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Ring.png", 70)
 }
 
-export function draw_shop_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_shop_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Shop.png", 70)
 }
 
-export function draw_trap_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_trap_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Trap.png", 70)
 }
 
-export function draw_trap1_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_trap1_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Trap1.png", 70)
 }
 
-export function draw_wolf_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_wolf_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Wolf.png", 70)
 }
 
-export function draw_detective_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_detective_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Detective.png", 70)
 }
 
-export function draw_daughter_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_daughter_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Daughter.png", 70)
 }
 
-export function draw_player_icon(ctx: CanvasRenderingContext2D, x: number, y: number) {
+export function draw_player_icon(ctx: CanvasRenderingContext2D, x: number, y: number): void {
     draw_icon(ctx, x, y, "../img/Player.png", 70)
 }
 
@@ -193,7 +193,7 @@ export function player_draw_function(ctx: CanvasRenderingContext2D, x: number, y
  * @param y - y value to draw at
  * @param self - the ring ('NodeObject') that we want to draw
  */
-export function ring_draw_function(ctx: CanvasRenderingContext2D, x: number, y: number){
+export function ring_draw_function(ctx: CanvasRenderingContext2D, x: number, y: number): void{
     draw_ring_icon(ctx, x - 35, y - 35);
     draw_default_text_style("Ring",x-25,y+30,ctx, 20)
 }
@@ -206,7 +206,7 @@ export function ring_draw_function(ctx: CanvasRenderingContext2D, x: number, y: 
  * @param y - y value to draw at
  * @param self - the love interest ('NodeObject') that we want to draw
  */
-export function draw_daughter(ctx: CanvasRenderingContext2D, x: number, y: number){
+export function draw_daughter(ctx: CanvasRenderingContext2D, x: number, y: number): void{
     // NOTE: In the movie this game is based on, the main character falls in love with
     //       the daughter of the shop owner, but when the shop owner catches on, he gets 
     //       angry and demands "hundreds of beavers" to allow the main character (you) to 

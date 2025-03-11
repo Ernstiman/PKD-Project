@@ -161,7 +161,7 @@ export function inventory_item_click_on(game_state: GameState, index: number): v
 
 
 //Submits the beavers and decreses the quota
-export function submit_beavers_click_on(game_state: GameState){
+export function submit_beavers_click_on(game_state: GameState): void{
     let current_shop = game_state.shop_collectables[0].count
     //Decreases the quota and the beavers the player has
     game_state.shop_collectables[0].count -= game_state.player_collectables[0].count;

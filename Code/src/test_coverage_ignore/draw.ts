@@ -98,17 +98,7 @@ function applyOldMovieFilter(ctx: CanvasRenderingContext2D, game_state: GameStat
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
     
-// Apply filter at random intervals for flickering effect
-/*/
-setInterval(() => {
-    if (Math.random() > 0.8) {
-        ctx!.globalAlpha = 0.9 + Math.random() * 0.1; // Slight flicker
-    } else {
-        ctx!.globalAlpha = 1;
-    }
-}, 200);
-/*/
-    
+  
 /**
  * Draws the game visuals
  * @param ctx the context of the canvas
@@ -197,7 +187,7 @@ export function draw_ui_elements(ctx: CanvasRenderingContext2D, game_state: Game
  * @param ctx the context of the canvas
  * @param game_state the state of the game              
  */
-export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState){
+export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameState): void{
     /**
      * Draws the edges and arrowheads
      */
@@ -205,7 +195,6 @@ export function list_graph_draw(ctx: CanvasRenderingContext2D, game_state: GameS
         let detective_nodes=get_detective_nodes_indexes(game_state)
         for(let i = 0; i < game_state.map_graph.size; i++){
 
-            
             ctx.font = "45px Arial";
             let inode: iNode = game_state.i_node_array[i];
             let adj_nodes = game_state.map_graph.adj[i];
@@ -399,7 +388,8 @@ export function draw_shop_block_item_blocks(ctx: CanvasRenderingContext2D, game_
 
         
         draw_gui_rectangle(ctx, shop_block_item_block.block);
-        shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x + 50, shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
+        shop_block_item_block.node_object.draw_function(ctx,shop_block_item_block.block.x + 50, 
+            shop_block_item_block.block.y - 50, shop_block_item_block.node_object);
         i ++;
     }
 }

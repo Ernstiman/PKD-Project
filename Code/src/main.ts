@@ -28,8 +28,9 @@ addEventListener('click', function(e){
     }
     //Checks if the player cklicked on a shop_item
     for(let shop_item_block of game_state.shop_item_blocks){
-        if(mouse_in_rectangle(x, y, shop_item_block.block.x, shop_item_block.block.y, shop_item_block.block.width + shop_item_block.block.x, shop_item_block.block.height + shop_item_block.block.y)){
-            shop_item_block.block.click_on_function(game_state, shop_item_block, i);  
+        if(mouse_in_rectangle(x, y, shop_item_block.block.x, shop_item_block.block.y, shop_item_block.block.width + 
+            shop_item_block.block.x, shop_item_block.block.height + shop_item_block.block.y)){
+                shop_item_block.block.click_on_function(game_state, shop_item_block, i);  
         }
         i ++}
     //Checks if the player clicked on a inventory item

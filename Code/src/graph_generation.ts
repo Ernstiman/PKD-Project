@@ -19,7 +19,8 @@ import { GameState, iNode,  NodeObject} from './types';
 export function create_daughter_node(graph: ListGraph, i_node_array: Array<iNode>, shop_index: number, game_state: GameState) : void{
     graph.adj[graph.size] = list()
 
-    construct_inode(graph.size, [construct_node_object(3, draw_daughter, () => {remove_id_arrray("place_object",game_state.gui_rectangles)},() => {}, 0,)], canvas!.width / 2, canvas!.height / 2,i_node_array);
+    construct_inode(graph.size, [construct_node_object(3, draw_daughter,
+         () => {remove_id_arrray("place_object",game_state.gui_rectangles)},() => {}, 0,)], canvas!.width / 2, canvas!.height / 2,i_node_array);
     graph.size += 1;
     
     let new_list = append(graph.adj[shop_index], list(graph.size - 1));
@@ -50,7 +51,8 @@ export function build_first_layer_connections(circle_size: number, node: number,
 
     //We also have a chance to connect any node in the next circle step
     if (Math.random() < 0.4){
-        xs=pair(node + layers_per_circle_step_array[circle_step] - layer + Math.floor(Math.random() * layers_per_circle_step_array[(circle_step + 1) % circle_size]), xs)
+        xs=pair(node + layers_per_circle_step_array[circle_step] - layer + 
+            Math.floor(Math.random() * layers_per_circle_step_array[(circle_step + 1) % circle_size]), xs)
     }
 
     return xs
@@ -75,7 +77,8 @@ export function build_middle_layer_connections(circle_size: number, node: number
     //A small chance to connect to any of the next circle steps node max_random_connections amount of times.
     for(let i=0; i < max_random_connections; i++){
         if (Math.random() < 0.1){
-            xs = pair(node + layers_per_circle_step_array[circle_step] - layer + Math.min(Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size]-1), layer), xs)
+            xs = pair(node + layers_per_circle_step_array[circle_step] - layer + 
+                Math.min(Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size]-1), layer), xs)
         }
     }
 
@@ -97,7 +100,8 @@ export function build_last_layer_connections(circle_size: number, node: number, 
 
     if (Math.random() < 0.5){
         //Connect to the last node in the next circle step and the next node
-        xs = list(node + layers_per_circle_step_array[circle_step] - layer + Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size] - 1), node + 1)
+        xs = list(node + layers_per_circle_step_array[circle_step] - layer + 
+            Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size] - 1), node + 1)
     }else{
         //Connect to the next node
         xs = list(node + 1)
@@ -208,8 +212,10 @@ export function generate_x_y(graph: ListGraph, i_node_array: Array<iNode>) : voi
             //The higher layers are further from the middle.
             //Each circle step has a position around the circle. 
             //There is also a random offset.
-            i_node_array[nodes].x = center_x + ((radius+150*(layer)) * Math.cos(angle) + Math.floor(Math.random() * random_factor));
-            i_node_array[nodes].y = center_y + ((radius+70*(layer)) * Math.sin(angle) + Math.floor(Math.random() * random_factor));
+            i_node_array[nodes].x = center_x + ((radius+150*(layer)) * Math.cos(angle) + 
+            Math.floor(Math.random() * random_factor));
+            i_node_array[nodes].y = center_y + ((radius+70*(layer)) * Math.sin(angle) + 
+            Math.floor(Math.random() * random_factor));
 
             //Build the connections for the current node being created
             let node_connections = build_connections(circle_size, layers, nodes, layer, circle_step, layers_per_circle_step_array)

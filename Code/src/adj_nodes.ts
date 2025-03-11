@@ -13,7 +13,7 @@ export function is_adj_node(game_state: GameState, new_node_index: number): bool
     if(game_state.current_node === undefined){
         return true
     }
-
+    //Goes through all the adjacent nodes of the current node
     for_each((adj_node) => {
         if(adj_node === new_node_index){
             return_boolean = true;
