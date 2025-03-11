@@ -238,12 +238,12 @@ test('first layer connections should be 1, 2 or 3 in length', () => {
 
 });
 
-test('middle layer connections should be 0, 1 or 2 in length', () => {
+test('middle layer connections should be  1, 2 or 3 in length', () => {
 
     let xs = build_middle_layer_connections(3, 1, 1, [3, 3, 3], 1);
 
     if (xs != undefined) {
-        expect(List.length(xs)>=0 && List.length(xs)<3).toBe(true);
+        expect(List.length(xs)>0 && List.length(xs)<4).toBe(true);
     }
 
 });
@@ -258,7 +258,7 @@ test('last layer connections should be 1 or 2 in length', () => {
 
 });
 
-test('build connections', () => {
+test('build connections should get correct number of connections', () => {
     
         let xs_first = build_connections(4, 3, 0, 1, 0, [3, 3, 3, 3]);
     
@@ -269,7 +269,7 @@ test('build connections', () => {
         let xs_middle = build_connections(4, 1, 1, 1, 1, [3, 3, 3, 3]);
     
         if (xs_middle != undefined) {
-            expect(List.length(xs_middle)>=0 && List.length(xs_middle)<3).toBe(true);
+            expect(List.length(xs_middle)>0 && List.length(xs_middle)<4).toBe(true);
         }
 
         let xs_last = build_connections(4, 1, 2, 1, 1, [3, 3, 3, 3]);
