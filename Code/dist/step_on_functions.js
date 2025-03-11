@@ -4,20 +4,20 @@ import { shop_screen } from "./screens.js";
 import { construct_rectangle, construct_beaver_icon_animations } from "./contructors.js";
 import { i_node_array } from "./setup_game_state.js";
 import { return_to_game_click_on_function, submit_beavers_click_on } from "./click.js";
-import { play_music, stop_music } from "./music.js";
+import { play_music, stop_music } from "./test_coverage_ignore/music.js";
 import { construct_shop_block_item_block_dagger, construct_shop_block_item_block_lvl_1_trap, construct_shop_block_item_block_ring, construct_shop_block_item_block_test_trap } from "./shop_block_item_blocks.js";
 /**
  * Constructs the return to game button
  * @returns The return_to_game button
  */
-function construct_shop_return_to_game_button() {
+export function construct_shop_return_to_game_button() {
     return construct_rectangle("return_to_game", 800, 900, 300, 100, "Exit Shop", return_to_game_click_on_function);
 }
 /**
  * Generates the items in the shop
  * @param game_state The state of the game
  */
-function generate_shop_items(game_state) {
+export function generate_shop_items(game_state) {
     const number_of_traps = 3;
     const number_of_shop_items = 8;
     for (let i = 0; i < number_of_shop_items; i++) {

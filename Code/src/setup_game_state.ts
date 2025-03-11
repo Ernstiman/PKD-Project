@@ -53,13 +53,13 @@ export function get_base_game_state() : GameState{
 
 
     // How many days you will have to complete the quota
-    let start_days_to_quota = 1;
+    let start_days_to_quota = 6;
 
     //The players inventory
     let player_inventory: Array<InventoryNodeObject> = []
 
     // The amount of quotas you have to complete before you can buy the ring in the shop
-    let game_rounds = 1;
+    let game_rounds = 5;
 
     //Skapa gamestate
     return {i_node_array: i_node_array, 

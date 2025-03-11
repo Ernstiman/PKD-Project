@@ -1,10 +1,10 @@
 import { remove_node_object } from './node_objects.js';
 import { construct_inventory_items, construct_node_object, construct_rectangle, construct_wolf } from './contructors.js';
-import { player_draw_function } from './draw_functions.js';
+import { player_draw_function } from './test_coverage_ignore/draw_functions.js';
 import { step_on_node } from './node_objects.js';
 import { remove_id_arrray } from './id_array.js';
 import { detective_walk } from './detective.js';
-import { stop_music, play_music } from './music.js';
+import { stop_music, play_music } from './test_coverage_ignore/music.js';
 import { create_daughter_node } from './graph_generation.js';
 import { shop_index } from './setup_game_state.js';
 import { check_quota } from './round_end_functions.js';
@@ -136,7 +136,7 @@ export function inventory_item_click_on(game_state, index) {
     var _a, _b;
     //Updates the selected_object
     game_state.selected_object = game_state.player_inventory[index];
-    //Remoes the existing place_object button gui_rectangles
+    //Removes the existing place_object button gui_rectangles
     remove_id_arrray("place_object", game_state.gui_rectangles);
     //Constructs a new place_object button
     let place_object_button = construct_rectangle("place_object", 1700, 100, 150, 100, "Place Object", place_object_click_on);

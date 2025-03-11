@@ -1,8 +1,8 @@
-import { dagger_draw_function, detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './draw_functions.js';
+import { dagger_draw_function, detective_draw_function, lvl_1_trap_draw_function, trap_draw_function, wolf_draw_function } from './test_coverage_ignore/draw_functions.js';
 import { detective_step_on, trap_step_on, wolf_step_on } from './step_on_functions.js';
-import { ring_draw_function } from './draw_functions.js';
+import { ring_draw_function } from './test_coverage_ignore/draw_functions.js';
 import { detective_end, lvl_1_trap_end, trap_round_end, wolf_end } from './round_end_functions.js';
-import { play_music, stop_music } from './music.js';
+import { play_music, stop_music } from './test_coverage_ignore/music.js';
 /**
  * Constructs a collectable with a given name and count.
  * @param name - name of the collectable

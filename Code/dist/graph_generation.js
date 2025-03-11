@@ -1,6 +1,6 @@
 import { construct_detective, construct_inode, construct_node_object } from './contructors.js';
-import { canvas } from './draw.js';
-import { shop_draw_function, draw_daughter } from './draw_functions.js';
+import { canvas } from './test_coverage_ignore/draw.js';
+import { shop_draw_function, draw_daughter } from './test_coverage_ignore/draw_functions.js';
 import { remove_id_arrray } from './id_array.js';
 import { build_list, list, map, pair, append } from './lib/list.js';
 import { shop_step_on } from './step_on_functions.js';
@@ -27,7 +27,7 @@ export function create_daughter_node(graph, i_node_array, shop_index, game_state
  * @param circle_step the circle step we are on
  * @return a new list with the connections of the node
 */
-function build_first_layer_connections(circle_size, node, layer, layers_per_circle_step_array, circle_step) {
+export function build_first_layer_connections(circle_size, node, layer, layers_per_circle_step_array, circle_step) {
     let xs;
     if (Math.random() < 0.5) {
         //Connect to the first node at the next circle step and the next node
@@ -39,7 +39,8 @@ function build_first_layer_connections(circle_size, node, layer, layers_per_circ
     }
     //We also have a chance to connect any node in the next circle step
     if (Math.random() < 0.4) {
-        xs = pair(node + layers_per_circle_step_array[circle_step] - layer + Math.floor(Math.random() * layers_per_circle_step_array[(circle_step + 1) % circle_size]), xs);
+        xs = pair(node + layers_per_circle_step_array[circle_step] - layer +
+            Math.floor(Math.random() * layers_per_circle_step_array[(circle_step + 1) % circle_size]), xs);
     }
     return xs;
 }
@@ -52,13 +53,14 @@ function build_first_layer_connections(circle_size, node, layer, layers_per_circ
  * @param circle_step the circle step we are on
  * @return a new list with the connections of the node
 */
-function build_middle_layer_connections(circle_size, node, layer, layers_per_circle_step_array, circle_step) {
+export function build_middle_layer_connections(circle_size, node, layer, layers_per_circle_step_array, circle_step) {
     let xs = list(node + 1);
     let max_random_connections = 2;
     //A small chance to connect to any of the next circle steps node max_random_connections amount of times.
     for (let i = 0; i < max_random_connections; i++) {
         if (Math.random() < 0.1) {
-            xs = pair(node + layers_per_circle_step_array[circle_step] - layer + Math.min(Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size] - 1), layer), xs);
+            xs = pair(node + layers_per_circle_step_array[circle_step] - layer +
+                Math.min(Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size] - 1), layer), xs);
         }
     }
     return xs;
@@ -72,11 +74,12 @@ function build_middle_layer_connections(circle_size, node, layer, layers_per_cir
  * @param circle_step the circle step we are on
  * @return a new list with the connections of the node
 */
-function build_last_layer_connections(circle_size, node, layer, layers_per_circle_step_array, circle_step) {
+export function build_last_layer_connections(circle_size, node, layer, layers_per_circle_step_array, circle_step) {
     let xs;
     if (Math.random() < 0.5) {
         //Connect to the last node in the next circle step and the next node
-        xs = list(node + layers_per_circle_step_array[circle_step] - layer + Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size] - 1), node + 1);
+        xs = list(node + layers_per_circle_step_array[circle_step] - layer +
+            Math.floor(layers_per_circle_step_array[(circle_step + 1) % circle_size] - 1), node + 1);
     }
     else {
         //Connect to the next node
@@ -92,7 +95,7 @@ function build_last_layer_connections(circle_size, node, layer, layers_per_circl
  * @return An updated browser history with 'page' as the current page and
  *     no forward pages stored.
 */
-function build_connections(circle_size, layers, node, layer, circle_step, layers_per_circle_step_array) {
+export function build_connections(circle_size, layers, node, layer, circle_step, layers_per_circle_step_array) {
     //The list of connections to be created
     let xs;
     //If we are in the first layer 
@@ -116,14 +119,14 @@ function build_connections(circle_size, layers, node, layer, circle_step, layers
  * @param max generates a number between 0 and max for each element
  * @return An array with random integers between 0 and max
 */
-function generate_array_with_random_integers(length, max) {
+export function generate_array_with_random_integers(length, max) {
     let arr = [];
     for (let i = 0; i < length; i++) {
         arr[i] = Math.floor(1 + Math.random() * (max));
     }
     return arr;
 }
-function construct_node_on_circle_step_layer(layer, circle_size, circle_step, node, i_node_array) {
+export function construct_node_on_circle_step_layer(layer, circle_size, circle_step, node, i_node_array) {
     //On the first node place a shop
     if (layer === 0 && circle_step === 0) {
         construct_inode(node, [construct_node_object(99, shop_draw_function, shop_step_on, () => { })], 0, 0, i_node_array);
@@ -168,8 +171,10 @@ export function generate_x_y(graph, i_node_array) {
             //The higher layers are further from the middle.
             //Each circle step has a position around the circle. 
             //There is also a random offset.
-            i_node_array[nodes].x = center_x + ((radius + 150 * (layer)) * Math.cos(angle) + Math.floor(Math.random() * random_factor));
-            i_node_array[nodes].y = center_y + ((radius + 70 * (layer)) * Math.sin(angle) + Math.floor(Math.random() * random_factor));
+            i_node_array[nodes].x = center_x + ((radius + 150 * (layer)) * Math.cos(angle) +
+                Math.floor(Math.random() * random_factor));
+            i_node_array[nodes].y = center_y + ((radius + 70 * (layer)) * Math.sin(angle) +
+                Math.floor(Math.random() * random_factor));
             //Build the connections for the current node being created
             let node_connections = build_connections(circle_size, layers, nodes, layer, circle_step, layers_per_circle_step_array);
             //Add the connections for this node to the list graph

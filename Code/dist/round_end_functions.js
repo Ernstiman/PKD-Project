@@ -43,7 +43,8 @@ export function lvl_1_trap_end(game_state, node_object, node) {
     //node_object.collectables[0].count += day;
     console.log("BEAEAVER");
     for (let i = 0; i < day; i++) {
-        construct_beaver_icon_animations(game_state, Math.random() * 500, 1000 + Math.random() * 200, node.x - 30, node.y - 30, node_object);
+        construct_beaver_icon_animations(game_state, Math.random() * 500, 1000 +
+            Math.random() * 200, node.x - 30, node.y - 30, node_object);
     }
 }
 export function detective_end(game_state, node_object) {

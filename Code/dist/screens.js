@@ -1,6 +1,6 @@
-import { game_draw, draw_game_over_screen } from "./draw.js";
-import { draw_shop_gui } from "./draw.js";
-import { draw_win_screen } from "./draw.js";
+import { game_draw, draw_game_over_screen } from "./test_coverage_ignore/draw.js";
+import { draw_shop_gui } from "./test_coverage_ignore/draw.js";
+import { draw_win_screen } from "./test_coverage_ignore/draw.js";
 //The screen that shows the game
 export let game_screen = {
     id: "game_screen",
